@@ -28,10 +28,11 @@
         Go to your home directory. Equivalent to `cd` with no arguments.
 10. Tab completion
     Press Tab to auto-complete commands and paths. Double-press Tab to see available completions when ambiguous.
-11. `touch foo.txt` [Smokey Stover, Bill Holman: The Foo Fighter, FUBAR: Fouled up beyond all recognition?]
+11. `touch foo.txt`[^1]
+[^1]: Smokey Stover, Bill Holman: The Foo Fighter, FUBAR: Fouled up beyond all recognition?
     Creates an empty file if it doesn't exist, or updates the file's modified timestamp. Often used to quickly create placeholder files.
 12. Use `>` and `>>` to add content to the file.
-    `>` overwrites a file with new content; `>>` appends to the end. Example: `echo hello > notes.txt`.
+    `>` overwrites a file with new content; `>>` appends to the end. Example: `echo hello > foo.txt`.
 13. `cat`
     Concatenates and prints file contents to the terminal. Combine with pipes to preview or process text.
 14. `touch foo.png` then `ls *.txt`
