@@ -56,33 +56,43 @@
     1. Modify the file: `echo "yet another line" >> hello.txt` 
     2. Check what has changed since the last commit: `git diff hello.txt`
     3. Remember, HEAD refers to the latest snapshot. We may have made changes to the file after the latest snapshot. `git diff` by default shows what changed since the snapshot where HEAD is pointing to.
-26. Now, let’s explore how to create a new branch. 
-        `git checkout -b feature-a`
-        `git branch`
-        `touch feature-a.py`
-        `echo "print('feature a')" > feature-a.py`
-        `git status`
-        `git add .`
-        `git commit -m "Added feature A"`
-        `git log --all --graph --decorate`
-        `git checkout master`
-        `ls` (There's no `feature-a.py`)
-        `git merge feature-a` (Fast forward?)
-        `ls` (`feature-a.py` is now present.)
+26. Now, let’s explore how to create a new branch.
+        ```
+        git checkout -b feature-a
+        git branch
+        touch feature-a.py
+        echo "print('feature a')" > feature-a.py
+        git status
+        git add .
+        git commit -m "Added feature A"
+        git log --all --graph --decorate
+        git checkout master
+        ls -- There's no feature-a.py
+        git merge feature-a 
+        ls -- feature-a.py is now present
         
-27. Push
-    `git remote` (Shows nothing)
-    `mkdir ../remote`
-    `git remote add origin ../remote`
-    `git push origin master:master`
-    `git log --all --graph --decorate --oneline` (Head points to master, and origin/master)
-    
+28. Push
+    ```
+    git remote -- Shows nothing
+    mkdir ../remote
+    cd ../remote
+    git init
+    git config receive.denyCurrentBranch updateInstead
+    cd ../demo
+    git remote add origin ../remote
+    git push origin master:master
+    git log --all --graph --decorate --oneline` -- Head points to master, and origin/master
+    ```
     Now if I make changes to the local branch, they won't be in the remote branch (yet).
-    `git clone ../remote demo2`
+    ```
+    git clone ../remote demo2
+    ```
     
     Now go back to the original demo, make changes and push to remote.
-    `git pull` on `demo2` to retrieve changes.
-    `git fetch` + `git merge` = `git pull` 
+    ```
+    git pull -- on demo2 to retrieve changes
+    git fetch + git merge = git pull
+    ``` 
     
-28. `git clone`
+30. `git clone`
     Creates a copy of a remote repository on your local machine. Use `git clone <repository-url> <directory-name>` to specify where to clone.
