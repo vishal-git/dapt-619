@@ -4,7 +4,7 @@
 def add_number(a, b):
     return a + b
 
-add_number(3, 5)
+print(add_number(3, 5))
 ```
 3. Run the script using `python addition.py` and show that it returns the correct output. 
 4. Add a test to this function.
