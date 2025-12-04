@@ -147,3 +147,5 @@ xgboost==3.1.2
 optuna-dashboard==0.20.0
 torch>=2.0.0
 torchvision>=0.15.0
+openai==2.9.0
+python-dotenv==1.2.1
