@@ -145,3 +145,5 @@ websockets==15.0.1
 optuna==4.6.0
 xgboost==3.1.2
 optuna-dashboard==0.20.0
+torch>=2.0.0
+torchvision>=0.15.0
