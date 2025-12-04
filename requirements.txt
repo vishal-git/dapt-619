@@ -142,3 +142,6 @@ webcolors==24.11.1
 webencodings==0.5.1
 websocket-client==1.9.0
 websockets==15.0.1
+optuna==4.6.0
+xgboost==3.1.2
+optuna-dashboard==0.20.0
