@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DAPT 619 · Analytics Computing · Part 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css">
+<style>
+  body.blackout #stage { visibility: hidden; }
+</style>
+</head>
+<body>
+<div id="bg"></div>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker>
+    <marker id="arr-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8b97ab"/></marker>
+    <marker id="arr-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2ee6d6"/></marker>
+    <marker id="arr-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ff3b5c"/></marker>
+    <marker id="arr-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ffb648"/></marker>
+    <marker id="arr-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#4ade80"/></marker>
+    <symbol id="i-term" viewBox="0 0 24 24"><path d="M4 17l6-5-6-5"/><path d="M12 19h8"/></symbol>
+    <symbol id="i-git" viewBox="0 0 24 24"><circle cx="6" cy="4" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="6" cy="20" r="2.5"/><path d="M6 6.5v11M18 10.5a6 6 0 0 1-6 6h-2"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v9"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3v6L4 19a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3L15 9V3"/><path d="M8 3h8M7 15h10"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M3 5h6l2 2h10v12H3z"/><path d="M7 13h4M7 16h8"/></symbol>
+    <symbol id="i-quiz" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h8"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></symbol>
+    <symbol id="i-swords" viewBox="0 0 100 100"><g stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 68 L84 16 L90 10 L84 22 Z" fill="currentColor" stroke-width="2"/><line x1="32" y1="68" x2="84" y2="16" stroke-width="7"/>
+      <line x1="22" y1="60" x2="40" y2="78"/><line x1="31" y1="69" x2="16" y2="84"/><circle cx="14" cy="86" r="4.5" fill="currentColor"/>
+      <path d="M68 68 L16 16 L10 10 L16 22 Z" fill="currentColor" stroke-width="2"/><line x1="68" y1="68" x2="16" y2="16" stroke-width="7"/>
+      <line x1="78" y1="60" x2="60" y2="78"/><line x1="69" y1="69" x2="84" y2="84"/><circle cx="86" cy="86" r="4.5" fill="currentColor"/>
+    </g></symbol>
+  </defs>
+</svg>
+
+<div id="stage"><div id="deck">
+
+<!-- ═══════════════════════════ 1 · Title ═══════════════════════════ -->
+<section class="slide title-slide" data-title="DAPT 619 · Analytics Computing">
+  <div class="course">DAPT 619 · Fall 2026</div>
+  <h1>Analytics<br><span class="grad">Computing 3</span></h1>
+  <div class="who">Vishal Patel</div>
+  <div class="when">MS in Decision Analytics · Virginia Commonwealth University</div>
+</section>
+
+<!-- ═══════════════════════════ 2 · Tool orbit ═══════════════════════════ -->
+<section class="slide" data-title="The Python ecosystem" style="justify-content:center">
+  <div class="orbit">
+    <svg class="ring-svg" viewBox="0 0 540 540"><circle data-f="1" class="fx-draw spin-slow" cx="270" cy="270" r="240" fill="none" stroke="var(--amber)" stroke-width="2" stroke-dasharray="14 10" opacity=".8"/></svg>
+    <a class="center" href="https://www.python.org/about/" target="_blank"><img src="assets/python.png" alt="Python"></a>
+    <div class="sat" style="left:195px;top:-5px"   data-f="1"><img src="assets/terminal.png" alt="Terminal" style="max-height:72px"></div>
+    <div class="sat" style="left:-13px;top:355px"   data-f="1"><span class="pad"><img src="assets/git.png" alt="Git"></span></div>
+    <div class="sat" style="left:41px;top:51px"   data-f="1"><span class="pad"><img src="assets/venv.png" alt="venv" style="max-height:48px"></span></div>
+    <div class="sat" style="left:431px;top:193px" data-f="1"><span class="pad"><img src="assets/unittest.png" alt="unittest" style="max-height:64px"></span></div>
+    <div class="sat" style="left:403px;top:355px" data-f="1"><span class="pad"><img src="assets/cookiecutter.jpg" alt="Cookiecutter" style="max-height:44px"></span></div>
+    <div class="sat" style="left:-41px;top:193px" data-f="1"><span class="pad"><img src="assets/gradio.png" alt="Gradio" style="max-height:50px"></span></div>
+    <div class="sat" style="left:113px;top:460px" data-f="1"><span class="pad"><img src="assets/mlflow.png" alt="MLflow" style="max-height:50px"></span></div>
+    <div class="sat" style="left:277px;top:460px" data-f="1"><span class="pad"><img src="assets/fastapi.png" alt="FastAPI" style="max-height:50px"></span></div>
+    <div class="sat" style="left:349px;top:51px"  data-f="1"><img src="assets/cursor.png" alt="Cursor" style="max-height:52px;border-radius:8px"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 3 · Why ecosystem tools ═══════════════════════════ -->
+<section class="slide" data-title="Beyond Python: Why Ecosystem Tools Matter">
+  <h1 class="title">Beyond Python: Why Ecosystem Tools Matter</h1>
+  <div class="grid-3 fill eq" style="align-content:center;gap:22px 34px">
+    <div class="col center" data-f="1"><div class="card glow-cyan"><div class="num" style="margin:-44px auto 10px">1</div><h3>Team Collaboration &amp; Version Control</h3></div><p class="amber" style="margin:4px 0 0">Coding is a team sport.</p></div>
+    <div class="col center" data-f="2"><div class="card glow-cyan"><div class="num" style="margin:-44px auto 10px">2</div><h3>Structured Projects &amp; Environments</h3></div><p class="amber" style="margin:4px 0 0">Avoid “works on my machine” problems.</p></div>
+    <div class="col center" data-f="3"><div class="card glow-cyan"><div class="num" style="margin:-44px auto 10px">3</div><h3>Quality Assurance &amp; Testing</h3></div><p class="amber" style="margin:4px 0 0">Test early, fail less.</p></div>
+    <div class="col center" data-f="4"><div class="card glow-cyan"><div class="num" style="margin:-44px auto 10px">4</div><h3>Deployment &amp; Accessibility</h3></div><p class="amber" style="margin:4px 0 0">Share your code as apps or services.</p></div>
+    <div class="col center" data-f="5"><div class="card glow-cyan"><div class="num" style="margin:-44px auto 10px">5</div><h3>Reproducibility &amp; Automation</h3></div><p class="amber" style="margin:4px 0 0">Make your work traceable and scalable.</p></div>
+    <div class="col center" data-f="6"><div class="card glow-cyan"><div class="num" style="margin:-44px auto 10px">6</div><h3>AI-Era Skillset</h3></div><p class="amber" style="margin:4px 0 0">Knowing <i>how to code</i> is less important now than <i>how to work with</i> code.</p></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 4 · Section: CLI ═══════════════════════════ -->
+<section class="slide section" data-section="CLI" data-title="Command Line Interface (CLI)">
+  <div class="kicker">Section 01</div>
+  <h1>Command Line <span>Interface</span> (CLI)</h1>
+  <svg class="big-ico ico"><use href="#i-term"/></svg>
+  <div class="secnum">01</div>
+</section>
+
+<!-- ═══════════════════════════ 5 · Timeline ═══════════════════════════ -->
+<section class="slide" data-section="CLI" data-title="From consoles to GUIs" style="justify-content:center">
+  <div class="row" style="align-items:flex-start;gap:30px;justify-content:center">
+    <div class="col center" style="width:250px;gap:10px"><img class="shot" src="assets/ibm701.jpg" style="height:270px;width:100%;object-fit:cover" alt="IBM 701 operator console"><div class="muted" style="font-size:16px">Operator’s Console<br>(for an IBM 701)</div><div class="amber mono" style="font-size:20px">1950s</div></div>
+    <div class="col center" style="width:250px;gap:10px" data-f="1"><img class="shot" src="assets/ibm5150.png" style="height:270px;width:100%;object-fit:cover" alt="IBM 5150"><div class="muted" style="font-size:16px">The First IBM PC<br>(IBM 5150)</div><div class="amber mono" style="font-size:20px">1981</div></div>
+    <div class="col center" style="width:250px;gap:10px" data-f="2"><img class="shot" src="assets/lisa.jpg" style="height:270px;width:100%;object-fit:cover" alt="Apple Lisa"><div class="muted" style="font-size:16px">The First Commercial PC with GUI (Lisa by Apple)</div><div class="amber mono" style="font-size:20px">1983</div></div>
+    <div class="col center" style="width:250px;gap:10px" data-f="3"><img class="shot" src="assets/win1.jpg" style="height:270px;width:100%;object-fit:cover" alt="Windows 1.0 brochure"><div class="muted" style="font-size:16px">Microsoft<br>Windows 1.0</div><div class="amber mono" style="font-size:20px">1985</div></div>
+  </div>
+  <div class="foot" data-f="2"><a href="https://youtu.be/ErwS24cBZPc" target="_blank"><svg class="ico" style="vertical-align:-2px"><use href="#i-play"/></svg> 1984 Super Bowl Apple Macintosh Ad</a></div>
+</section>
+
+<!-- ═══════════════════════════ 6 · GUI vs CLI ═══════════════════════════ -->
+<section class="slide" data-section="CLI" data-title="GUI vs CLI" style="justify-content:center;gap:44px">
+  <div class="row" style="gap:40px">
+    <div class="col center fx-left" style="width:150px;font-family:var(--font-head);font-weight:700;font-size:24px;color:var(--cyan)" data-f="8">Point &amp;<br>Click</div>
+    <div class="card glow-cyan" style="width:150px;text-align:center;font:700 34px var(--font-head);color:var(--cyan);clip-path:polygon(0 0,80% 0,100% 50%,80% 100%,0 100%);padding-right:40px">GUI</div>
+    <ol class="list sm" style="flex:1">
+      <li data-f="1">A software mechanism used to interact with your operating system using a <span class="cyan">mouse</span>.</li>
+      <li data-f="2">You can use a GUI to visually <span class="cyan">navigate and click</span> on icons and images to make things work.</li>
+      <li data-f="3">However, a GUI is <span class="cyan">inefficient</span> for system administration tasks, especially if the environment is virtual or remote.</li>
+    </ol>
+  </div>
+  <div class="row" style="gap:40px">
+    <div class="col center fx-left" style="width:150px;font-family:var(--font-head);font-weight:700;font-size:24px;color:var(--red)" data-f="8">Type &amp;<br>Enter</div>
+    <div class="card glow-red" data-f="4" style="width:150px;text-align:center;font:700 34px var(--font-head);color:var(--red);clip-path:polygon(0 0,80% 0,100% 50%,80% 100%,0 100%);padding-right:40px">CLI</div>
+    <ol class="list sm" style="flex:1">
+      <li data-f="5">A software mechanism you use to interact with your operating system using your <span class="red">keyboard</span>.</li>
+      <li data-f="6">You can <span class="red">enter text</span> commands to configure, navigate, or run programs on any server or computer system.</li>
+      <li data-f="7">All operating systems—including Linux, macOS, and Windows—provide a CLI for <span class="red">faster</span> system interaction.</li>
+    </ol>
+  </div>
+  <div class="foot" data-f="7">Source: <a href="https://aws.amazon.com/what-is/cli/" target="_blank">What is CLI? (aws.amazon.com)</a></div>
+</section>
+
+<!-- ═══════════════════════════ 7 · Why command line ═══════════════════════════ -->
+<section class="slide" data-section="CLI" data-title="Why Command Line?">
+  <h1 class="title">Why Command Line?</h1>
+  <div class="fill" style="padding-left:120px">
+    <ol class="list">
+      <li data-f="1">It makes you more <strong>flexible</strong>, <strong>faster</strong> and more <strong>efficient</strong>.</li>
+      <li data-f="2">It’s less resource intensive. It’s <strong>scalable</strong>.</li>
+      <li data-f="3">The command line is <strong>ubiquitous</strong>.</li>
+      <li data-f="4">The skills are <strong>highly valued</strong>.</li>
+      <li data-f="5">It makes you look like a <strong>cool hacker</strong> 😎</li>
+      <li data-f="6">It’s <strong>easier</strong> than you might think!</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 8 · Terminals ═══════════════════════════ -->
+<section class="slide" data-section="CLI" data-title="Terminal, Command Prompt, PowerShell, WSL, Git Bash" style="justify-content:center">
+  <div class="row" style="justify-content:center;align-items:flex-start;gap:24px">
+    <div class="col" style="gap:20px">
+      <img src="assets/kondo-joy.jpg" class="shot" style="width:260px" alt="This one sparks joy" data-f="1">
+      <img src="assets/kondo-nojoy.jpg" class="shot" style="width:260px" alt="This one does not spark joy" data-f="2">
+    </div>
+    <div class="col" style="gap:20px">
+      <div class="card center ring" style="width:270px;height:260px;display:grid;place-items:center;gap:6px" data-f="1">
+        <img src="assets/macos.png" style="height:130px" alt="macOS"><div style="font-size:24px;font-weight:600">Terminal</div>
+        <div data-f="6" class="fx-none" style="position:absolute;inset:-4px;border:3px solid var(--amber);border-radius:18px;box-shadow:0 0 24px rgba(255,182,72,.4)"></div>
+      </div>
+      <div class="card center" style="width:270px;height:260px;display:grid;place-items:center;gap:6px" data-f="2">
+        <img src="assets/windows.png" style="height:70px;padding:0 10px;background:#fff;border-radius:8px" alt="Windows"><div style="font-size:24px;font-weight:600">Command Prompt</div>
+      </div>
+    </div>
+    <div class="col" style="gap:18px;width:300px;padding-top:0">
+      <div class="center cyan" style="font:700 24px var(--font-head);height:120px;display:grid;place-items:center" data-f="6">Unix-based! <span style="display:block;font:14px var(--font-mono);color:var(--muted);margin-top:4px">(Terminal · Git Bash)</span></div>
+      <div class="col" style="gap:14px;align-items:center;margin-top:16px">
+        <img class="logo fx-left" src="assets/powershell.png" style="width:220px;background:#fff;padding:6px 12px" alt="PowerShell" data-f="3">
+        <img class="logo fx-left" src="assets/wsl.png" style="width:220px" alt="WSL" data-f="4">
+        <div class="ring" data-f="5"><img src="assets/gitbash.jpg" class="logo" style="width:220px;display:block" alt="Git Bash">
+          <div data-f="6" class="fx-none" style="position:absolute;inset:-6px;border:3px solid var(--amber);border-radius:14px;box-shadow:0 0 24px rgba(255,182,72,.4)"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 9 · Shell ═══════════════════════════ -->
+<section class="slide" data-section="CLI" data-title="What is a shell?" style="justify-content:center;gap:26px">
+  <div class="row" style="gap:50px">
+    <img src="assets/gitbash.jpg" class="logo" style="width:300px" alt="Git Bash">
+    <div class="lead" style="flex:1;max-width:560px">A software designed to execute on a Unix style command-line environment.</div>
+  </div>
+  <div class="row" style="gap:50px;align-items:center">
+    <img src="assets/bash.png" class="logo" style="width:300px;background:#fff;padding:6px" alt="Bash" data-f="1">
+    <div class="row" style="gap:20px;margin-left:auto;margin-right:40px" data-f="2">
+      <img src="assets/bourne.jpg" class="shot" style="height:200px" alt="Steve Bourne">
+      <div class="muted" style="font-size:15px;width:190px">Steve Bourne, creator of the Bourne shell (<code>sh</code>) in 1976 at Bell Labs.</div>
+    </div>
+  </div>
+  <div class="card lead center" data-f="3" style="font-size:24px"><strong>Shell:</strong> A <span class="cyan">terminal</span> application used to interact with an OS through written commands.</div>
+</section>
+
+<!-- ═══════════════════════════ 10 · Anatomy of a command line ═══════════════════════════ -->
+<section class="slide" data-section="CLI" data-title="Anatomy of a Command Line">
+  <h1 class="title">Anatomy of a Command Line</h1>
+  <div class="fill" style="align-items:center">
+    <div class="term" style="width:1136px">
+      <div class="bar"><i></i><i></i><i></i><span>bash</span></div>
+      <div class="body" style="font-size:31px;line-height:1;padding:80px 40px 100px;position:relative;white-space:nowrap;text-align:center">
+        <span class="ring" style="display:inline-block;padding:10px 14px;border-radius:12px;color:var(--violet)">
+          <span style="color:var(--cyan)">⌘</span> vishal@derive <span style="color:var(--muted)">~/code</span> <span class="amber">&gt;</span>
+          <span data-f="1" class="fx-none" style="position:absolute;inset:0;border:3px solid var(--cyan);border-radius:12px;box-shadow:0 0 20px rgba(46,230,214,.35)"></span>
+          <span class="lbl cyan" data-f="1" style="left:0;right:0;top:100%;font:600 22px var(--font-head);padding-top:36px"><i style="position:absolute;left:50%;top:6px;width:2px;height:26px;background:var(--cyan)"></i>Prompt</span>
+        </span>
+        <span class="ring" style="display:inline-block;padding:10px 14px;border-radius:12px;color:var(--amber);margin-left:14px">ls
+          <span data-f="2" class="fx-none" style="position:absolute;inset:0;border:3px solid var(--amber);border-radius:12px;box-shadow:0 0 20px rgba(255,182,72,.35)"></span>
+          <span class="lbl amber" data-f="2" style="left:0;right:0;top:100%;font:600 22px var(--font-head);padding-top:36px"><i style="position:absolute;left:50%;top:6px;width:2px;height:26px;background:var(--amber)"></i>Command</span>
+        </span>
+        <span class="ring" style="display:inline-block;padding:10px 14px;border-radius:12px;color:#ff8a5b;margin-left:6px">-l
+          <span data-f="3" class="fx-none" style="position:absolute;inset:0;border:3px solid #ff8a5b;border-radius:12px;box-shadow:0 0 20px rgba(255,138,91,.35)"></span>
+          <span class="lbl" data-f="3" style="left:0;right:0;bottom:100%;font:600 22px var(--font-head);color:#ff8a5b;padding-bottom:36px"><i style="position:absolute;left:50%;bottom:6px;width:2px;height:26px;background:#ff8a5b"></i>Option</span>
+        </span>
+        <span class="ring" style="display:inline-block;padding:10px 14px;border-radius:12px;color:var(--green);margin-left:6px">*.txt
+          <span data-f="4" class="fx-none" style="position:absolute;inset:0;border:3px solid var(--green);border-radius:12px;box-shadow:0 0 20px rgba(74,222,128,.35)"></span>
+          <span class="lbl green" data-f="4" style="left:0;right:0;top:100%;font:600 22px var(--font-head);padding-top:36px"><i style="position:absolute;left:50%;top:6px;width:2px;height:26px;background:var(--green)"></i>Argument</span>
+        </span>
+        <span class="ring" style="display:inline-block;margin-left:4px"><span class="cursor-line" style="width:18px;height:40px"></span>
+          <span class="lbl" data-f="5" style="left:-40px;right:-40px;bottom:100%;font:600 22px var(--font-head);color:#fff;padding-bottom:36px;margin-bottom:10px"><i style="position:absolute;left:50%;bottom:6px;width:2px;height:26px;background:#fff"></i>Cursor</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 11 · Quiz divider: CLI ═══════════════════════════ -->
+<section class="slide section quiz" data-section="CLI · Quick check" data-title="Quick check: CLI">
+  <div class="kicker">Quick check</div>
+  <h1>Command Line <span>Interface</span> (CLI)</h1>
+  <svg class="big-ico ico"><use href="#i-quiz"/></svg>
+</section>
+
+<!-- ═══════════════════════════ 12–20 · CLI quiz ═══════════════════════════ -->
+<section class="slide q" data-section="CLI · Quick check" data-title="What does pwd print?">
+  <div class="fill"><p><span class="chip amber qn">Q1</span> What does <code>pwd</code> print?</p>
+    <ol class="list abc"><li>Your username</li><li data-fa="1">Your current working directory</li><li>The last command you ran</li><li>The parent directory</li></ol></div>
+</section>
+<section class="slide q" data-section="CLI · Quick check" data-title="Fill in the blank: cd ___">
+  <div class="fill"><p><span class="chip amber qn">Q2</span> Fill in the blank:</p><p><code>cd ___</code> moves you one directory up from where you are.</p><div class="answer" data-f="1"><span class="chip green">Answer</span><span><code>cd ..</code> &nbsp;(<code>..</code> is the parent directory; <code>.</code> is the current one)</span></div></div>
+</section>
+<section class="slide q" data-section="CLI · Quick check" data-title="What will pwd output?">
+  <div class="fill"><p><span class="chip amber qn">Q3</span> You run:</p>
+<pre><span class="p">$</span> cd /Users/vishal/projects
+<span class="p">$</span> pwd</pre>
+    <p>What will <code>pwd</code> output?</p>
+    <ol class="list abc mono"><li>projects</li><li>/Users/projects</li><li>/Users</li><li data-fa="1">/Users/vishal/projects</li></ol></div>
+</section>
+<section class="slide q" data-section="CLI · Quick check" data-title="True or False: cd with no arguments">
+  <div class="fill"><p><span class="chip amber qn">Q4</span> <strong>True or False:</strong> <code>cd</code> with no arguments takes you to your home directory.</p><div class="answer" data-f="1"><span class="chip green">Answer</span><span><strong>True.</strong> Same as <code>cd ~</code> or <code>cd $HOME</code>.</span></div></div>
+</section>
+<section class="slide q" data-section="CLI · Quick check" data-title="Folder with a space in its name">
+  <div class="fill"><p><span class="chip amber qn">Q5</span> You want to go into a folder named <code>Project Files</code> inside your home directory. Which one works?</p>
+    <ol class="list abc mono"><li>cd ~/Project Files</li><li>cd ~/"Project Files"</li><li>cd ~/'Project Files'</li><li data-fa="1">B or C</li></ol><div class="answer" data-f="1"><span class="chip green">Answer</span><span>Quote the name (or escape the space: <code>cd ~/Project\ Files</code>). Unquoted, the shell sees two arguments.</span></div></div>
+</section>
+<section class="slide q" data-section="CLI · Quick check" data-title="Navigate the directory tree">
+  <div class="fill"><p><span class="chip amber qn">Q6</span> Given this directory tree:</p>
+<pre>/home/student
+├─ notes
+│  └─ week1
+└─ demos
+   └─ cli</pre>
+    <p>Starting from <code>/home/student</code>, write the exact command to move into the <code>cli</code> folder.</p><div class="answer" data-f="1"><span class="chip green">Answer</span><span><code>cd demos/cli</code> &nbsp;(relative path; <code>cd /home/student/demos/cli</code> also works)</span></div></div>
+</section>
+<section class="slide q" data-section="CLI · Quick check" data-title="Predict the output: cd ../../..">
+  <div class="fill"><p><span class="chip amber qn">Q7</span> Predict the output:</p><p>Assume you’re in <code>/home/student/course/week1</code> and you run:</p>
+<pre><span class="p">$</span> cd ../../..
+<span class="p">$</span> pwd</pre>
+    <p>What prints?</p><div class="answer" data-f="1"><span class="chip green">Answer</span><span><code>/home</code> &nbsp;— each <code>..</code> goes up one level: week1 → course → student → home</span></div></div>
+</section>
+<section class="slide q" data-section="CLI · Quick check" data-title="cd -">
+  <div class="fill"><p><span class="chip amber qn">Q8</span> You run:</p>
+<pre><span class="p">$</span> cd /var/log
+<span class="p">$</span> cd -</pre>
+    <p>Where do you end up?</p><div class="answer" data-f="1"><span class="chip green">Answer</span><span>Back in whatever directory you were in before <code>cd /var/log</code>. <code>cd -</code> jumps to the previous directory (<code>$OLDPWD</code>).</span></div></div>
+</section>
+<section class="slide q" data-section="CLI · Quick check" data-title="Home directory path">
+  <div class="fill"><p><span class="chip amber qn">Q9</span> What command prints just your <strong>home directory path</strong> without moving you?</p>
+    <div class="answer" data-f="1"><span class="chip green">Answer</span><span><code>echo ~</code> &nbsp;or&nbsp; <code>echo $HOME</code></span></div>
+    <div class="divider" data-f="2"></div>
+    <p data-f="2"><span class="chip amber qn">Q10</span> You’re in <code>/tmp</code>. In one command, jump to your home directory’s <code>Downloads</code> folder using <code>~</code>.</p>
+    <div class="answer" data-f="3"><span class="chip green">Answer</span><span><code>cd ~/Downloads</code></span></div></div>
+</section>
+
+<!-- ═══════════════════════════ 21 · Section: Git ═══════════════════════════ -->
+<section class="slide section" data-section="Git" data-title="Git">
+  <div class="kicker">Section 02</div>
+  <h1><span>Git</span></h1>
+  <svg class="big-ico ico"><use href="#i-git"/></svg>
+  <div class="secnum">02</div>
+</section>
+
+<!-- ═══════════════════════════ 22 · Save As ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="Version Control System: Save As">
+  <h1 class="title">Version Control System: Save As</h1>
+  <div class="row fill" style="gap:50px;padding-left:140px;align-items:center;margin-bottom:16px">
+    <img class="shot fx-zoom" src="assets/mcmahon.jpg" style="height:380px" alt="" data-f="6">
+    <div class="mono" style="font-size:24px;line-height:2.1">
+      <div data-f="1">my_code.py</div>
+      <div data-f="2">my_code_sep2025.py</div>
+      <div data-f="3">my_code_sep2025_v2.py</div>
+      <div data-f="4">my_code_sep2025_v2_final.py</div>
+      <div data-f="5">my_code_sep2025_v2_final_edited.py</div>
+      <div data-f="6" class="red">my_code_sep2025_v2_final_edited_FINAL.py</div>
+    </div>
+  </div>
+  <div class="card center" data-f="7" style="font-size:20px">With the rise of <em class="k">“vibe coding”</em> (aka AI-assisted coding), version control is more useful than ever.</div>
+</section>
+
+<!-- ═══════════════════════════ 23 · VCS definition ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="Version Control System">
+  <h1 class="title">Version Control System</h1>
+  <div class="fill center" style="gap:40px">
+    <p class="quote" style="font-size:34px">A system that <em class="k">records changes</em> to a file or set of files <em class="k">over time</em> so that you can <em class="k">recall</em> specific versions later.</p>
+    <a href="https://git-scm.com/book/en/v2" target="_blank"><img src="assets/progit.png" class="shot" style="height:170px" alt="Pro Git book"></a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 24 · Three kinds of VCS ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="Version Control Systems">
+  <h1 class="title">Version Control Systems</h1>
+  <div class="row fill" style="justify-content:center;gap:50px">
+    <div class="card glow-cyan center" style="width:260px;padding:40px 20px 30px"><div class="num lg" style="margin:-70px auto 20px">1</div><div style="font-size:30px">Local</div></div>
+    <div class="card center" style="width:260px;padding:40px 20px 30px;border-color:rgba(74,222,128,.5)"><div class="num lg green" style="margin:-70px auto 20px">2</div><div style="font-size:30px">Centralized</div></div>
+    <div class="card glow-amber center" style="width:260px;padding:40px 20px 30px"><div class="num lg amber" style="margin:-70px auto 20px">3</div><div style="font-size:30px">Distributed</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 25 · Local & Centralized ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="Local vs Centralized VCS">
+  <div class="row" style="align-items:flex-start">
+    <div class="row" style="flex:1;gap:16px"><div class="num lg">1</div><div style="font-size:30px">Local</div></div>
+    <div class="row" style="flex:1;gap:16px" data-f="2"><div class="num lg green">2</div><div style="font-size:30px">Centralized</div></div>
+  </div>
+  <div class="diagram">
+    <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line)"></div>
+    <!-- Local -->
+    <div class="frame" data-f="1" style="left:60px;top:40px;width:430px;height:360px"><span class="tag">Local Computer</span></div>
+    <svg class="person" data-f="1" style="position:absolute;left:90px;top:190px"><use href="#i-user"/></svg>
+    <span class="doc" data-f="1" style="position:absolute;left:150px;top:185px;color:var(--red)"><svg><use href="#i-doc"/></svg></span>
+    <div class="lbl mono" data-f="1" style="left:198px;top:175px;font-size:14px">Checkout</div>
+    <div class="box dark" data-f="1" style="left:275px;top:85px;width:190px;height:290px;align-content:start;padding-top:12px;gap:8px"><div class="muted" style="font-size:15px">Version database</div>
+      <div class="row" style="gap:10px"><span class="doc" style="color:var(--red)"><svg><use href="#i-doc"/></svg></span><span class="tiny" style="font-size:14px;color:var(--muted)">Version 3</span></div>
+      <div class="row" style="gap:10px"><span class="doc" style="color:var(--red);opacity:.7"><svg><use href="#i-doc"/></svg></span><span class="tiny" style="font-size:14px;color:var(--muted)">Version 2</span></div>
+      <div class="row" style="gap:10px"><span class="doc" style="color:var(--red);opacity:.45"><svg><use href="#i-doc"/></svg></span><span class="tiny" style="font-size:14px;color:var(--muted)">Version 1</span></div>
+    </div>
+    <!-- Centralized -->
+    <div class="box" data-f="2" style="left:760px;top:40px;width:230px;height:56px;font-weight:600">Shared Repository</div>
+    <span class="doc" data-f="2" style="position:absolute;left:700px;top:230px;color:var(--red)"><svg><use href="#i-doc"/></svg></span>
+    <span class="doc" data-f="2" style="position:absolute;left:853px;top:230px;color:var(--amber)"><svg><use href="#i-doc"/></svg></span>
+    <span class="doc" data-f="2" style="position:absolute;left:1006px;top:230px;color:var(--red-2)"><svg><use href="#i-doc"/></svg></span>
+    <svg class="person" data-f="2" style="position:absolute;left:700px;top:300px"><use href="#i-user"/></svg>
+    <svg class="person" data-f="2" style="position:absolute;left:853px;top:300px"><use href="#i-user"/></svg>
+    <svg class="person" data-f="2" style="position:absolute;left:1006px;top:300px"><use href="#i-user"/></svg>
+    <svg class="wires">
+      <line data-f="1" class="fx-draw r" x1="200" y1="207" x2="268" y2="207" marker-end="url(#arr-r)"/>
+      <line data-f="1" class="fx-draw r" x1="268" y1="222" x2="200" y2="222" marker-end="url(#arr-r)"/>
+      <line data-f="2" class="fx-draw" x1="820" y1="100" x2="730" y2="222" marker-end="url(#arr-m)" marker-start="url(#arr-m)"/>
+      <line data-f="2" class="fx-draw" x1="875" y1="100" x2="875" y2="222" marker-end="url(#arr-m)" marker-start="url(#arr-m)"/>
+      <line data-f="2" class="fx-draw" x1="930" y1="100" x2="1022" y2="222" marker-end="url(#arr-m)" marker-start="url(#arr-m)"/>
+    </svg>
+    <div class="lbl" data-f="3" style="left:60px;width:430px;top:420px;font-size:20px;color:var(--text)">The entire history of the project in a single place!</div>
+    <div class="lbl" data-f="4" style="left:660px;width:430px;top:420px;font-size:20px;color:var(--red)">Single point of failure!</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 26 · Distributed ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="Distributed VCS">
+  <div class="row" style="gap:16px;justify-content:center"><div class="num lg amber">3</div><div style="font-size:30px">Distributed</div></div>
+  <div class="row fill" style="gap:30px;align-items:center">
+    <div class="diagram" style="width:520px;height:480px;flex:none">
+      <div class="box dark" style="left:170px;top:0;width:180px;height:190px;align-content:start;padding-top:8px;gap:4px"><div style="font-weight:600;font-size:15px">Server</div><div class="muted" style="font-size:13px">Version database</div>
+        <div class="row" style="gap:8px"><span class="doc" style="width:30px;height:36px;color:var(--amber)"><svg><use href="#i-doc"/></svg></span><span style="font-size:12px;color:var(--muted)">Version 3</span></div>
+        <div class="row" style="gap:8px"><span class="doc" style="width:30px;height:36px;color:var(--amber);opacity:.7"><svg><use href="#i-doc"/></svg></span><span style="font-size:12px;color:var(--muted)">Version 2</span></div>
+        <div class="row" style="gap:8px"><span class="doc" style="width:30px;height:36px;color:var(--amber);opacity:.45"><svg><use href="#i-doc"/></svg></span><span style="font-size:12px;color:var(--muted)">Version 1</span></div></div>
+      <div class="box dark" style="left:0;top:280px;width:180px;height:190px;align-content:start;padding-top:8px;gap:4px"><div style="font-weight:600;font-size:15px">Computer A</div><div class="muted" style="font-size:13px">Version database</div>
+        <div class="row" style="gap:8px"><span class="doc" style="width:30px;height:36px;color:var(--cyan)"><svg><use href="#i-doc"/></svg></span><span style="font-size:12px;color:var(--muted)">Version 3</span></div>
+        <div class="row" style="gap:8px"><span class="doc" style="width:30px;height:36px;color:var(--cyan);opacity:.7"><svg><use href="#i-doc"/></svg></span><span style="font-size:12px;color:var(--muted)">Version 2</span></div>
+        <div class="row" style="gap:8px"><span class="doc" style="width:30px;height:36px;color:var(--cyan);opacity:.45"><svg><use href="#i-doc"/></svg></span><span style="font-size:12px;color:var(--muted)">Version 1</span></div></div>
+      <div class="box dark" style="left:340px;top:280px;width:180px;height:190px;align-content:start;padding-top:8px;gap:4px"><div style="font-weight:600;font-size:15px">Computer B</div><div class="muted" style="font-size:13px">Version database</div>
+        <div class="row" style="gap:8px"><span class="doc" style="width:30px;height:36px;color:var(--green)"><svg><use href="#i-doc"/></svg></span><span style="font-size:12px;color:var(--muted)">Version 3</span></div>
+        <div class="row" style="gap:8px"><span class="doc" style="width:30px;height:36px;color:var(--green);opacity:.7"><svg><use href="#i-doc"/></svg></span><span style="font-size:12px;color:var(--muted)">Version 2</span></div>
+        <div class="row" style="gap:8px"><span class="doc" style="width:30px;height:36px;color:var(--green);opacity:.45"><svg><use href="#i-doc"/></svg></span><span style="font-size:12px;color:var(--muted)">Version 1</span></div></div>
+      <svg class="wires">
+        <path d="M160 95 C 60 110, 60 240, 90 272" marker-end="url(#arr-m)" marker-start="url(#arr-m)"/>
+        <path d="M360 95 C 460 110, 460 240, 430 272" marker-end="url(#arr-m)" marker-start="url(#arr-m)"/>
+        <path d="M188 375 C 230 400, 290 400, 332 375" marker-end="url(#arr-m)" marker-start="url(#arr-m)"/>
+      </svg>
+    </div>
+    <ul class="list sm" style="flex:1;font-size:21px">
+      <li data-f="1">Clients don’t just check out the latest snapshot of the files; rather, they <span class="amber">fully mirror</span> the repository, including its full history.</li>
+      <li data-f="2">Thus, if any server dies, and these systems were collaborating via that server, any of the client repositories can be copied back up to the server to restore it.</li>
+      <li data-f="3">Every clone is really a full backup of all the data.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 27 · Goals of Git ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="Goals of Git">
+  <h1 class="title">Goals of Git</h1>
+  <div class="row fill" style="gap:60px;padding:0 40px">
+    <img src="assets/git.png" style="width:300px;background:#fff;padding:14px 20px;border-radius:16px" alt="Git">
+    <ul class="list">
+      <li>Speed</li><li>Simple design</li><li>Strong support for non-linear development (thousands of parallel branches)</li><li class="amber">Fully distributed</li><li>Able to handle large projects like the Linux kernel efficiently (speed and data size)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 28 · History ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="A Brief History of Git">
+  <h1 class="title">A Brief History of Git</h1>
+  <div class="row fill" style="justify-content:center;gap:70px">
+    <div class="col center" style="gap:14px"><img src="assets/linus.jpg" class="shot" style="height:330px" alt="Linus Torvalds"><div class="muted" style="font-size:16px;width:280px"><strong>Linus Torvalds</strong>, the creator of the Linux kernel (1991)</div></div>
+    <svg class="ico fx-pop" style="width:130px;height:130px;color:var(--red);filter:drop-shadow(0 0 18px rgba(255,59,92,.5))" data-f="2"><use href="#i-swords"/></svg>
+    <img src="assets/bitkeeper.png" style="width:300px;background:#fff;padding:14px 20px;border-radius:16px" alt="BitKeeper" data-f="1">
+  </div>
+  <div class="center cyan" data-f="3" style="font-size:22px">Git is the de facto version control system since 2005.</div>
+</section>
+
+<!-- ═══════════════════════════ 29 · Quote ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="“I name all my projects after myself.”" style="justify-content:center">
+  <div class="row" style="gap:60px;justify-content:center">
+    <img src="assets/linus.jpg" class="shot" style="height:380px" alt="Linus Torvalds">
+    <div class="col" style="gap:30px;max-width:640px">
+      <p class="quote" style="font-size:28px;text-align:left;margin:0">“I'm an egotistical bastard, and I name all my projects after myself. First ‘Linux’, now ‘<span class="amber">git</span>’.”</p>
+      <img src="assets/dictionary.png" class="shot" style="width:560px" alt="Dictionary definition of git">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 30 · First commit README ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="The first git README" style="padding:30px 60px 50px;justify-content:center">
+  <div class="row" style="align-items:flex-end;gap:24px">
+    <a class="col" href="https://github.com/qingyunha/initgit/blob/master/README" target="_blank" style="gap:0;width:880px;border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.5)">
+      <img src="assets/readme-1.png" style="display:block;width:100%" alt="">
+      <img src="assets/readme-2.png" style="display:block;width:100%" alt="" data-f="1" class="fx-none">
+      <img src="assets/readme-3.png" style="display:block;width:100%" alt="" data-f="2" class="fx-none">
+      <img src="assets/readme-4.png" style="display:block;width:100%" alt="" data-f="3" class="fx-none">
+    </a>
+    <img class="shot fx-pop" src="assets/honestwork.jpg" style="width:240px" alt="It ain't much but it's honest work" data-f="4">
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 31 · Software vs providers ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="Git software vs repository hosts" style="justify-content:center;gap:40px">
+  <div class="row" style="gap:30px;justify-content:center" data-f="1">
+    <div class="card glow-cyan" style="padding:16px 30px"><img src="assets/git.png" style="width:220px;background:#fff;padding:10px 14px;border-radius:10px;display:block" alt="Git"></div>
+    <div class="cyan" style="font:600 28px var(--font-head)">Software</div>
+  </div>
+  <div class="ring" style="padding:36px 30px 28px">
+    <div class="amber" data-f="2" style="--d:.5s;font:600 28px var(--font-head);position:absolute;top:-18px;left:30px;background:var(--bg);padding:0 14px;z-index:1">Repository Service Providers</div>
+    <div data-f="2" class="fx-none" style="--d:.5s;position:absolute;inset:0;border:1.5px solid rgba(255,182,72,.6);border-radius:24px"></div>
+    <div class="row" style="justify-content:space-around" data-f="2">
+      <a href="https://github.com/" target="_blank" class="col center" style="gap:8px;color:#fff;text-decoration:none"><img src="assets/github.png" style="width:120px;background:#fff;border-radius:20px;padding:8px" alt=""><b style="font:700 28px var(--font-head)">GitHub</b></a>
+      <a href="https://bitbucket.org/" target="_blank" class="col center" style="gap:8px;color:#fff;text-decoration:none"><img src="assets/bitbucket.png" style="width:120px;background:#fff;border-radius:20px" alt=""><b style="font:700 28px var(--font-head)">Bitbucket</b></a>
+      <a href="https://about.gitlab.com/" target="_blank" class="col center" style="gap:8px;color:#fff;text-decoration:none"><img src="assets/gitlab.png" style="width:120px;background:#fff;border-radius:20px" alt=""><b style="font:700 28px var(--font-head)">GitLab</b></a>
+      <a href="https://beanstalkapp.com/" target="_blank" class="col center" style="gap:8px;color:#fff;text-decoration:none"><img src="assets/beanstalk.png" style="width:120px;height:120px;object-fit:contain;background:#fff;padding:10px;border-radius:20px" alt=""><b style="font:700 28px var(--font-head)">Beanstalk</b></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 32 · GitHub account ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="Create a GitHub account" style="justify-content:center;gap:30px">
+  <p class="lead center" style="font-size:30px;margin:0">Create a personal account on <a href="https://github.com/" target="_blank">github.com</a>.</p>
+  <img src="assets/signup.png" class="shot" style="width:900px;margin:0 auto" alt="Signing up for a new personal account">
+  <div class="foot"><a href="https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github" target="_blank">docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github</a></div>
+</section>
+
+<!-- ═══════════════════════════ 33 · xkcd ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="xkcd: Git" style="justify-content:center;align-items:center">
+  <a href="https://xkcd.com/1597/" target="_blank"><img src="assets/xkcd-git.png" class="shot" style="height:560px;background:#fff" alt="xkcd 1597: Git"></a>
+</section>
+
+<!-- ═══════════════════════════ 34 · add / commit / push ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="Git Process: Add, Commit, Push">
+  <h1 class="title">Git Process: Add, Commit, Push</h1>
+  <div class="diagram">
+    <div class="frame dashed" data-f="1" style="left:40px;top:40px;width:230px;height:330px;border-color:rgba(255,59,92,.6)"><span class="tag" style="top:auto;bottom:-30px;left:0;right:0;text-align:center;color:var(--red);background:none">Development Workspace</span></div>
+    <div class="frame dashed" data-f="2" style="left:290px;top:40px;width:470px;height:330px;border-color:rgba(255,182,72,.6)"><span class="tag" style="top:auto;bottom:-30px;left:0;right:0;text-align:center;color:var(--amber);background:none">Local Git Repo</span></div>
+    <div class="frame dashed" data-f="5" style="left:800px;top:40px;width:330px;height:330px;border-color:rgba(46,230,214,.6)"><span class="tag" style="top:auto;bottom:-30px;left:0;right:0;text-align:center;color:var(--cyan);background:none">Remote Git Repo</span></div>
+    <div data-f="4" style="position:absolute;left:36px;top:410px;width:728px;height:34px;border:2px solid var(--muted);border-top:none;border-radius:0 0 14px 14px"></div>
+    <div class="lbl" data-f="4" style="left:36px;width:728px;top:452px;font-size:20px;color:#fff;font-weight:600">Your Computer</div>
+    <!-- docs -->
+    <span class="doc" data-f="1" style="position:absolute;left:110px;top:130px;width:90px;height:110px;color:var(--red)"><svg><use href="#i-doc"/></svg></span>
+    <div class="lbl" data-f="1" style="left:60px;width:190px;top:250px;color:var(--red)">Working File</div>
+    <span class="doc" data-f="2" style="position:absolute;left:370px;top:130px;width:90px;height:110px;color:var(--amber)"><svg><use href="#i-doc"/></svg></span>
+    <div class="lbl" data-f="2" style="left:320px;width:190px;top:250px;color:var(--amber)">Start<br>tracking it.</div>
+    <span class="doc" data-f="3" style="position:absolute;left:600px;top:130px;width:90px;height:110px;color:var(--amber)"><svg><use href="#i-doc"/></svg></span>
+    <div class="lbl" data-f="3" style="left:550px;width:190px;top:250px;color:var(--amber)">Take a<br>snapshot.</div>
+    <span class="doc" data-f="5" style="position:absolute;left:920px;top:130px;width:90px;height:110px;color:var(--cyan)"><svg><use href="#i-doc"/></svg></span>
+    <div class="lbl" data-f="5" style="left:870px;width:190px;top:250px;color:var(--cyan)">Push to the<br>remote repo.</div>
+    <!-- arrows + commands -->
+    <div class="lbl mono" data-f="2" style="left:215px;width:150px;top:135px;color:var(--amber);font-size:24px">add</div>
+    <div class="lbl mono" data-f="3" style="left:450px;width:150px;top:135px;color:var(--amber);font-size:24px">commit</div>
+    <div class="lbl mono" data-f="5" style="left:730px;width:150px;top:135px;color:var(--cyan);font-size:24px">push</div>
+    <svg class="wires">
+      <line data-f="2" class="fx-draw a" x1="210" y1="185" x2="360" y2="185" marker-end="url(#arr-a)"/>
+      <line data-f="3" class="fx-draw a" x1="470" y1="185" x2="590" y2="185" marker-end="url(#arr-a)"/>
+      <line data-f="5" class="fx-draw c" x1="700" y1="185" x2="910" y2="185" marker-end="url(#arr-c)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 35 · Branching ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="Git Branching">
+  <h1 class="title">Git Branching</h1>
+  <div class="diagram">
+    <svg class="wires" viewBox="0 0 1136 480">
+      <defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <!-- static first Main -->
+      <circle cx="120" cy="240" r="34" fill="#0a0d13" stroke="var(--cyan)" stroke-width="3" filter="url(#glow)"/><text x="120" y="246" text-anchor="middle" fill="#fff" font-size="18" font-family="Inter,sans-serif">Main</text>
+      <line data-f="1" class="fx-draw c" x1="156" y1="240" x2="366" y2="240" marker-end="url(#arr-c)"/>
+      <g data-f="1" class="fx-pop" style="transform-origin:400px 240px"><circle cx="400" cy="240" r="34" fill="#0a0d13" stroke="var(--cyan)" stroke-width="3" filter="url(#glow)"/><text x="400" y="246" text-anchor="middle" fill="#fff" font-size="18" font-family="Inter,sans-serif">Main</text></g>
+      <!-- B bug fix -->
+      <line data-f="2" class="fx-draw r" x1="428" y1="262" x2="630" y2="368" marker-end="url(#arr-r)"/>
+      <g data-f="2" class="fx-pop" style="transform-origin:660px 380px"><circle cx="660" cy="380" r="34" fill="#0a0d13" stroke="var(--red)" stroke-width="3" filter="url(#glow)"/><text x="660" y="387" text-anchor="middle" fill="#fff" font-size="20" font-family="Inter,sans-serif">B</text></g>
+      <text data-f="2" x="660" y="450" text-anchor="middle" fill="var(--red)" font-size="20" font-family="Inter,sans-serif">+ Bug Fix</text>
+      <!-- A feature -->
+      <line data-f="3" class="fx-draw a" x1="428" y1="218" x2="630" y2="112" marker-end="url(#arr-a)"/>
+      <g data-f="3" class="fx-pop" style="transform-origin:660px 100px"><circle cx="660" cy="100" r="34" fill="#0a0d13" stroke="var(--amber)" stroke-width="3" filter="url(#glow)"/><text x="660" y="107" text-anchor="middle" fill="#fff" font-size="20" font-family="Inter,sans-serif">A</text></g>
+      <text data-f="3" x="660" y="45" text-anchor="middle" fill="var(--amber)" font-size="20" font-family="Inter,sans-serif">+ Feature</text>
+      <!-- merge -->
+      <line data-f="4" class="fx-draw a" x1="690" y1="118" x2="892" y2="222" marker-end="url(#arr-a)"/>
+      <line data-f="4" class="fx-draw r" x1="690" y1="362" x2="892" y2="258" marker-end="url(#arr-r)"/>
+      <g data-f="4" class="fx-pop" style="transform-origin:920px 240px"><circle cx="920" cy="240" r="34" fill="#0a0d13" stroke="var(--cyan)" stroke-width="3" filter="url(#glow)"/><text x="920" y="246" text-anchor="middle" fill="#fff" font-size="18" font-family="Inter,sans-serif">Main</text></g>
+      <text data-f="4" x="975" y="232" fill="var(--amber)" font-size="18" font-family="Inter,sans-serif">+ Feature</text>
+      <text data-f="4" x="975" y="258" fill="var(--red)" font-size="18" font-family="Inter,sans-serif">+ Bug Fix</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 36 · Quiz divider: Git ═══════════════════════════ -->
+<section class="slide section quiz" data-section="Git · Quick check" data-title="Quick check: Git">
+  <div class="kicker">Quick check</div>
+  <h1><span>Git</span></h1>
+  <a href="https://missing.csail.mit.edu/2020/version-control/" target="_blank" style="margin-top:50px;display:inline-block"><img src="assets/missing-semester.png" class="shot" style="width:330px" alt="The Missing Semester of Your CS Education"></a>
+  <svg class="big-ico ico"><use href="#i-quiz"/></svg>
+</section>
+
+<!-- ═══════════════════════════ 37–41 · Git quiz ═══════════════════════════ -->
+<section class="slide q" data-section="Git · Quick check" data-title="What does git clone do?">
+  <div class="fill"><p><span class="chip amber qn">Q1</span> What does <code>git clone &lt;URL&gt;</code> do?</p>
+    <ol class="list abc"><li data-fa="1">Copies a remote repo to your machine.</li><li>Creates a blank repo on GitHub.</li><li>Downloads only the latest commit.</li><li>Copies your current folder into the remote.</li></ol></div>
+</section>
+<section class="slide q" data-section="Git · Quick check" data-title="Order the git commands">
+  <div class="fill"><p><span class="chip amber qn">Q2</span> Put these in the most common order for first-time work on a repo:</p><p><code style="font-size:1.05em">commit, push, clone, add</code></p><div class="answer" data-f="1"><span class="chip green">Answer</span><span><code>clone</code> → <code>add</code> → <code>commit</code> → <code>push</code></span></div></div>
+</section>
+<section class="slide q" data-section="Git · Quick check" data-title="Which state is notes.txt in?">
+  <div class="fill"><p><span class="chip amber qn">Q3</span> You just ran:</p>
+<pre>echo "hello" &gt; notes.txt
+git status</pre>
+    <p>Which state is <code>notes.txt</code> in?</p>
+    <ol class="list abc"><li data-fa="1">Untracked</li><li>Staged</li><li>Committed</li><li>Pushed</li></ol></div>
+</section>
+<section class="slide q" data-section="Git · Quick check" data-title="Stage only a.py">
+  <div class="fill"><p><span class="chip amber qn">Q4</span> You created two files: <code>a.py</code>, <code>b.py</code>. You only want to stage <code>a.py</code>.</p><p>Which command should you use to do this?</p>
+    <div class="answer" data-f="1"><span class="chip green">Answer</span><span><code>git add a.py</code> &nbsp;(not <code>git add .</code>, which would stage both)</span></div>
+    <div class="divider" data-f="2"></div>
+    <p data-f="2"><span class="chip amber qn">Q5</span> <strong>True or False:</strong> <code>git push</code> sends your local commits to the remote repository.</p>
+    <div class="answer" data-f="3"><span class="chip green">Answer</span><span><strong>True.</strong> Commits stay local until you push.</span></div></div>
+</section>
+<section class="slide q" data-section="Git · Quick check" data-title="Create a branch named feature-login">
+  <div class="fill"><p><span class="chip amber qn">Q6</span> To create a new branch named <code>feature-login</code>:</p>
+    <ol class="list abc mono"><li data-fa="1">git branch feature-login</li><li>git -b feature-login</li><li>git branch --new feature-login</li><li>git push feature-login</li></ol>
+    <div class="answer" data-f="1"><span class="chip green">Answer</span><span>A. &nbsp;(<code>git checkout -b feature-login</code> / <code>git switch -c feature-login</code> create <em>and</em> switch to it)</span></div>
+    <div class="divider" data-f="2"></div>
+    <p data-f="2"><span class="chip amber qn">Q7</span> What’s the difference between <strong>staging</strong> and <strong>committing</strong>?</p>
+    <div class="answer" data-f="3"><span class="chip green">Answer</span><span><strong>Staging</strong> (<code>git add</code>) selects which changes go into the next snapshot. <strong>Committing</strong> (<code>git commit</code>) records that snapshot in the repo history.</span></div></div>
+</section>
+
+<!-- ═══════════════════════════ 42 · Section: venv ═══════════════════════════ -->
+<section class="slide section" data-section="venv" data-title="Python Virtual Environment (venv)">
+  <div class="kicker">Section 03</div>
+  <h1>Python <span>Virtual Environment</span> (venv)</h1>
+  <svg class="big-ico ico"><use href="#i-box"/></svg>
+  <div class="secnum">03</div>
+</section>
+
+<!-- ═══════════════════════════ 43 · Works on my machine ═══════════════════════════ -->
+<section class="slide" data-section="venv" data-title="It works on my machine" style="justify-content:center">
+  <div class="row" style="justify-content:center;gap:80px">
+    <img src="assets/worksonmymachine.png" class="shot" style="width:340px" alt="It works on my machine">
+    <div class="col" style="gap:8px">
+      <img src="assets/jim-1.jpg" class="shot" style="width:480px" alt="I get that it works on your computer" data-f="1">
+      <img src="assets/jim-2.jpg" class="shot" style="width:480px" alt="But we are not going to give your computer to the client" data-f="2">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 44 · Why venv ═══════════════════════════ -->
+<section class="slide" data-section="venv" data-title="Why virtual environments?" style="justify-content:center;padding-left:200px">
+  <div class="col" style="gap:50px;font-size:38px;font-family:var(--font-head)">
+    <div class="row" style="gap:28px"><div class="num lg red">1</div><div>Avoid <span class="amber">dependency conflicts</span>.</div></div>
+    <div class="row" style="gap:28px" data-f="1"><div class="num lg red">2</div><div>Ensure easy <span class="amber">reproducibility</span>.</div></div>
+    <div class="row" style="gap:28px" data-f="2"><div class="num lg red">3</div><div><span class="amber">Cleanliness</span> is next to Godliness 😇</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 45 · Start a project flow ═══════════════════════════ -->
+<section class="slide" data-section="venv" data-title="Start a project → venv → dependencies" style="justify-content:center">
+  <div class="row" style="justify-content:center;gap:0">
+    <div class="card glow-cyan center" style="width:210px;height:130px;display:grid;place-items:center;align-content:center;gap:6px;font-size:21px"><svg class="ico" style="width:30px;height:30px;color:var(--cyan)"><use href="#i-tree"/></svg>Start<br>a Project</div>
+    <svg class="wires" style="width:90px;height:20px;flex:none"><line data-f="1" class="fx-draw c" x1="0" y1="10" x2="84" y2="10" marker-end="url(#arr-c)"/></svg>
+    <div class="card glow-amber center" style="width:240px;height:130px;display:grid;place-items:center;align-content:center;gap:6px;font-size:21px" data-f="1"><svg class="ico" style="width:30px;height:30px;color:var(--amber)"><use href="#i-box"/></svg>Create and activate<br>a Python venv</div>
+    <svg class="wires" style="width:90px;height:20px;flex:none"><line data-f="2" class="fx-draw a" x1="0" y1="10" x2="84" y2="10" marker-end="url(#arr-a)"/></svg>
+    <div class="card center" style="width:210px;height:130px;display:grid;place-items:center;align-content:center;gap:6px;font-size:21px;border-color:rgba(74,222,128,.5);box-shadow:0 0 0 1px rgba(74,222,128,.15),0 14px 40px rgba(74,222,128,.12)" data-f="2"><svg class="ico" style="width:30px;height:30px;color:var(--green)"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></svg>Install<br>Dependencies</div>
+    <svg class="wires" style="width:90px;height:20px;flex:none"><line data-f="3" class="fx-draw g" x1="0" y1="10" x2="84" y2="10" marker-end="url(#arr-g)"/></svg>
+    <div style="font-size:44px;color:var(--muted);letter-spacing:.1em" data-f="3">…</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 46 · xkcd standards ═══════════════════════════ -->
+<section class="slide" data-section="venv" data-title="xkcd: Standards" style="justify-content:center;align-items:center">
+  <a href="https://xkcd.com/927/" target="_blank" class="col" style="gap:0;width:1000px;background:#fff;border-radius:12px;padding:10px;box-shadow:0 20px 50px rgba(0,0,0,.5)">
+    <img src="assets/standards-head.png" style="width:100%;display:block" alt="How standards proliferate">
+    <div class="row" style="gap:0;align-items:flex-start">
+      <img src="assets/standards-1.png" style="width:28%;display:block" alt="" data-f="1" class="fx-none">
+      <img src="assets/standards-2.png" style="width:39%;display:block" alt="" data-f="2" class="fx-none">
+      <img src="assets/standards-3.png" style="width:27.6%;display:block" alt="" data-f="3" class="fx-none">
+    </div>
+  </a>
+</section>
+
+<!-- ═══════════════════════════ 47 · Creating a venv ═══════════════════════════ -->
+<section class="slide" data-section="venv" data-title="Creating a Virtual Environment (venv)">
+  <h1 class="title">Creating a Virtual Environment (venv)</h1>
+  <div class="fill" style="gap:34px;align-items:center">
+    <div class="row" style="justify-content:center;gap:30px;flex-wrap:wrap;width:1000px">
+      <a href="https://github.com/pyenv/pyenv" target="_blank"><img src="assets/pyenv.png" class="logo wh" style="height:110px" alt="pyenv"></a>
+      <a href="https://www.anaconda.com/docs/getting-started/working-with-conda/environments" target="_blank"><img src="assets/anaconda.png" class="logo wh" style="height:110px" alt="Anaconda"></a>
+      <img src="assets/virtualenv.jpg" class="logo wh" style="height:110px" alt="virtualenv">
+      <a href="https://docs.astral.sh/uv/" target="_blank"><img src="assets/uv.png" class="logo" style="height:110px" alt="uv"></a>
+      <a href="https://python-poetry.org/" target="_blank"><img src="assets/poetry.png" class="logo wh" style="height:110px" alt="Poetry"></a>
+    </div>
+    <pre data-f="1" style="font-size:32px;padding:18px 40px;color:var(--amber)">python -m venv &lt;venv-name&gt;</pre>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 48 · $PATH ═══════════════════════════ -->
+<section class="slide" data-section="venv" data-title="How It Works: $PATH">
+  <h1 class="title">How It Works: <code class="plain" style="color:var(--red)">$PATH</code></h1>
+  <ul class="list sm fill" style="font-size:21px">
+    <li data-f="1">When you run the <code>python</code> command, or execute code in Jupyter Notebook, the Python interpreter looks for a <span class="amber">python executable file</span> in the system environment variable called <code>$PATH</code>…</li>
+    <li data-f="2">… Unless you are inside a virtual environment.</li>
+    <li data-f="3"><div>When you create a venv, a new (hidden) directory is created. It contains:
+      <ul>
+        <li data-f="3" style="--d:.15s">A directory named <code>site_packages</code> that will store all installed packages.</li>
+        <li data-f="3" style="--d:.3s">A file named <code>pyvenv.cfg</code> which includes a path to the Python executable.</li>
+        <li data-f="3" style="--d:.45s">The Python interpreter will now use this Python executable to execute Python scripts.</li>
+        <li data-f="3" style="--d:.6s">And all Python packages will be installed within the “local” <code>site_packages</code> directory.</li>
+      </ul></div></li>
+  </ul>
+</section>
+
+<!-- ═══════════════════════════ 49 · The Process ═══════════════════════════ -->
+<section class="slide" data-section="venv" data-title="The venv process">
+  <h1 class="title">The Process</h1>
+  <div class="diagram">
+    <div class="frame" data-f="8" style="left:0;top:0;width:1136px;height:300px;border-color:rgba(46,230,214,.6);border-radius:14px"><span class="tag" style="left:-1px;top:-1px;background:var(--cyan);color:#0b0e14;border-radius:12px 0 10px 0;padding:4px 14px;font-weight:700">Machine A</span></div>
+    <div class="frame" data-f="9" style="left:0;top:330px;width:700px;height:170px;border-color:rgba(255,59,92,.6);border-radius:14px"><span class="tag" style="left:-1px;top:-1px;background:var(--red);color:#fff;border-radius:12px 0 10px 0;padding:4px 14px;font-weight:700">Machine B</span></div>
+    <!-- boxes row 1 -->
+    <div class="box dark" data-f="1"  style="left:40px; top:70px;width:220px;height:90px;font-size:20px">Create a<br>Python venv</div>
+    <div class="box dark" data-f="2"  style="left:330px;top:70px;width:200px;height:90px;font-size:20px">Activate it.</div>
+    <div class="box dark" data-f="3"  style="left:600px;top:70px;width:200px;height:90px;font-size:20px">Install<br>packages.</div>
+    <div class="box dark" data-f="4"  style="left:870px;top:70px;width:220px;height:90px;font-size:20px">Write and<br>execute code.</div>
+    <!-- row 2 -->
+    <div class="box dark" data-f="6"  style="left:870px;top:190px;width:220px;height:90px;font-size:20px">Freeze<br>dependencies.</div>
+    <div class="box dark" data-f="7"  style="left:600px;top:190px;width:200px;height:90px;font-size:20px">Deactivate it.</div>
+    <!-- machine B -->
+    <div class="box dark" data-f="10" style="left:60px;top:380px;width:240px;height:90px;font-size:20px">Install<br>dependencies.</div>
+    <div class="box dark" data-f="11" style="left:390px;top:380px;width:240px;height:90px;font-size:20px">Execute (and<br>write) code.</div>
+    <svg class="wires">
+      <line data-f="2" class="fx-draw" x1="262" y1="115" x2="326" y2="115" marker-end="url(#arr-m)"/>
+      <line data-f="3" class="fx-draw" x1="532" y1="115" x2="596" y2="115" marker-end="url(#arr-m)"/>
+      <line data-f="4" class="fx-draw" x1="802" y1="115" x2="866" y2="115" marker-end="url(#arr-m)"/>
+      <polyline data-f="5" class="fx-draw dashed" points="980,68 980,40 700,40 700,66" marker-end="url(#arr-m)"/>
+      <line data-f="6" class="fx-draw" x1="980" y1="162" x2="980" y2="186" marker-end="url(#arr-m)"/>
+      <line data-f="7" class="fx-draw" x1="868" y1="235" x2="804" y2="235" marker-end="url(#arr-m)"/>
+      <polyline data-f="10" class="fx-draw dashed" points="980,282 980,315 180,315 180,376" marker-end="url(#arr-m)"/>
+      <line data-f="11" class="fx-draw" x1="302" y1="425" x2="386" y2="425" marker-end="url(#arr-m)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 50 · Quiz divider: venv ═══════════════════════════ -->
+<section class="slide section quiz" data-section="venv · Quick check" data-title="Quick check: venv">
+  <div class="kicker">Quick check</div>
+  <h1>Python <span>Virtual Environment</span></h1>
+  <svg class="big-ico ico"><use href="#i-quiz"/></svg>
+</section>
+
+<!-- ═══════════════════════════ 51–52 · venv quiz ═══════════════════════════ -->
+<section class="slide q" data-section="venv · Quick check" data-title="Main reason to use a virtual environment">
+  <div class="fill" style="gap:18px"><p><span class="chip amber qn">Q1</span> What’s the main reason to use a virtual environment?</p>
+    <ol class="list abc" style="font-size:21px"><li>Make Python run faster</li><li data-fa="1">Keep project dependencies isolated</li><li>Share secrets with teammates</li><li>Compile Python to C</li></ol>
+    <div class="divider" data-f="2"></div>
+    <p data-f="2"><span class="chip amber qn">Q2</span> What’s the command to create a virtual environment named <code>vcu</code> using the standard library?</p>
+    <div class="answer" data-f="3"><span class="chip green">Answer</span><span><code>python -m venv vcu</code></span></div>
+    <div class="divider" data-f="4"></div>
+    <p data-f="4"><span class="chip amber qn">Q3</span> <strong>True or False:</strong> <code>deactivate</code> deletes the virtual environment folder.</p>
+    <div class="answer" data-f="5"><span class="chip green">Answer</span><span><strong>False.</strong> It only restores your shell’s <code>$PATH</code>; the folder stays until you delete it.</span></div></div>
+</section>
+<section class="slide q" data-section="venv · Quick check" data-title="Order the venv steps">
+  <div class="fill"><p><span class="chip amber qn">Q4</span> Put these in the usual order for a fresh project:</p>
+    <ol class="list abc mono"><li>pip install -r requirements.txt</li><li>python -m venv .venv</li><li>pip freeze &gt; requirements.txt</li><li>activate the venv</li></ol>
+    <div class="answer" data-f="1"><span class="chip green">Answer</span><span>B → D → A → C &nbsp;(create, activate, install, then freeze what you installed)</span></div>
+    <div class="divider" data-f="2"></div>
+    <p data-f="2"><span class="chip amber qn">Q5</span> You forgot to activate and installed packages globally by accident. Describe a way to undo or mitigate that.</p>
+    <div class="answer" data-f="3"><span class="chip green">Answer</span><span>Uninstall them from the global interpreter (<code>pip uninstall &lt;pkg&gt;</code>; <code>pip freeze</code> shows what landed there), then activate the venv and install again. Check <code>which python</code> before installing.</span></div></div>
+</section>
+
+<!-- ═══════════════════════════ 53 · Section: Unit Testing ═══════════════════════════ -->
+<section class="slide section" data-section="Testing" data-title="Unit Testing">
+  <div class="kicker">Section 04</div>
+  <h1>Unit <span>Testing</span></h1>
+  <svg class="big-ico ico"><use href="#i-flask"/></svg>
+  <div class="secnum">04</div>
+</section>
+
+<!-- ═══════════════════════════ 54 · Two questions ═══════════════════════════ -->
+<section class="slide" data-section="Testing" data-title="Is the code working as expected?" style="justify-content:center;align-items:center">
+  <div class="col" style="gap:40px;font-size:38px;font-family:var(--font-head)">
+    <div class="row" style="gap:28px"><div class="num lg red">1</div><div>Is the code <span class="amber">working as expected</span>?</div></div>
+    <div class="row" style="gap:28px" data-f="1"><div class="num lg red">2</div><div>Any <span class="amber">edge cases</span> where the code <span class="red">fails</span>?</div></div>
+  </div>
+  <img src="assets/pytest.png" style="height:200px;margin-top:40px;background:#fff;border-radius:20px;padding:10px" alt="pytest" data-f="2" class="fx-zoom">
+</section>
+
+<!-- ═══════════════════════════ 55 · Anatomy of a Test ═══════════════════════════ -->
+<section class="slide" data-section="Testing" data-title="Anatomy of a Test" style="justify-content:center;gap:34px">
+  <h1 class="title">Anatomy of a Test</h1>
+  <p class="center" data-f="1" style="font-size:22px;margin:0">A test checks the outcome of a specific <span class="red">behavior</span> and ensures it aligns with the expectations.</p>
+  <div class="diagram" style="height:300px;flex:none">
+    <div class="box dark" data-f="5" style="left:0px;top:40px;width:190px;height:80px;font:600 19px var(--font-head);letter-spacing:.14em">ARRANGE</div>
+    <div class="box dark" data-f="3" style="left:240px;top:40px;width:190px;height:80px;font:600 19px var(--font-head);letter-spacing:.14em">ACT</div>
+    <div class="box pill fx-pop" data-f="2" style="left:470px;top:30px;width:200px;height:100px;font:600 19px var(--font-head);letter-spacing:.14em;background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 0 40px rgba(255,59,92,.45)">BEHAVIOR</div>
+    <div class="box dark" data-f="4" style="left:710px;top:40px;width:190px;height:80px;font:600 19px var(--font-head);letter-spacing:.14em">ASSERT</div>
+    <div class="box dark" data-f="6" style="left:946px;top:40px;width:190px;height:80px;font:600 19px var(--font-head);letter-spacing:.14em">CLEANUP</div>
+    <svg class="wires">
+      <line data-f="5" class="fx-draw" x1="192" y1="80" x2="234" y2="80" marker-end="url(#arr-m)"/>
+      <line data-f="3" class="fx-draw" x1="432" y1="80" x2="464" y2="80" marker-end="url(#arr-m)"/>
+      <line data-f="4" class="fx-draw" x1="672" y1="80" x2="704" y2="80" marker-end="url(#arr-m)"/>
+      <line data-f="6" class="fx-draw" x1="902" y1="80" x2="940" y2="80" marker-end="url(#arr-m)"/>
+    </svg>
+    <div class="lbl" data-f="5" style="left:0;width:190px;top:140px;font-size:15px">Prepare everything for the test, e.g., enter records into a database.</div>
+    <div class="lbl" data-f="3" style="left:240px;width:190px;top:140px;font-size:15px">A singular, state-changing action that kicks off the behavior under evaluation.</div>
+    <div class="lbl" data-f="2" style="left:470px;width:200px;top:140px;font-size:15px">How the system acts in response to the given situation or stimulus.</div>
+    <div class="lbl" data-f="4" style="left:710px;width:190px;top:140px;font-size:15px">Check the resulting state to ensure it aligns with what was expected.</div>
+    <div class="lbl" data-f="6" style="left:946px;width:190px;top:140px;font-size:15px">The test picks up after itself, so it doesn’t unintentionally affect other tests.</div>
+  </div>
+  <p class="center muted" data-f="7" style="font-size:20px;margin:0">The focus is less on <i>how</i> or <i>why</i> it happened, and more on <i>what</i> happened.</p>
+  <div class="foot" data-f="7"><a href="https://docs.pytest.org/en/stable/explanation/anatomy.html" target="_blank">docs.pytest.org/en/stable/explanation/anatomy.html</a></div>
+</section>
+
+<!-- ═══════════════════════════ 56 · Example ═══════════════════════════ -->
+<section class="slide" data-section="Testing" data-title="Example test">
+  <h1 class="title">Example</h1>
+  <div class="fill" style="align-items:center">
+    <div class="col" style="gap:0;width:800px;border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.5)">
+      <img src="assets/code-1.png" style="width:100%;display:block" alt="def add_number(a, b): return a + b">
+      <img src="assets/code-2.png" style="width:100%;display:block" alt="def test_add_number(): assert add_number(1, 2) == 3 ..." data-f="1" class="fx-none">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 57 · Pytest demo divider ═══════════════════════════ -->
+<section class="slide section quiz" data-section="Testing · Demo" data-title="Pytest">
+  <div class="kicker green">Live demo</div>
+  <h1>Pytest</h1>
+  <pre style="margin-top:40px;font-size:26px;color:var(--amber)">pip install pytest</pre>
+  <svg class="big-ico ico" style="color:var(--green)"><use href="#i-flask"/></svg>
+</section>
+
+<!-- ═══════════════════════════ 58 · Pytest exercise ═══════════════════════════ -->
+<section class="slide" data-section="Testing" data-title="Pytest Exercise">
+  <h1 class="title">Pytest Exercise</h1>
+  <ol class="list sm fill" style="font-size:19px;line-height:1.4">
+    <li>Create a new Python virtual environment for this exercise or reuse the one that we created in the previous section.</li>
+    <li>Install <code>pandas</code>.</li>
+    <li>Write a simple function to load <code>heart.csv</code> file into a Pandas dataframe.</li>
+    <li>Write a test to verify that the dataframe contains twelve columns.</li>
+    <li>Check if you already have <code>pytest</code> in the virtual environment. Install it if needed.</li>
+    <li>Run the test and check the results. The test should <strong>pass</strong>.</li>
+    <li>Write another test to verify that there are no null values in any columns.</li>
+    <li>Run the test and check the results. The test should <strong>pass</strong>.</li>
+    <li>Write another test to verify that the column <code>heart_disease</code> is present.</li>
+    <li>Run the test and check the results. Inspect the results and figure out why the test failed.</li>
+  </ol>
+</section>
+
+<!-- ═══════════════════════════ 59 · Section: Project Code Structure ═══════════════════════════ -->
+<section class="slide section" data-section="Structure" data-title="Project Code Structure">
+  <div class="kicker">Section 05</div>
+  <h1>Project <span>Code Structure</span></h1>
+  <svg class="big-ico ico"><use href="#i-tree"/></svg>
+  <div class="secnum">05</div>
+</section>
+
+<!-- ═══════════════════════════ 60 · Noble's principles ═══════════════════════════ -->
+<section class="slide" data-section="Structure" data-title="Noble’s Principles">
+  <h1 class="title">Noble’s Principles</h1>
+  <div class="fill" style="gap:46px;padding:0 60px">
+    <div class="row" style="gap:28px;font-size:26px;line-height:1.4" data-f="1"><div class="num lg red">1</div><div>Someone unfamiliar with your project should be able to look at your files and understand in detail <span class="amber">what</span> you did and <span class="amber">why</span>.</div></div>
+    <div class="row" style="gap:28px;font-size:26px;line-height:1.4" data-f="2"><div class="num lg red">2</div><div>Everything you do, you will probably have to do over again.</div></div>
+  </div>
+  <div class="foot">A Quick Guide to Organizing Computational Biology Projects: <a href="https://dx.plos.org/10.1371/journal.pcbi.1000424" target="_blank">dx.plos.org/10.1371/journal.pcbi.1000424</a></div>
+</section>
+
+<!-- ═══════════════════════════ 61 · Knuth ═══════════════════════════ -->
+<section class="slide" data-section="Structure" data-title="Donald Knuth on literate programming" style="justify-content:center">
+  <p class="quote"><span class="mark">“</span>Let us change our traditional attitude to the construction of programs.<br><br>Instead of imagining that our main task is to <em class="k">instruct a computer</em> what to do, let us concentrate rather on <em class="k">explaining to human beings</em> what we want a computer to do.<span class="mark">”</span></p>
+  <div class="cite">– Donald E. Knuth</div>
+</section>
+
+<!-- ═══════════════════════════ 62 · Elements of a DS project ═══════════════════════════ -->
+<section class="slide" data-section="Structure" data-title="Elements of a Data Science Project">
+  <h1 class="title">Elements of a Data Science Project</h1>
+  <div class="fill" style="gap:14px">
+  <div class="row" style="justify-content:center;gap:24px;margin-bottom:46px" data-f="1">
+    <div class="box dark" style="position:static;width:170px;height:60px;font:500 22px var(--font-mono);border-color:var(--red)">README.md</div>
+    <div class="muted" style="font-size:16px;width:340px"><i>Why</i> this project exists, how things are organized, conventions used in the project, etc.</div>
+  </div>
+  <div class="row" style="justify-content:center;gap:18px;align-items:flex-start;margin-bottom:46px">
+    <div class="col center" style="gap:8px;width:160px" data-f="2"><div class="box dark" style="position:static;width:100%;height:60px;font-size:20px">Data</div><div class="muted" style="font-size:14px">Raw, Interim, Processed</div></div>
+    <div class="col center" style="gap:8px;width:160px" data-f="3"><div class="box dark" style="position:static;width:100%;height:60px;font-size:20px">Models</div><div class="muted" style="font-size:14px">Model artifacts</div></div>
+    <div class="col center" style="gap:8px;width:160px" data-f="4"><div class="box dark" style="position:static;width:100%;height:60px;font-size:20px">Notebooks</div><div class="muted" style="font-size:14px">Jupyter Notebooks</div></div>
+    <div class="col center" style="gap:8px;width:160px" data-f="5"><div class="box dark" style="position:static;width:100%;height:60px;font-size:20px">Reports</div><div class="muted" style="font-size:14px">Plots, Excel files, …</div></div>
+    <div class="col center" style="gap:8px;width:160px" data-f="6"><div class="box dark" style="position:static;width:100%;height:60px;font-size:20px">Scripts</div><div class="muted" style="font-size:14px"><code>.py</code> files</div></div>
+    <div class="col center" style="gap:8px;width:160px" data-f="7"><div class="box dark" style="position:static;width:100%;height:60px;font-size:20px">Tests</div><div class="muted" style="font-size:14px">Unit tests</div></div>
+  </div>
+  <div class="row" style="justify-content:center;gap:40px;align-items:flex-start">
+    <div class="col center" style="gap:8px;width:180px" data-f="8"><div class="box dark" style="position:static;width:100%;height:60px;font-size:20px">Configs</div><div class="muted" style="font-size:14px">Paths, options, …</div></div>
+    <div class="col center" style="gap:8px;width:180px" data-f="9"><div class="box dark" style="position:static;width:100%;height:60px;font-size:20px;border-color:var(--amber)">Secrets</div><div class="muted" style="font-size:14px">API keys, …</div></div>
+    <div class="col center" style="gap:8px;width:200px" data-f="10"><div class="box dark" style="position:static;width:100%;height:60px;font-size:20px;border-color:var(--cyan)">Requirements</div><div class="muted" style="font-size:14px">Python dependencies</div></div>
+  </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 63 · Cookiecutter repo ═══════════════════════════ -->
+<section class="slide" data-section="Structure" data-title="cookiecutter-data-science on GitHub" style="justify-content:center;align-items:center">
+  <a href="https://github.com/drivendataorg/cookiecutter-data-science" target="_blank"><img src="assets/ccds-github.png" class="shot" style="width:1000px" alt="drivendataorg/cookiecutter-data-science on GitHub"></a>
+</section>
+
+<!-- ═══════════════════════════ 64–67 · Opinions ═══════════════════════════ -->
+<section class="slide" data-section="Structure" data-title="Opinion 1: Data analysis is a DAG">
+  <h1 class="title">Cookiecutter Data Science: Opinions</h1>
+  <div class="fill" style="gap:26px;padding:0 50px">
+    <div class="row" style="gap:24px"><div class="num lg amber">1</div><h2 style="font-size:34px">Data analysis is a directed acyclic graph.</h2></div>
+    <p style="font-size:22px;line-height:1.5;margin:0 0 0 80px"><strong>The best way to ensure reproducibility is to treat your data analysis pipeline as a directed acyclic graph (<a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph" target="_blank" style="color:#fff">DAG</a>).</strong></p>
+    <p style="font-size:22px;line-height:1.5;margin:0 0 0 80px">This means each step of your analysis is a node in a directed graph with no loops. You can run through the graph forwards to recreate any analysis output, or you can trace backwards from an output to examine the combination of code and data that created it.</p>
+  </div>
+</section>
+<section class="slide" data-section="Structure" data-title="Opinion 2: Raw data is immutable">
+  <h1 class="title">Cookiecutter Data Science: Opinions</h1>
+  <div class="fill" style="gap:26px;padding:0 50px">
+    <div class="row" style="gap:24px"><div class="num lg amber">2</div><h2 style="font-size:34px">Raw data is immutable.</h2></div>
+    <p style="font-size:22px;line-height:1.5;margin:0 0 0 80px">That proper data analysis is a DAG means that raw data must be treated as immutable—it's okay to read and copy raw data to manipulate it into new outputs, but never okay to change it in place.</p>
+  </div>
+</section>
+<section class="slide" data-section="Structure" data-title="Opinion 3: Data should (mostly) not be in source control">
+  <h1 class="title">Cookiecutter Data Science: Opinions</h1>
+  <div class="fill" style="gap:26px;padding:0 50px">
+    <div class="row" style="gap:24px"><div class="num lg amber">3</div><h2 style="font-size:34px">Data should (mostly) not be kept in source control.</h2></div>
+    <p style="font-size:22px;line-height:1.5;margin:0 0 0 80px">Another consequence of treating data as immutable is that data doesn't need source control in the same way that code does.</p>
+    <p style="font-size:22px;line-height:1.5;margin:0 0 0 80px">Therefore, by default, the <code>data/</code> folder is included in the <code>.gitignore</code> file.</p>
+    <p style="font-size:22px;line-height:1.5;margin:0 0 0 80px">If you have a small amount of data that rarely changes, you may want to include the data in the repository.</p>
+  </div>
+</section>
+<section class="slide" data-section="Structure" data-title="Opinion 4: Notebooks vs source files">
+  <h1 class="title">Cookiecutter Data Science: Opinions</h1>
+  <div class="fill" style="gap:26px;padding:0 50px">
+    <div class="row" style="gap:24px"><div class="num lg amber">4</div><h2 style="font-size:32px;line-height:1.3">Notebooks are for <span class="cyan">exploration</span> and <span class="cyan">communication</span>,<br>source files are for <span class="cyan">repetition</span>.</h2></div>
+    <p style="font-size:22px;line-height:1.5;margin:0 0 0 80px">Source code is superior for replicability because it is more portable, can be tested more easily, and is easier to code review.</p>
+  </div>
+  <div class="foot"><a href="https://cookiecutter-data-science.drivendata.org/opinions/" target="_blank">cookiecutter-data-science.drivendata.org/opinions</a></div>
+</section>
+
+<!-- ═══════════════════════════ 68 · Cookiecutter demo divider ═══════════════════════════ -->
+<section class="slide section quiz" data-section="Structure · Demo" data-title="Cookiecutter">
+  <div class="kicker green">Live demo</div>
+  <h1>Cookiecutter</h1>
+  <svg class="big-ico ico" style="color:var(--green)"><use href="#i-tree"/></svg>
+</section>
+
+<!-- ═══════════════════════════ 69 · How to name files ═══════════════════════════ -->
+<section class="slide" data-section="Structure" data-title="How to Name Files">
+  <h1 class="title">How to Name Files</h1>
+  <div class="fill" style="align-items:center">
+    <!-- YouTube only allows embeds from http(s) pages; when opened as a local file we show a thumbnail that links out instead -->
+    <div id="yt-slot" data-video="ES1LTlnpLMk" class="ring" style="width:880px;height:495px">
+      <a class="yt-fallback" href="https://www.youtube.com/watch?v=ES1LTlnpLMk" target="_blank" style="display:block;position:relative;width:100%;height:100%"><img src="assets/normconf.png" class="shot" style="width:100%;height:100%;object-fit:cover" alt="How to Name Files Like a Normie — Jenny Bryan, NormConf">
+        <svg class="ico" style="position:absolute;left:50%;top:50%;width:90px;height:90px;transform:translate(-50%,-50%);color:#fff;filter:drop-shadow(0 4px 20px rgba(0,0,0,.6))"><use href="#i-play"/></svg></a>
+    </div>
+    <div class="tiny" id="yt-note" style="margin-top:12px">Jenny Bryan · NormConf · <a href="https://www.youtube.com/watch?v=ES1LTlnpLMk" target="_blank">youtube.com/watch?v=ES1LTlnpLMk</a></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 70 · File names ═══════════════════════════ -->
+<section class="slide" data-section="Structure" data-title="Which file names are good?" style="justify-content:center;padding-left:200px">
+  <ol class="list mono" style="font-size:28px;line-height:1.5">
+    <li data-f="1">ProjectBrief_FINAL (2).pptx</li>
+    <li data-f="2">Sales Report 12-04-09.csv</li>
+    <li data-f="3">2012-04-09_sales-report.csv</li>
+    <li data-f="4">2025-09-24_project-brief_v03.pptx</li>
+    <li data-f="5">20250924_lab_notes.md</li>
+  </ol>
+</section>
+
+<!-- ═══════════════════════════ 71 · Closing orbit ═══════════════════════════ -->
+<section class="slide" data-title="Part 1 recap · what’s next" style="justify-content:center">
+  <div class="chip" style="position:absolute;left:72px;top:50px">Part 1 · covered</div>
+  <div class="chip red" style="position:absolute;right:72px;top:50px">Part 2 · next</div>
+  <div class="orbit">
+    <svg class="ring-svg" viewBox="0 0 540 540"><circle class="spin-slow" cx="270" cy="270" r="240" fill="none" stroke="var(--amber)" stroke-width="2" stroke-dasharray="14 10" opacity=".8"/></svg>
+    <a class="center" href="https://www.python.org/about/" target="_blank"><img src="assets/python.png" alt="Python"></a>
+    <div class="sat done" style="left:195px;top:-5px"><img src="assets/terminal.png" alt="Terminal" style="max-height:72px"></div>
+    <div class="sat done" style="left:-13px;top:355px"><span class="pad"><img src="assets/git.png" alt="Git"></span></div>
+    <div class="sat done" style="left:41px;top:51px"><span class="pad"><img src="assets/venv.png" alt="venv" style="max-height:48px"></span></div>
+    <div class="sat done" style="left:431px;top:193px"><span class="pad"><img src="assets/unittest.png" alt="unittest" style="max-height:64px"></span></div>
+    <div class="sat done" style="left:403px;top:355px"><span class="pad"><img src="assets/cookiecutter.jpg" alt="Cookiecutter" style="max-height:44px"></span></div>
+    <div class="sat todo" style="left:-41px;top:193px"><span class="pad"><img src="assets/gradio.png" alt="Gradio" style="max-height:50px"></span></div>
+    <div class="sat todo" style="left:113px;top:460px"><span class="pad"><img src="assets/mlflow.png" alt="MLflow" style="max-height:50px"></span></div>
+    <div class="sat todo" style="left:277px;top:460px"><span class="pad"><img src="assets/fastapi.png" alt="FastAPI" style="max-height:50px"></span></div>
+    <div class="sat todo" style="left:349px;top:51px"><img src="assets/cursor.png" alt="Cursor" style="max-height:52px;border-radius:8px"></div>
+  </div>
+</section>
+
+</div></div>
+
+<!-- ───────── chrome ───────── -->
+<div id="progress"><i></i></div>
+<div id="hud"><span id="hud-l"></span><span id="hud-r"></span></div>
+<button id="help">? help</button>
+<div id="helpbox"><div>
+  <h3>Keyboard</h3>
+  <kbd>→</kbd><kbd>Space</kbd><kbd>Click</kbd><kbd>Wheel</kbd> next build / slide<br>
+  <kbd>←</kbd><kbd>Shift+Click</kbd> previous<br>
+  <kbd>n</kbd><kbd>p</kbd> skip builds, next / previous slide<br>
+  <kbd>o</kbd><kbd>Esc</kbd> slide overview<br>
+  <kbd>f</kbd> fullscreen &nbsp; <kbd>b</kbd> blackout &nbsp; <kbd>a</kbd> toggle animations<br>
+  <kbd>Home</kbd><kbd>End</kbd> first / last slide<br>
+  <span class="dim">Presentation clickers (PageUp / PageDown) work too. URL hash <code>#12.3</code> = slide 12, build 3.</span>
+</div></div>
+<div id="secbadge"></div>
+<div id="overview"><div class="grid"></div></div>
+<script src="deck.js"></script>
+</body>
+</html>
