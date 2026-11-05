@@ -1,26 +1,34 @@
+# Unit testing with pytest
+
 1. Create a new file called `addition.py`.
 2. Write the following code into it:
-```python
-def add_number(a, b):
-    return a + b
 
-print(add_number(3, 5))
-```
+   ```python
+   def add_number(a, b):
+       return a + b
+
+   print(add_number(3, 5))
+   ```
+
 3. Run the script using `python addition.py` and show that it returns the correct output. 
 4. Add a test to this function.
-```python
-def test_add_number():
-    assert add_number(3, 5) == 8
-```
+
+   ```python
+   def test_add_number():
+       assert add_number(3, 5) == 8
+   ```
+
 5. Run the code using `pytest -q` and show how it passes. (Confirm the run command.)
 6. It won't run—we need to install `pytest`. Activate the virtual environment first and then install it: `pip install pytest`.
 7. Add a few more tests: 
-```python
-def test_add_number():
-    assert add_number(3, 5) == 8
-    assert add_number(-1, 1) == 0
-    assert add_number(0, 0) == 0
-```
+
+   ```python
+   def test_add_number():
+       assert add_number(3, 5) == 8
+       assert add_number(-1, 1) == 0
+       assert add_number(0, 0) == 0
+   ```
+
 8. Run again and check the output. All tests pass.
 9. Change `return a + b` to `return a - b` to indicate a typo, and then re-run the tests to show how two of them will fail. But one will pass!
 10. Exercise

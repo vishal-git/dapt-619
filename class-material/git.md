@@ -1,3 +1,5 @@
+# Git
+
 1. Make a new directory: `mkdir demo`
 2. Go into that directory: `cd demo`
 3. The directory is empty, since we just created it: `ls`
@@ -38,7 +40,7 @@
 20. Commit these changes: `git commit -m "added another line"`
     1. Now we have another node in the graph.
 21. Draw another circle on the whiteboard to represent the second node. 
-22. Check log: `git log --all -- graph --decorate`
+22. Check log: `git log --all --graph --decorate`
     1. Now we have this graph, in a vertical form.
     2. More recent commits are shown at the top.
 23. Let’s talk about HEAD → master now. 
@@ -57,23 +59,26 @@
     2. Check what has changed since the last commit: `git diff hello.txt`
     3. Remember, HEAD refers to the latest snapshot. We may have made changes to the file after the latest snapshot. `git diff` by default shows what changed since the snapshot where HEAD is pointing to.
 26. Now, let’s explore how to create a new branch.
-        ```
-        git checkout -b feature-a
-        git branch
-        touch feature-a.py
-        echo "print('feature a')" > feature-a.py
-        git status
-        git add .
-        git commit -m "Added feature A"
-        git log --all --graph --decorate
-        git checkout master
-        ls -- There's no feature-a.py
-        git merge feature-a 
-        ls -- feature-a.py is now present
-        
-28. Push
+
+    ```bash
+    git checkout -b feature-a
+    git branch
+    touch feature-a.py
+    echo "print('feature a')" > feature-a.py
+    git status
+    git add .
+    git commit -m "Added feature A"
+    git log --all --graph --decorate
+    git checkout master
+    ls                    # feature-a.py is not here
+    git merge feature-a
+    ls                    # feature-a.py is now present
     ```
-    git remote -- Shows nothing
+
+27. Push
+
+    ```bash
+    git remote            # shows nothing
     mkdir ../remote
     cd ../remote
     git init
@@ -81,18 +86,23 @@
     cd ../demo
     git remote add origin ../remote
     git push origin master:master
-    git log --all --graph --decorate --oneline` -- Head points to master, and origin/master
+    git log --all --graph --decorate --oneline   # HEAD points to master, and origin/master
     ```
+
     Now if I make changes to the local branch, they won't be in the remote branch (yet).
-    ```
+
+    ```bash
     git clone ../remote demo2
     ```
-    
-    Now go back to the original demo, make changes and push to remote.
+
+    Now go back to the original `demo`, make changes and push to remote.
+
+    ```bash
+    git pull              # run this in demo2 to retrieve the changes
     ```
-    git pull -- on demo2 to retrieve changes
-    git fetch + git merge = git pull
-    ``` 
-    
-30. `git clone`
+
+    Note: `git fetch` + `git merge` = `git pull`.
+
+28. `git clone`
+
     Creates a copy of a remote repository on your local machine. Use `git clone <repository-url> <directory-name>` to specify where to clone.
