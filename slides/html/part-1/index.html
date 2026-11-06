@@ -456,12 +456,32 @@
   <div class="foot"><a href="https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github" target="_blank">docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github</a></div>
 </section>
 
-<!-- ═══════════════════════════ 33 · xkcd ═══════════════════════════ -->
-<section class="slide" data-section="Git" data-title="xkcd: Git" style="justify-content:center;align-items:center">
-  <a href="https://xkcd.com/1597/" target="_blank"><img src="assets/xkcd-git.png" class="shot" style="height:560px;background:#fff" alt="xkcd 1597: Git"></a>
+<!-- ═══════════════════════════ 33 · Arctic Code Vault ═══════════════════════════ -->
+<!-- Discussion prompt (revealed on click): Why would anyone want to preserve today's software for 1,000 years?
+     Talking points: much of civilization quietly runs on open source nobody thinks about — the Linux kernel (servers, Android,
+     routers, cars, supercomputers), OpenSSL / curl (every HTTPS connection and API call), SQLite (in every phone, browser, plane),
+     Python/NumPy/pandas (the analytics stack), zlib / libpng / FFmpeg (every image, PDF, video), BIND / Postfix (DNS, email),
+     Apache/nginx, PostgreSQL, Git itself. The vault (Svalbard, 02/02/2020 snapshot, 21 TB on 186 film reels) is a record of how
+     this generation built things — like the Rosetta Stone — not just a backup. -->
+<section class="slide" data-section="Git" data-title="Your Code Might Survive for 1,000 Years">
+  <h1 class="title">Your Code Might Survive for 1,000 Years</h1>
+  <div class="fill" style="align-items:center">
+    <!-- YouTube only allows embeds from http(s) pages; when opened as a local file we show a thumbnail that links out instead -->
+    <div class="yt-slot ring" data-video="fzI9FNjXQ0o" style="width:780px;height:439px">
+      <a class="yt-fallback" href="https://www.youtube.com/watch?v=fzI9FNjXQ0o" target="_blank" style="display:block;position:relative;width:100%;height:100%"><img src="assets/arctic-vault.jpg" class="shot" style="width:100%;height:100%;object-fit:cover" alt="GitHub Arctic Code Vault">
+        <svg class="ico" style="position:absolute;left:50%;top:50%;width:90px;height:90px;transform:translate(-50%,-50%);color:#fff;filter:drop-shadow(0 4px 20px rgba(0,0,0,.6))"><use href="#i-play"/></svg></a>
+    </div>
+    <div class="tiny yt-note" style="margin-top:12px">GitHub Arctic Code Vault · <a href="https://www.youtube.com/watch?v=fzI9FNjXQ0o" target="_blank">youtube.com/watch?v=fzI9FNjXQ0o</a> · <a href="https://archiveprogram.github.com/arctic-vault/" target="_blank">archiveprogram.github.com/arctic-vault</a></div>
+    <p class="lead center" data-f="1" style="margin:14px 0 0;font-size:26px">Why would anyone want to preserve <em class="k">today’s</em> software for 1,000 years?</p>
+  </div>
 </section>
 
-<!-- ═══════════════════════════ 34 · add / commit / push ═══════════════════════════ -->
+<!-- ═══════════════════════════ 34 · xkcd 2347 ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="xkcd: Dependency" style="justify-content:center;align-items:center">
+  <a href="https://xkcd.com/2347/" target="_blank"><img src="assets/xkcd-dependency.png" class="shot" style="height:600px;background:#fff" alt="xkcd 2347: Dependency — all modern digital infrastructure resting on a project some random person in Nebraska has been thanklessly maintaining since 2003"></a>
+</section>
+
+<!-- ═══════════════════════════ 35 · add / commit / push ═══════════════════════════ -->
 <section class="slide" data-section="Git" data-title="Git Process: Add, Commit, Push">
   <h1 class="title">Git Process: Add, Commit, Push</h1>
   <div class="diagram">
@@ -491,7 +511,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════ 35 · Branching ═══════════════════════════ -->
+<!-- ═══════════════════════════ 36 · Branching ═══════════════════════════ -->
 <section class="slide" data-section="Git" data-title="Git Branching">
   <h1 class="title">Git Branching</h1>
   <div class="diagram">
@@ -519,7 +539,12 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════ 36 · Quiz divider: Git ═══════════════════════════ -->
+<!-- ═══════════════════════════ 37 · xkcd 1597 ═══════════════════════════ -->
+<section class="slide" data-section="Git" data-title="xkcd: Git" style="justify-content:center;align-items:center">
+  <a href="https://xkcd.com/1597/" target="_blank"><img src="assets/xkcd-git.png" class="shot" style="height:560px;background:#fff" alt="xkcd 1597: Git"></a>
+</section>
+
+<!-- ═══════════════════════════ 38 · Quiz divider: Git ═══════════════════════════ -->
 <section class="slide section quiz" data-section="Git · Quick check" data-title="Quick check: Git">
   <div class="kicker">Quick check</div>
   <h1><span>Git</span></h1>
@@ -527,7 +552,7 @@
   <svg class="big-ico ico"><use href="#i-quiz"/></svg>
 </section>
 
-<!-- ═══════════════════════════ 37–41 · Git quiz ═══════════════════════════ -->
+<!-- ═══════════════════════════ 39–43 · Git quiz ═══════════════════════════ -->
 <section class="slide q" data-section="Git · Quick check" data-title="What does git clone do?">
   <div class="fill"><p><span class="chip amber qn">Q1</span> What does <code>git clone &lt;URL&gt;</code> do?</p>
     <ol class="list abc"><li data-fa="1">Copies a remote repo to your machine.</li><li>Creates a blank repo on GitHub.</li><li>Downloads only the latest commit.</li><li>Copies your current folder into the remote.</li></ol></div>
@@ -558,7 +583,7 @@ git status</pre>
     <div class="answer" data-f="3"><span class="chip green">Answer</span><span><strong>Staging</strong> (<code>git add</code>) selects which changes go into the next snapshot. <strong>Committing</strong> (<code>git commit</code>) records that snapshot in the repo history.</span></div></div>
 </section>
 
-<!-- ═══════════════════════════ 42 · Section: venv ═══════════════════════════ -->
+<!-- ═══════════════════════════ 44 · Section: venv ═══════════════════════════ -->
 <section class="slide section" data-section="venv" data-title="Python Virtual Environment (venv)">
   <div class="kicker">Section 03</div>
   <h1>Python <span>Virtual Environment</span> (venv)</h1>
@@ -566,7 +591,7 @@ git status</pre>
   <div class="secnum">03</div>
 </section>
 
-<!-- ═══════════════════════════ 43 · Works on my machine ═══════════════════════════ -->
+<!-- ═══════════════════════════ 45 · Works on my machine ═══════════════════════════ -->
 <section class="slide" data-section="venv" data-title="It works on my machine" style="justify-content:center">
   <div class="row" style="justify-content:center;gap:80px">
     <img src="assets/worksonmymachine.png" class="shot" style="width:340px" alt="It works on my machine">
@@ -577,7 +602,7 @@ git status</pre>
   </div>
 </section>
 
-<!-- ═══════════════════════════ 44 · Why venv ═══════════════════════════ -->
+<!-- ═══════════════════════════ 46 · Why venv ═══════════════════════════ -->
 <section class="slide" data-section="venv" data-title="Why virtual environments?" style="justify-content:center;padding-left:200px">
   <div class="col" style="gap:50px;font-size:38px;font-family:var(--font-head)">
     <div class="row" style="gap:28px"><div class="num lg red">1</div><div>Avoid <span class="amber">dependency conflicts</span>.</div></div>
@@ -586,7 +611,7 @@ git status</pre>
   </div>
 </section>
 
-<!-- ═══════════════════════════ 45 · Start a project flow ═══════════════════════════ -->
+<!-- ═══════════════════════════ 47 · Start a project flow ═══════════════════════════ -->
 <section class="slide" data-section="venv" data-title="Start a project → venv → dependencies" style="justify-content:center">
   <div class="row" style="justify-content:center;gap:0">
     <div class="card glow-cyan center" style="width:210px;height:130px;display:grid;place-items:center;align-content:center;gap:6px;font-size:21px"><svg class="ico" style="width:30px;height:30px;color:var(--cyan)"><use href="#i-tree"/></svg>Start<br>a Project</div>
@@ -599,7 +624,7 @@ git status</pre>
   </div>
 </section>
 
-<!-- ═══════════════════════════ 46 · xkcd standards ═══════════════════════════ -->
+<!-- ═══════════════════════════ 48 · xkcd standards ═══════════════════════════ -->
 <section class="slide" data-section="venv" data-title="xkcd: Standards" style="justify-content:center;align-items:center">
   <a href="https://xkcd.com/927/" target="_blank" class="col" style="gap:0;width:1000px;background:#fff;border-radius:12px;padding:10px;box-shadow:0 20px 50px rgba(0,0,0,.5)">
     <img src="assets/standards-head.png" style="width:100%;display:block" alt="How standards proliferate">
@@ -611,7 +636,7 @@ git status</pre>
   </a>
 </section>
 
-<!-- ═══════════════════════════ 47 · Creating a venv ═══════════════════════════ -->
+<!-- ═══════════════════════════ 49 · Creating a venv ═══════════════════════════ -->
 <section class="slide" data-section="venv" data-title="Creating a Virtual Environment (venv)">
   <h1 class="title">Creating a Virtual Environment (venv)</h1>
   <div class="fill" style="gap:34px;align-items:center">
@@ -626,7 +651,7 @@ git status</pre>
   </div>
 </section>
 
-<!-- ═══════════════════════════ 48 · $PATH ═══════════════════════════ -->
+<!-- ═══════════════════════════ 50 · $PATH ═══════════════════════════ -->
 <section class="slide" data-section="venv" data-title="How It Works: $PATH">
   <h1 class="title">How It Works: <code class="plain" style="color:var(--red)">$PATH</code></h1>
   <ul class="list sm fill" style="font-size:21px">
@@ -642,7 +667,7 @@ git status</pre>
   </ul>
 </section>
 
-<!-- ═══════════════════════════ 49 · The Process ═══════════════════════════ -->
+<!-- ═══════════════════════════ 51 · The Process ═══════════════════════════ -->
 <section class="slide" data-section="venv" data-title="The venv process">
   <h1 class="title">The Process</h1>
   <div class="diagram">
@@ -672,14 +697,14 @@ git status</pre>
   </div>
 </section>
 
-<!-- ═══════════════════════════ 50 · Quiz divider: venv ═══════════════════════════ -->
+<!-- ═══════════════════════════ 52 · Quiz divider: venv ═══════════════════════════ -->
 <section class="slide section quiz" data-section="venv · Quick check" data-title="Quick check: venv">
   <div class="kicker">Quick check</div>
   <h1>Python <span>Virtual Environment</span></h1>
   <svg class="big-ico ico"><use href="#i-quiz"/></svg>
 </section>
 
-<!-- ═══════════════════════════ 51–52 · venv quiz ═══════════════════════════ -->
+<!-- ═══════════════════════════ 53–54 · venv quiz ═══════════════════════════ -->
 <section class="slide q" data-section="venv · Quick check" data-title="Main reason to use a virtual environment">
   <div class="fill" style="gap:18px"><p><span class="chip amber qn">Q1</span> What’s the main reason to use a virtual environment?</p>
     <ol class="list abc" style="font-size:21px"><li>Make Python run faster</li><li data-fa="1">Keep project dependencies isolated</li><li>Share secrets with teammates</li><li>Compile Python to C</li></ol>
@@ -699,7 +724,7 @@ git status</pre>
     <div class="answer" data-f="3"><span class="chip green">Answer</span><span>Uninstall them from the global interpreter (<code>pip uninstall &lt;pkg&gt;</code>; <code>pip freeze</code> shows what landed there), then activate the venv and install again. Check <code>which python</code> before installing.</span></div></div>
 </section>
 
-<!-- ═══════════════════════════ 53 · Section: Unit Testing ═══════════════════════════ -->
+<!-- ═══════════════════════════ 55 · Section: Unit Testing ═══════════════════════════ -->
 <section class="slide section" data-section="Testing" data-title="Unit Testing">
   <div class="kicker">Section 04</div>
   <h1>Unit <span>Testing</span></h1>
@@ -707,7 +732,74 @@ git status</pre>
   <div class="secnum">04</div>
 </section>
 
-<!-- ═══════════════════════════ 54 · Two questions ═══════════════════════════ -->
+<!-- ═══════════════════════════ 56 · Mars Climate Orbiter: quiz ═══════════════════════════ -->
+<section class="slide" data-section="Testing" data-title="Mars Climate Orbiter" style="padding-top:50px">
+  <h1 class="title">Mars Climate Orbiter (1998–1999)</h1>
+  <div class="row fill" style="gap:44px;align-items:center;padding:0 20px">
+    <a href="https://www.jpl.nasa.gov/missions/mars-climate-orbiter/" target="_blank" style="flex:none"><img src="assets/mars-climate-orbiter.jpg" class="shot" style="height:400px" alt="Artist's concept of the Mars Climate Orbiter above Mars"></a>
+    <div class="col" style="gap:20px;font-size:21px;line-height:1.5">
+      <p style="margin:0">Launched <b>Dec. 11, 1998</b> to study Mars from orbit and relay communications for the Mars Polar Lander. Last contact: <b>September 23, 1999</b>, nine months after launch. It had <span class="red">burned up in Mars’ atmosphere</span>.</p>
+      <p style="margin:0" data-f="1"><span class="chip amber qn">Quiz</span> NASA lost a spacecraft despite having sophisticated engineers and extensive software systems. What do you think went wrong?</p>
+      <ol class="list abc" data-f="1" style="font-size:21px;margin:0"><li>A mathematical formula was incorrect.</li><li data-fa="2">Two systems used incompatible measurement units.</li><li>The software ran out of memory.</li><li>A programmer accidentally deleted critical code.</li></ol>
+    </div>
+  </div>
+  <div class="foot">Image: NASA/JPL · <a href="https://www.jpl.nasa.gov/missions/mars-climate-orbiter/" target="_blank">jpl.nasa.gov/missions/mars-climate-orbiter</a></div>
+</section>
+
+<!-- ═══════════════════════════ 57 · Mars Climate Orbiter: answer ═══════════════════════════ -->
+<!-- Open question (revealed on click): would km-vs-miles code necessarily crash? No. Python has no notion of units; a float
+     is a float, so 1.0 mile is silently treated as 1.0 km and every downstream number is plausibly wrong. Nothing raises, no
+     traceback, CI is green. That is why tests check *outcomes* (assert the value), not just "it ran". Real story: Lockheed
+     Martin's ground software reported thruster impulse in pound-force seconds while JPL's navigation software expected
+     newton-seconds (factor 4.45). The orbiter arrived ~57 km above Mars instead of the planned ~226 km (anything below ~80 km
+     was unsurvivable). Total mission cost ≈ $327M. -->
+<section class="slide" data-section="Testing" data-title="Mars Climate Orbiter: what went wrong" style="padding-top:50px">
+  <h1 class="title">Mars Climate Orbiter: What Went Wrong</h1>
+  <div class="row fill" style="gap:44px;align-items:center;padding:0 20px">
+    <a href="https://www.jpl.nasa.gov/missions/mars-climate-orbiter/" target="_blank" style="flex:none"><img src="assets/mars-climate-orbiter.jpg" class="shot" style="height:300px" alt="Artist's concept of the Mars Climate Orbiter above Mars"></a>
+    <div class="col" style="gap:22px">
+      <p class="quote" style="font-size:20px;text-align:left;margin:0;line-height:1.55">“…the Mars Climate Orbiter was unsuccessful due to a <em class="k">navigation error caused by a failure to translate English units to metric</em>. Last contact with the spacecraft was on September 23, 1999, 9 months after launch, and an investigation found that the spacecraft burned up in Mars’ atmosphere.”</p>
+      <div class="answer"><span class="chip green">B</span><span>One team’s software reported thruster force in <b>pound-force seconds</b>; the navigation software expected <b>newton-seconds</b>. Every number was off by a factor of 4.45. <span class="amber">Nothing crashed.</span> The code ran perfectly and the spacecraft flew into the atmosphere.</span></div>
+    </div>
+  </div>
+  <p class="lead center" data-f="1" style="margin:10px 0 24px;font-size:24px">Suppose a Python function expects distances in <em class="k">kilometers</em>, but another function provides <em class="k">miles</em>. Would the code <span class="red">necessarily crash</span>?</p>
+  <div class="foot">Text and image: NASA/JPL · <a href="https://www.jpl.nasa.gov/missions/mars-climate-orbiter/" target="_blank">jpl.nasa.gov/missions/mars-climate-orbiter</a></div>
+</section>
+
+<!-- ═══════════════════════════ 58 · Mariner 1: quiz ═══════════════════════════ -->
+<section class="slide" data-section="Testing" data-title="Mariner 1" style="padding-top:50px">
+  <h1 class="title">Mariner 1 (1962)</h1>
+  <div class="row fill" style="gap:44px;align-items:center;padding:0 20px">
+    <a href="https://science.nasa.gov/mission/mariner-1/" target="_blank" style="flex:none"><img src="assets/mariner-1.jpg" class="shot" style="height:400px" alt="Engineers stand with Mariner 1 on May 2, 1962, at JPL's Spacecraft Assembly Facility"></a>
+    <div class="col" style="gap:20px;font-size:21px;line-height:1.5">
+      <p style="margin:0">The first U.S. attempt to send a spacecraft to <b>Venus</b>. Launched <b>July 22, 1962</b> on an Atlas Agena B. The rocket veered off course and the Range Safety Officer sent a <span class="red">destruct command at T+294.5 seconds</span>. Investigators traced it to the guidance software.</p>
+      <p style="margin:0" data-f="1"><span class="chip amber qn">Quiz</span> What was the bug?</p>
+      <ol class="list abc" data-f="1" style="font-size:21px;margin:0"><li>An integer overflow in the flight computer.</li><li data-fa="2">A single missing character when an equation was typed into code.</li><li>The program loaded the trajectory table for a different rocket.</li><li>A cosmic ray flipped a bit in memory.</li></ol>
+    </div>
+  </div>
+  <div class="foot">Image: NASA/JPL-Caltech · <a href="https://science.nasa.gov/mission/mariner-1/" target="_blank">science.nasa.gov/mission/mariner-1</a></div>
+</section>
+
+<!-- ═══════════════════════════ 59 · Mariner 1: answer ═══════════════════════════ -->
+<!-- Open question (revealed on click): the equation was correct on paper; the bug entered when it was transcribed into code
+     (R̄n, a smoothed value, became Rn, the raw value). With the Atlas antenna fault the ground lost contact and the onboard
+     computer ran these equations on noisy data, steering wildly. Not a linter or a compiler catches that (R is a valid symbol).
+     A unit test that feeds a known noisy series and asserts the smoothed output would. Cost ≈ $18.5M in 1962 (~$190M today);
+     Arthur C. Clarke called it "the most expensive hyphen in history", but NASA notes it was an overbar, not a hyphen. -->
+<section class="slide" data-section="Testing" data-title="Mariner 1: the costliest typo" style="padding-top:50px">
+  <h1 class="title">Mariner 1: The Costliest Typo in Programming History</h1>
+  <div class="row fill" style="gap:44px;align-items:center;padding:0 20px">
+    <div class="card center mono" style="flex:none;font-size:64px;padding:24px 40px;line-height:1.1"><span class="green">R̅</span> <span class="muted" style="font-size:40px">→</span> <span class="red">R</span></div>
+    <div class="col" style="gap:22px">
+      <p class="quote" style="font-size:20px;text-align:left;margin:0;line-height:1.55">“…a software error, the omission of an overbar for the symbol R for radius (R instead of R̅) in an equation, caused the program to not respond as planned. It should be noted the omission was <em class="k">not a hyphen</em>, as is sometimes erroneously reported.”</p>
+      <div class="answer"><span class="chip green">B</span><span>R̅ meant a <b>smoothed</b> value; R meant the <b>raw</b> one. The handwritten equations were right. The typo happened when they were coded. Perfectly valid syntax, <span class="amber">wrong behavior</span>, and with the ground link lost the rocket steered on noisy data.</span></div>
+    </div>
+  </div>
+  <p class="lead center" data-f="1" style="margin:10px 0 24px;font-size:24px">The equation was correct on paper; the typo was made <em class="k">transcribing it into code</em>. What kind of test would have caught a missing overbar?</p>
+  <div class="foot">Text: NASA/JPL-Caltech · <a href="https://science.nasa.gov/mission/mariner-1/" target="_blank">science.nasa.gov/mission/mariner-1</a></div>
+</section>
+
+<!-- ═══════════════════════════ 60 · Two questions ═══════════════════════════ -->
 <section class="slide" data-section="Testing" data-title="Is the code working as expected?" style="justify-content:center;align-items:center">
   <div class="col" style="gap:40px;font-size:38px;font-family:var(--font-head)">
     <div class="row" style="gap:28px"><div class="num lg red">1</div><div>Is the code <span class="amber">working as expected</span>?</div></div>
@@ -716,7 +808,7 @@ git status</pre>
   <img src="assets/pytest.png" style="height:200px;margin-top:40px;background:#fff;border-radius:20px;padding:10px" alt="pytest" data-f="2" class="fx-zoom">
 </section>
 
-<!-- ═══════════════════════════ 55 · Anatomy of a Test ═══════════════════════════ -->
+<!-- ═══════════════════════════ 61 · Anatomy of a Test ═══════════════════════════ -->
 <section class="slide" data-section="Testing" data-title="Anatomy of a Test" style="justify-content:center;gap:34px">
   <h1 class="title">Anatomy of a Test</h1>
   <p class="center" data-f="1" style="font-size:22px;margin:0">A test checks the outcome of a specific <span class="red">behavior</span> and ensures it aligns with the expectations.</p>
@@ -742,7 +834,7 @@ git status</pre>
   <div class="foot" data-f="7"><a href="https://docs.pytest.org/en/stable/explanation/anatomy.html" target="_blank">docs.pytest.org/en/stable/explanation/anatomy.html</a></div>
 </section>
 
-<!-- ═══════════════════════════ 56 · Example ═══════════════════════════ -->
+<!-- ═══════════════════════════ 62 · Example ═══════════════════════════ -->
 <section class="slide" data-section="Testing" data-title="Example test">
   <h1 class="title">Example</h1>
   <div class="fill" style="align-items:center">
@@ -753,7 +845,7 @@ git status</pre>
   </div>
 </section>
 
-<!-- ═══════════════════════════ 57 · Pytest demo divider ═══════════════════════════ -->
+<!-- ═══════════════════════════ 63 · Pytest demo divider ═══════════════════════════ -->
 <section class="slide section quiz" data-section="Testing · Demo" data-title="Pytest">
   <div class="kicker green">Live demo</div>
   <h1>Pytest</h1>
@@ -761,7 +853,7 @@ git status</pre>
   <svg class="big-ico ico" style="color:var(--green)"><use href="#i-flask"/></svg>
 </section>
 
-<!-- ═══════════════════════════ 58 · Pytest exercise ═══════════════════════════ -->
+<!-- ═══════════════════════════ 64 · Pytest exercise ═══════════════════════════ -->
 <section class="slide" data-section="Testing" data-title="Pytest Exercise">
   <h1 class="title">Pytest Exercise</h1>
   <ol class="list sm fill" style="font-size:19px;line-height:1.4">
@@ -778,7 +870,7 @@ git status</pre>
   </ol>
 </section>
 
-<!-- ═══════════════════════════ 59 · Section: Project Code Structure ═══════════════════════════ -->
+<!-- ═══════════════════════════ 65 · Section: Project Code Structure ═══════════════════════════ -->
 <section class="slide section" data-section="Structure" data-title="Project Code Structure">
   <div class="kicker">Section 05</div>
   <h1>Project <span>Code Structure</span></h1>
@@ -786,7 +878,7 @@ git status</pre>
   <div class="secnum">05</div>
 </section>
 
-<!-- ═══════════════════════════ 60 · Noble's principles ═══════════════════════════ -->
+<!-- ═══════════════════════════ 66 · Noble's principles ═══════════════════════════ -->
 <section class="slide" data-section="Structure" data-title="Noble’s Principles">
   <h1 class="title">Noble’s Principles</h1>
   <div class="fill" style="gap:46px;padding:0 60px">
@@ -796,13 +888,13 @@ git status</pre>
   <div class="foot">A Quick Guide to Organizing Computational Biology Projects: <a href="https://dx.plos.org/10.1371/journal.pcbi.1000424" target="_blank">dx.plos.org/10.1371/journal.pcbi.1000424</a></div>
 </section>
 
-<!-- ═══════════════════════════ 61 · Knuth ═══════════════════════════ -->
+<!-- ═══════════════════════════ 67 · Knuth ═══════════════════════════ -->
 <section class="slide" data-section="Structure" data-title="Donald Knuth on literate programming" style="justify-content:center">
   <p class="quote"><span class="mark">“</span>Let us change our traditional attitude to the construction of programs.<br><br>Instead of imagining that our main task is to <em class="k">instruct a computer</em> what to do, let us concentrate rather on <em class="k">explaining to human beings</em> what we want a computer to do.<span class="mark">”</span></p>
   <div class="cite">– Donald E. Knuth</div>
 </section>
 
-<!-- ═══════════════════════════ 62 · Elements of a DS project ═══════════════════════════ -->
+<!-- ═══════════════════════════ 68 · Elements of a DS project ═══════════════════════════ -->
 <section class="slide" data-section="Structure" data-title="Elements of a Data Science Project">
   <h1 class="title">Elements of a Data Science Project</h1>
   <div class="fill" style="gap:14px">
@@ -826,12 +918,12 @@ git status</pre>
   </div>
 </section>
 
-<!-- ═══════════════════════════ 63 · Cookiecutter repo ═══════════════════════════ -->
+<!-- ═══════════════════════════ 69 · Cookiecutter repo ═══════════════════════════ -->
 <section class="slide" data-section="Structure" data-title="cookiecutter-data-science on GitHub" style="justify-content:center;align-items:center">
   <a href="https://github.com/drivendataorg/cookiecutter-data-science" target="_blank"><img src="assets/ccds-github.png" class="shot" style="width:1000px" alt="drivendataorg/cookiecutter-data-science on GitHub"></a>
 </section>
 
-<!-- ═══════════════════════════ 64–67 · Opinions ═══════════════════════════ -->
+<!-- ═══════════════════════════ 70–73 · Opinions ═══════════════════════════ -->
 <section class="slide" data-section="Structure" data-title="Opinion 1: Data analysis is a DAG">
   <h1 class="title">Cookiecutter Data Science: Opinions</h1>
   <div class="fill" style="gap:26px;padding:0 50px">
@@ -865,27 +957,27 @@ git status</pre>
   <div class="foot"><a href="https://cookiecutter-data-science.drivendata.org/opinions/" target="_blank">cookiecutter-data-science.drivendata.org/opinions</a></div>
 </section>
 
-<!-- ═══════════════════════════ 68 · Cookiecutter demo divider ═══════════════════════════ -->
+<!-- ═══════════════════════════ 74 · Cookiecutter demo divider ═══════════════════════════ -->
 <section class="slide section quiz" data-section="Structure · Demo" data-title="Cookiecutter">
   <div class="kicker green">Live demo</div>
   <h1>Cookiecutter</h1>
   <svg class="big-ico ico" style="color:var(--green)"><use href="#i-tree"/></svg>
 </section>
 
-<!-- ═══════════════════════════ 69 · How to name files ═══════════════════════════ -->
+<!-- ═══════════════════════════ 75 · How to name files ═══════════════════════════ -->
 <section class="slide" data-section="Structure" data-title="How to Name Files">
   <h1 class="title">How to Name Files</h1>
   <div class="fill" style="align-items:center">
     <!-- YouTube only allows embeds from http(s) pages; when opened as a local file we show a thumbnail that links out instead -->
-    <div id="yt-slot" data-video="ES1LTlnpLMk" class="ring" style="width:880px;height:495px">
+    <div class="yt-slot ring" data-video="ES1LTlnpLMk" style="width:880px;height:495px">
       <a class="yt-fallback" href="https://www.youtube.com/watch?v=ES1LTlnpLMk" target="_blank" style="display:block;position:relative;width:100%;height:100%"><img src="assets/normconf.png" class="shot" style="width:100%;height:100%;object-fit:cover" alt="How to Name Files Like a Normie — Jenny Bryan, NormConf">
         <svg class="ico" style="position:absolute;left:50%;top:50%;width:90px;height:90px;transform:translate(-50%,-50%);color:#fff;filter:drop-shadow(0 4px 20px rgba(0,0,0,.6))"><use href="#i-play"/></svg></a>
     </div>
-    <div class="tiny" id="yt-note" style="margin-top:12px">Jenny Bryan · NormConf · <a href="https://www.youtube.com/watch?v=ES1LTlnpLMk" target="_blank">youtube.com/watch?v=ES1LTlnpLMk</a></div>
+    <div class="tiny yt-note" style="margin-top:12px">Jenny Bryan · NormConf · <a href="https://www.youtube.com/watch?v=ES1LTlnpLMk" target="_blank">youtube.com/watch?v=ES1LTlnpLMk</a></div>
   </div>
 </section>
 
-<!-- ═══════════════════════════ 70 · File names ═══════════════════════════ -->
+<!-- ═══════════════════════════ 76 · File names ═══════════════════════════ -->
 <section class="slide" data-section="Structure" data-title="Which file names are good?" style="justify-content:center;padding-left:200px">
   <ol class="list mono" style="font-size:28px;line-height:1.5">
     <li data-f="1">ProjectBrief_FINAL (2).pptx</li>
@@ -896,7 +988,7 @@ git status</pre>
   </ol>
 </section>
 
-<!-- ═══════════════════════════ 71 · Closing orbit ═══════════════════════════ -->
+<!-- ═══════════════════════════ 77 · Closing orbit ═══════════════════════════ -->
 <section class="slide" data-title="Part 1 recap · what’s next" style="justify-content:center">
   <div class="chip" style="position:absolute;left:72px;top:50px">Part 1 · covered</div>
   <div class="chip red" style="position:absolute;right:72px;top:50px">Part 2 · next</div>

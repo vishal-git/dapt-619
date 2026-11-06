@@ -132,13 +132,9 @@
   addEventListener('hashchange', () => { const m = location.hash.match(/#(\d+)(?:\.(\d+))?/); if (m && (+m[1] - 1 !== cur)) goto(+m[1] - 1, +(m[2] || 0)); });
 
   // Embedded video: YouTube rejects embeds from file:// pages (error 153), so only embed when served over http(s).
-  document.querySelectorAll('#yt-slot').forEach(slot => {
-    const note = document.getElementById('yt-note');
+  document.querySelectorAll('.yt-slot').forEach(slot => {
     if (location.protocol.startsWith('http')) {
-      slot.innerHTML = `<iframe class="shot" width="880" height="495" src="https://www.youtube-nocookie.com/embed/${slot.dataset.video}" title="YouTube video" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="background:#000;display:block"></iframe>`;
-      note.insertAdjacentHTML('beforeend', ' · click outside the video to return keyboard focus to the deck');
-    } else {
-      note.insertAdjacentHTML('beforeend', ' · opens on YouTube (run <code>present.cmd</code> / <code>present.sh</code> to play it inline)');
+      slot.innerHTML = `<iframe class="shot" width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/${slot.dataset.video}" title="YouTube video" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="background:#000;display:block"></iframe>`;
     }
   });
   // expose for testing
