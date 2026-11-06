@@ -766,40 +766,7 @@ git status</pre>
   <div class="foot">Text and image: NASA/JPL · <a href="https://www.jpl.nasa.gov/missions/mars-climate-orbiter/" target="_blank">jpl.nasa.gov/missions/mars-climate-orbiter</a></div>
 </section>
 
-<!-- ═══════════════════════════ 58 · Mariner 1: quiz ═══════════════════════════ -->
-<section class="slide" data-section="Testing" data-title="Mariner 1" style="padding-top:50px">
-  <h1 class="title">Mariner 1 (1962)</h1>
-  <div class="row fill" style="gap:44px;align-items:center;padding:0 20px">
-    <a href="https://science.nasa.gov/mission/mariner-1/" target="_blank" style="flex:none"><img src="assets/mariner-1.jpg" class="shot" style="height:400px" alt="Engineers stand with Mariner 1 on May 2, 1962, at JPL's Spacecraft Assembly Facility"></a>
-    <div class="col" style="gap:20px;font-size:21px;line-height:1.5">
-      <p style="margin:0">The first U.S. attempt to send a spacecraft to <b>Venus</b>. Launched <b>July 22, 1962</b> on an Atlas Agena B. The rocket veered off course and the Range Safety Officer sent a <span class="red">destruct command at T+294.5 seconds</span>. Investigators traced it to the guidance software.</p>
-      <p style="margin:0" data-f="1"><span class="chip amber qn">Quiz</span> What was the bug?</p>
-      <ol class="list abc" data-f="1" style="font-size:21px;margin:0"><li>An integer overflow in the flight computer.</li><li data-fa="2">A single missing character when an equation was typed into code.</li><li>The program loaded the trajectory table for a different rocket.</li><li>A cosmic ray flipped a bit in memory.</li></ol>
-    </div>
-  </div>
-  <div class="foot">Image: NASA/JPL-Caltech · <a href="https://science.nasa.gov/mission/mariner-1/" target="_blank">science.nasa.gov/mission/mariner-1</a></div>
-</section>
-
-<!-- ═══════════════════════════ 59 · Mariner 1: answer ═══════════════════════════ -->
-<!-- Open question (revealed on click): the equation was correct on paper; the bug entered when it was transcribed into code
-     (R̄n, a smoothed value, became Rn, the raw value). With the Atlas antenna fault the ground lost contact and the onboard
-     computer ran these equations on noisy data, steering wildly. Not a linter or a compiler catches that (R is a valid symbol).
-     A unit test that feeds a known noisy series and asserts the smoothed output would. Cost ≈ $18.5M in 1962 (~$190M today);
-     Arthur C. Clarke called it "the most expensive hyphen in history", but NASA notes it was an overbar, not a hyphen. -->
-<section class="slide" data-section="Testing" data-title="Mariner 1: the costliest typo" style="padding-top:50px">
-  <h1 class="title">Mariner 1: The Costliest Typo in Programming History</h1>
-  <div class="row fill" style="gap:44px;align-items:center;padding:0 20px">
-    <div class="card center mono" style="flex:none;font-size:64px;padding:24px 40px;line-height:1.1"><span class="green">R̅</span> <span class="muted" style="font-size:40px">→</span> <span class="red">R</span></div>
-    <div class="col" style="gap:22px">
-      <p class="quote" style="font-size:20px;text-align:left;margin:0;line-height:1.55">“…a software error, the omission of an overbar for the symbol R for radius (R instead of R̅) in an equation, caused the program to not respond as planned. It should be noted the omission was <em class="k">not a hyphen</em>, as is sometimes erroneously reported.”</p>
-      <div class="answer"><span class="chip green">B</span><span>R̅ meant a <b>smoothed</b> value; R meant the <b>raw</b> one. The handwritten equations were right. The typo happened when they were coded. Perfectly valid syntax, <span class="amber">wrong behavior</span>, and with the ground link lost the rocket steered on noisy data.</span></div>
-    </div>
-  </div>
-  <p class="lead center" data-f="1" style="margin:10px 0 24px;font-size:24px">The equation was correct on paper; the typo was made <em class="k">transcribing it into code</em>. What kind of test would have caught a missing overbar?</p>
-  <div class="foot">Text: NASA/JPL-Caltech · <a href="https://science.nasa.gov/mission/mariner-1/" target="_blank">science.nasa.gov/mission/mariner-1</a></div>
-</section>
-
-<!-- ═══════════════════════════ 60 · Two questions ═══════════════════════════ -->
+<!-- ═══════════════════════════ 58 · Two questions ═══════════════════════════ -->
 <section class="slide" data-section="Testing" data-title="Is the code working as expected?" style="justify-content:center;align-items:center">
   <div class="col" style="gap:40px;font-size:38px;font-family:var(--font-head)">
     <div class="row" style="gap:28px"><div class="num lg red">1</div><div>Is the code <span class="amber">working as expected</span>?</div></div>
@@ -808,7 +775,7 @@ git status</pre>
   <img src="assets/pytest.png" style="height:200px;margin-top:40px;background:#fff;border-radius:20px;padding:10px" alt="pytest" data-f="2" class="fx-zoom">
 </section>
 
-<!-- ═══════════════════════════ 61 · Anatomy of a Test ═══════════════════════════ -->
+<!-- ═══════════════════════════ 59 · Anatomy of a Test ═══════════════════════════ -->
 <section class="slide" data-section="Testing" data-title="Anatomy of a Test" style="justify-content:center;gap:34px">
   <h1 class="title">Anatomy of a Test</h1>
   <p class="center" data-f="1" style="font-size:22px;margin:0">A test checks the outcome of a specific <span class="red">behavior</span> and ensures it aligns with the expectations.</p>
@@ -834,7 +801,7 @@ git status</pre>
   <div class="foot" data-f="7"><a href="https://docs.pytest.org/en/stable/explanation/anatomy.html" target="_blank">docs.pytest.org/en/stable/explanation/anatomy.html</a></div>
 </section>
 
-<!-- ═══════════════════════════ 62 · Example ═══════════════════════════ -->
+<!-- ═══════════════════════════ 60 · Example ═══════════════════════════ -->
 <section class="slide" data-section="Testing" data-title="Example test">
   <h1 class="title">Example</h1>
   <div class="fill" style="align-items:center">
@@ -845,7 +812,7 @@ git status</pre>
   </div>
 </section>
 
-<!-- ═══════════════════════════ 63 · Pytest demo divider ═══════════════════════════ -->
+<!-- ═══════════════════════════ 61 · Pytest demo divider ═══════════════════════════ -->
 <section class="slide section quiz" data-section="Testing · Demo" data-title="Pytest">
   <div class="kicker green">Live demo</div>
   <h1>Pytest</h1>
@@ -853,7 +820,7 @@ git status</pre>
   <svg class="big-ico ico" style="color:var(--green)"><use href="#i-flask"/></svg>
 </section>
 
-<!-- ═══════════════════════════ 64 · Pytest exercise ═══════════════════════════ -->
+<!-- ═══════════════════════════ 62 · Pytest exercise ═══════════════════════════ -->
 <section class="slide" data-section="Testing" data-title="Pytest Exercise">
   <h1 class="title">Pytest Exercise</h1>
   <ol class="list sm fill" style="font-size:19px;line-height:1.4">
@@ -868,6 +835,39 @@ git status</pre>
     <li>Write another test to verify that the column <code>heart_disease</code> is present.</li>
     <li>Run the test and check the results. Inspect the results and figure out why the test failed.</li>
   </ol>
+</section>
+
+<!-- ═══════════════════════════ 63 · Mariner 1: quiz ═══════════════════════════ -->
+<section class="slide" data-section="Testing" data-title="Mariner 1" style="padding-top:50px">
+  <h1 class="title">Mariner 1 (1962)</h1>
+  <div class="row fill" style="gap:44px;align-items:center;padding:0 20px">
+    <a href="https://science.nasa.gov/mission/mariner-1/" target="_blank" style="flex:none"><img src="assets/mariner-1.jpg" class="shot" style="height:400px" alt="Engineers stand with Mariner 1 on May 2, 1962, at JPL's Spacecraft Assembly Facility"></a>
+    <div class="col" style="gap:20px;font-size:21px;line-height:1.5">
+      <p style="margin:0">The first U.S. attempt to send a spacecraft to <b>Venus</b>. Launched <b>July 22, 1962</b> on an Atlas Agena B. The rocket veered off course and the Range Safety Officer sent a <span class="red">destruct command at T+294.5 seconds</span>. Investigators traced it to the guidance software.</p>
+      <p style="margin:0" data-f="1"><span class="chip amber qn">Quiz</span> What was the bug?</p>
+      <ol class="list abc" data-f="1" style="font-size:21px;margin:0"><li>An integer overflow in the flight computer.</li><li data-fa="2">A single missing character when an equation was typed into code.</li><li>The program loaded the trajectory table for a different rocket.</li><li>A cosmic ray flipped a bit in memory.</li></ol>
+    </div>
+  </div>
+  <div class="foot">Image: NASA/JPL-Caltech · <a href="https://science.nasa.gov/mission/mariner-1/" target="_blank">science.nasa.gov/mission/mariner-1</a></div>
+</section>
+
+<!-- ═══════════════════════════ 64 · Mariner 1: answer ═══════════════════════════ -->
+<!-- Open question (revealed on click): the equation was correct on paper; the bug entered when it was transcribed into code
+     (R̄n, a smoothed value, became Rn, the raw value). With the Atlas antenna fault the ground lost contact and the onboard
+     computer ran these equations on noisy data, steering wildly. Not a linter or a compiler catches that (R is a valid symbol).
+     A unit test that feeds a known noisy series and asserts the smoothed output would. Cost ≈ $18.5M in 1962 (~$190M today);
+     Arthur C. Clarke called it "the most expensive hyphen in history", but NASA notes it was an overbar, not a hyphen. -->
+<section class="slide" data-section="Testing" data-title="Mariner 1: the costliest typo" style="padding-top:50px">
+  <h1 class="title">Mariner 1: The Costliest Typo in Programming History</h1>
+  <div class="row fill" style="gap:44px;align-items:center;padding:0 20px">
+    <div class="card center mono" style="flex:none;font-size:64px;padding:24px 40px;line-height:1.1"><span class="green">R̅</span> <span class="muted" style="font-size:40px">→</span> <span class="red">R</span></div>
+    <div class="col" style="gap:22px">
+      <p class="quote" style="font-size:20px;text-align:left;margin:0;line-height:1.55">“…a software error, the omission of an overbar for the symbol R for radius (R instead of R̅) in an equation, caused the program to not respond as planned. It should be noted the omission was <em class="k">not a hyphen</em>, as is sometimes erroneously reported.”</p>
+      <div class="answer"><span class="chip green">B</span><span>R̅ meant a <b>smoothed</b> value; R meant the <b>raw</b> one. The handwritten equations were right. The typo happened when they were coded. Perfectly valid syntax, <span class="amber">wrong behavior</span>, and with the ground link lost the rocket steered on noisy data.</span></div>
+    </div>
+  </div>
+  <p class="lead center" data-f="1" style="margin:10px 0 24px;font-size:24px">The equation was correct on paper; the typo was made <em class="k">transcribing it into code</em>. What kind of test would have caught a missing overbar?</p>
+  <div class="foot">Text: NASA/JPL-Caltech · <a href="https://science.nasa.gov/mission/mariner-1/" target="_blank">science.nasa.gov/mission/mariner-1</a></div>
 </section>
 
 <!-- ═══════════════════════════ 65 · Section: Project Code Structure ═══════════════════════════ -->
