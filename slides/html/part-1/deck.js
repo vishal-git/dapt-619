@@ -137,6 +137,16 @@
       slot.innerHTML = `<iframe class="shot" width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/${slot.dataset.video}" title="YouTube video" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="background:#000;display:block"></iframe>`;
     }
   });
+  // Title-slide punch card: hover a column to decode it
+  document.querySelectorAll('.title-slide .hero .card').forEach(card => {
+    const clear = () => card.querySelectorAll('.lit').forEach(e => e.classList.remove('lit'));
+    card.querySelectorAll('.colhit').forEach(hit => hit.addEventListener('mouseenter', () => {
+      const { col } = hit.dataset;
+      card.classList.add('decoding'); clear();
+      card.querySelectorAll(`[data-col="${col}"]`).forEach(e => e.classList.add('lit'));
+    }));
+    card.addEventListener('mouseleave', () => { card.classList.remove('decoding'); clear(); });
+  });
   // expose for testing
   window.Deck = { next, prev, goto, get cur() { return cur; }, get frag() { return frag; }, steps, count: slides.length };
 })();

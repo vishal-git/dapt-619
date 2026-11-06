@@ -256,3 +256,31 @@ ol.list li[data-fa].on::before { color: var(--green); }
 #secbadge b { font-weight: 500; color: var(--muted); }
 
 .chip.qn { vertical-align: 3px; margin-right: 10px; font-size: 11px; padding: 4px 10px; }
+
+/* ── Title-slide hero: a Hollerith punch card over patent-style line art ── */
+.title-slide .hero { position: absolute; right: 36px; top: 50%; width: 640px; height: 512px; transform: translateY(-50%); overflow: visible; }
+.title-slide .hero .ink path, .title-slide .hero .ink circle { fill: none; stroke: var(--muted); stroke-width: 1.3; opacity: .38; stroke-dasharray: 1; stroke-dashoffset: 1; animation: heroDraw 2.2s var(--ease) .15s forwards; }
+.title-slide .hero .ink .dash { stroke-dasharray: .03 .02; animation: heroDrawDash 2.2s linear .4s forwards; opacity: .32; }
+.title-slide .hero .ink-lbl text { font: 500 22px var(--font-mono); fill: var(--muted); opacity: 0; letter-spacing: .06em; animation: heroFade .8s var(--ease) 1.6s forwards; }
+.title-slide .hero .ink-lbl text:last-child { font-size: 30px; }
+.title-slide .hero .card { opacity: 0; animation: heroCard 1s var(--ease) .5s forwards; filter: url(#cardshadow); }
+.title-slide .hero .card .paper { fill: url(#cardfill); }
+.title-slide .hero .card .interp text { font: 600 17px var(--font-mono); fill: rgba(5,30,28,.78); text-anchor: middle; letter-spacing: .02em; opacity: 0; transition: opacity .3s; }
+.title-slide .hero .card.decoding .interp text { opacity: 1; }
+.title-slide .hero .card .digits text { font: 500 13px var(--font-mono); fill: rgba(5,30,28,.72); text-anchor: middle; }
+.title-slide .hero .card .serial { font: 500 11px var(--font-mono); fill: rgba(5,30,28,.55); text-anchor: end; }
+.title-slide .hero .card .hole { fill: var(--bg); stroke: rgba(255,255,255,.14); stroke-width: 1; transform-box: fill-box; transform-origin: center; transform: scaleY(0); animation: heroPunch .22s cubic-bezier(.2,1.4,.5,1) var(--d, 1.2s) forwards; }
+@keyframes heroDraw { to { stroke-dashoffset: 0; } }
+@keyframes heroDrawDash { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes heroFade { to { opacity: .55; } }
+@keyframes heroCard { from { opacity: 0; transform: translate(90px, 150px) rotate(-7deg); } to { opacity: 1; transform: translate(90px, 110px) rotate(-7deg); } }
+@keyframes heroPunch { to { transform: scaleY(1); } }
+
+/* ── punch-card decoder (hover a column) ── */
+.title-slide .hero .card .colhit { fill: transparent; cursor: crosshair; }
+.title-slide .hero .card .colhit:hover { fill: rgba(255,255,255,.14); }
+.title-slide .hero .card .rowlbl text { font: 600 10px var(--font-mono); fill: rgba(5,30,28,.75); text-anchor: middle; opacity: 0; transition: opacity .3s; }
+.title-slide .hero .card.decoding .rowlbl text { opacity: 1; }
+.title-slide .hero .card .hole.lit { stroke: var(--amber); stroke-width: 2.5; }
+.title-slide .hero .card .interp text.lit, .title-slide .hero .card .digits text.lit { fill: #fff; stroke: rgba(5,30,28,.9); stroke-width: 3; paint-order: stroke; }
+.title-slide .hero .card .interp text.lit { font-size: 21px; }

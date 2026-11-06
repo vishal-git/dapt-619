@@ -31,7 +31,26 @@
 
 8. Run again and check the output. All tests pass.
 9. Change `return a + b` to `return a - b` to indicate a typo, and then re-run the tests to show how two of them will fail. But one will pass!
-10. Exercise
+10. Fix the typo (back to `a + b`) and re-run. All green again.
+11. Now try `add_number('a', 'b')` in a Python shell. It does **not** crash: Python returns `'ab'`. Then try `add_number('a', 5)`, which crashes with a `TypeError`. Neither is what we want from a function called `add_number`. Python has no idea we meant numbers.
+12. Update the function from step 2 to reject anything that isn't a number:
+
+    ```python
+    def add_number(a, b):
+        if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+            return 'Invalid input'
+        return a + b
+    ```
+
+13. Add a test for the new behavior:
+
+    ```python
+    def test_add_number_invalid():
+        assert add_number('a', 'b') == 'Invalid input'
+    ```
+
+14. Run `pytest -q` again. Both tests pass. Point out that the earlier tests still pass too: we changed the function and the old tests confirmed we didn't break anything.
+15. Exercise
     1. Create a new Python virtual environment for this exercise or reuse the one that we created in the previous section.
     2. Install `pandas`.
     3. Write a simple function to load `heart.csv` file into a Pandas dataframe.
