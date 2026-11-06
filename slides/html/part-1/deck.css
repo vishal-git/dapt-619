@@ -232,6 +232,7 @@ img { max-width: 100%; }
 .orbit .sat:nth-of-type(7) { --d: .84s; }
 .orbit .sat:nth-of-type(8) { --d: .96s; }
 .orbit .sat:nth-of-type(9) { --d: 1.08s; }
+.orbit .sat:nth-of-type(10) { --d: 1.20s; }
 
 /* ── equal-height card grid (slide 3) ── */
 .grid-3.eq .card { height: 150px; display: flex; flex-direction: column; align-items: center; padding-top: 0; }
