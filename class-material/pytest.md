@@ -34,7 +34,7 @@
    ```
 
 7. Run again. It still reports `1 passed`: one test function, three asserts.
-8. Introduce a typo: change `return a + b` to `return a - b`. **Ask first:** "Three asserts. How many will fail?" Then run `pytest -q addition.py`. Pytest reports **`1 failed`**, showing only `assert -2 == 8`.
+8. Introduce a typo: change `return a + b` to `return a - b`. Three asserts: how many will fail? Run `pytest -q addition.py`. Pytest reports **`1 failed`**, showing only `assert -2 == 8`.
    - A test stops at its **first** failing assert, so the other two never ran.
    - `add_number(0, 0)` would have passed even with the typo. A test case where `a + b` and `a - b` agree catches nothing.
    - This is the reason for `@pytest.mark.parametrize` (Demo 2): each case becomes its own test, and one failure no longer hides the others.
@@ -60,7 +60,7 @@
             add_number('a', 'b')
     ```
 
-13. Run `pytest -q addition.py` again: `2 passed`. Point out that the **old** test still passes: we changed the function, and the old test confirms we didn't break anything.
+13. Run `pytest -q addition.py` again: `2 passed`. The **old** test still passes: we changed the function, and the old test confirms we didn't break anything.
 
 ## Demo 2: `percent_change` (files: `src/metrics.py`, `src/test_metrics.py`; tutorial version: `src/test_metrics_tutorial.py`)
 

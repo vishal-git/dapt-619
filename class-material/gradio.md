@@ -19,7 +19,7 @@
 16. Check is a new model is saved in the `models` folder: `ls models`.
 17. Now, let’s build a Gradio app. Our goal is to hand-draw a digit and use the model to determine the digit.
 18. Create a new file to write code for this app: `touch src/digits_app.py`.
-19. Open it in VS Code and write the code from `dapt-619/src/digits_app.py` (or start from `dapt-619/src/digits_app_tutorial.py`, which fills in the pre-processing so we can focus on Gradio). Walk through the four pre-processing lines: the drawing has to *look like the training data*, so we invert it (white digit on black), crop to the digit, pad it to a square, and shrink it to 8×8 pixels on a 0–16 scale, the same as `load_digits()`.
+19. Open it in VS Code and write the code from `dapt-619/src/digits_app.py` (or start from `dapt-619/src/digits_app_tutorial.py`, which fills in the pre-processing so the focus stays on Gradio). The four pre-processing lines make sure the drawing *looks like the training data*: they invert it (white digit on black), crop to the digit, pad it to a square, and shrink it to 8×8 pixels on a 0–16 scale, the same as `load_digits()`.
 20. Gradio is already installed in `dapt619` (it's in `requirements.txt`).
 21. Run the app: `python src/digits_app.py`. This will print a local URL. Click on it to open it in a browser and interact with the app.
     - Click the **brush icon** first; the canvas won't draw until a tool is selected.
@@ -27,9 +27,9 @@
     - Use the canvas's **trash-can icon** to wipe the drawing. The Interface's **Clear** button does not reliably clear the canvas.
     - Expect some mistakes: the model was trained on tiny 8×8 scans, not mouse drawings. Good moment to ask: "How would you make it more accurate?"
 22. Press Ctrl + C to exit and get back to the command line.
-23. Deactivate the virtual environment: `deactivate`.
+23. Deactivate the environment when you are done: `conda deactivate`.
 
-## Hosting on Hugging Face Spaces (instructor demo)
+## Hosting on Hugging Face Spaces
 
 Everything the Space needs is in `spaces/digits/`: `app.py`, `requirements.txt`, `digit_model.pkl`, and `README.md` (the YAML header sets `sdk: gradio`, `sdk_version`, `app_file`).
 
@@ -38,9 +38,9 @@ Everything the Space needs is in `spaces/digits/`: `app.py`, `requirements.txt`,
    - ZeroGPU refuses to start unless one function is decorated with `@spaces.GPU`, which is why `spaces/digits/app.py` has it. The decorator does nothing outside ZeroGPU.
 25. Open the **Files** tab → **Add file** → **Upload files**. Drag in the four files from `spaces/digits/` and click **Commit**.
 26. Watch the status go from "Building" to "Running". If the build fails, open **Logs**; it's usually a missing or mismatched package in `requirements.txt`.
-27. Share `huggingface.co/spaces/<user>/<space>`. Open it on a phone to show it runs without your laptop.
+27. Share `huggingface.co/spaces/<user>/<space>`. The app runs on Hugging Face, so it works on a phone even when your laptop is off.
 
-Talking points:
+Good to know:
 
 - **Rebuild on every change:** each upload or push makes a fresh machine run `pip install -r requirements.txt` and then `python app.py`. This is the venv lesson again.
 - **Pin the version:** `scikit-learn==1.9.1` matches the version that pickled the model.
