@@ -21,7 +21,7 @@ Most of the points go to your **judgment calls** (what counts as a data problem 
 ## Setup (Part 0)
 
 1. Create a **new public GitHub repo** named `dapt619-churn-<your-last-name>`.
-2. Clone it, create a conda environment for it (for example `conda create -n churn python=3.12 -y`, then `conda activate churn`), and install what you need (`polars`, `pyarrow`, `pandas`, `scikit-learn`, `pytest`, `gradio`, `matplotlib`, `tabicl`, …).
+2. Clone it, create a conda environment for it (for example `conda create -n churn python=3.12`, then `conda activate churn`), and install what you need (`polars`, `pyarrow`, `pandas`, `scikit-learn`, `pytest`, `gradio`, `matplotlib`, `tabicl`, …).
 3. Lay out the project like this (the starter files in the course repo's `homework/` folder give you a head start):
 
    ```

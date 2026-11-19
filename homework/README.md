@@ -7,7 +7,7 @@ DAPT 619 · Fall 2026 homework. Instructions: `class-material/HW_instructions.md
 ```bash
 git clone <your repo url>
 cd <repo>
-conda create -n churn python=3.12 -y
+conda create -n churn python=3.12
 conda activate churn
 pip install -r requirements.txt
 pytest -v

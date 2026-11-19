@@ -1,9 +1,18 @@
 # Unit testing with pytest
 
-## Demo 1: `add_number`
+## Demo 1: `add_number` (complete version: `src/addition.py`)
 
 1. Activate the course environment (`conda activate dapt619`); pytest is already installed from `requirements.txt`. Confirm with `pytest --version`.
-2. Create a new file called `addition.py` and write the following code into it:
+2. Make a new folder for this demo, next to the `dapt-619` repo (not inside it, so the repo stays untouched):
+
+   ```bash
+   cd ..              # from dapt-619/ up to your course folder
+   mkdir pytest-demo
+   cd pytest-demo
+   ```
+
+   Open this folder in VS Code (**File → Open Folder**) and use VS Code's Git Bash terminal from here on. A new terminal starts outside the environment, so run `conda activate dapt619` in it first.
+3. Create a new file called `addition.py` (`touch addition.py`, then open it in VS Code) and write the following code into it:
 
    ```python
    def add_number(a, b):
@@ -14,17 +23,17 @@
        print(add_number(3, 5))
    ```
 
-3. Run the script with `python addition.py`. It prints `8`.
-4. Add a test to the same file:
+4. Run the script with `python addition.py`. It prints `8`.
+5. Add a test to the same file:
 
    ```python
    def test_add_number():
        assert add_number(3, 5) == 8
    ```
 
-5. Run `pytest -q addition.py`. It reports `1 passed`.
+6. Run `pytest -q addition.py`. It reports `1 passed`.
    - Pytest collects functions whose names start with `test_`. If you run `pytest` with no file name, it collects only files named `test_*.py` or `*_test.py`, so `addition.py` is found only when you name it explicitly.
-6. Add a few more checks:
+7. Add a few more checks:
 
    ```python
    def test_add_number():
@@ -33,14 +42,14 @@
        assert add_number(0, 0) == 0
    ```
 
-7. Run again. It still reports `1 passed`: one test function, three asserts.
-8. Introduce a typo: change `return a + b` to `return a - b`. Three asserts: how many will fail? Run `pytest -q addition.py`. Pytest reports **`1 failed`**, showing only `assert -2 == 8`.
+8. Run again. It still reports `1 passed`: one test function, three asserts.
+9. Introduce a typo: change `return a + b` to `return a - b`. Three asserts: how many will fail? Run `pytest -q addition.py`. Pytest reports **`1 failed`**, showing only `assert -2 == 8`.
    - A test stops at its **first** failing assert, so the other two never ran.
    - `add_number(0, 0)` would have passed even with the typo. A test case where `a + b` and `a - b` agree catches nothing.
    - This is the reason for `@pytest.mark.parametrize` (Demo 2): each case becomes its own test, and one failure no longer hides the others.
-9. Fix the typo (back to `a + b`) and re-run. All green again.
-10. In a Python shell, try `add_number('a', 'b')`. It does **not** crash: Python returns `'ab'`. Then try `add_number('a', 5)`, which raises `TypeError: can only concatenate str (not "int") to str`. Neither is what we want from a function called `add_number`. Python has no idea we meant numbers. This is the Mars Climate Orbiter problem: wrong input, no crash, plausible-looking output.
-11. Make the function reject anything that is not a number, with a clear error:
+10. Fix the typo (back to `a + b`) and re-run. All green again.
+11. Start Python in the same folder (`python`), import the function (`from addition import add_number`), and try `add_number('a', 'b')`. It does **not** crash: Python returns `'ab'`. Then try `add_number('a', 5)`, which raises `TypeError: can only concatenate str (not "int") to str`. Neither is what we want from a function called `add_number`. Python has no idea we meant numbers. This is the Mars Climate Orbiter problem: wrong input, no crash, plausible-looking output. Leave Python with `exit()`.
+12. Make the function reject anything that is not a number, with a clear error:
 
     ```python
     def add_number(a, b):
@@ -49,18 +58,15 @@
         return a + b
     ```
 
-12. Test the new behavior. `pytest.raises` passes only if the code inside it raises that error:
+13. Test the new behavior. Add `import pytest` at the **top** of `addition.py`, then this test. `pytest.raises` passes only if the code inside it raises that error:
 
     ```python
-    import pytest
-
-
     def test_add_number_rejects_strings():
         with pytest.raises(TypeError):
             add_number('a', 'b')
     ```
 
-13. Run `pytest -q addition.py` again: `2 passed`. The **old** test still passes: we changed the function, and the old test confirms we didn't break anything.
+14. Run `pytest -q addition.py` again: `2 passed`. The **old** test still passes: we changed the function, and the old test confirms we didn't break anything.
 
 ## Demo 2: `percent_change` (files: `src/metrics.py`, `src/test_metrics.py`; tutorial version: `src/test_metrics_tutorial.py`)
 

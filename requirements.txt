@@ -1,6 +1,6 @@
 # DAPT 619 · Analytics Computing — course packages (tested together on 2026-11-18)
-# Needs Python 3.12 or newer. In Anaconda Prompt (Mac: Terminal), from the repo folder:
-#   conda create -n dapt619 python=3.12 -y
+# Needs Python 3.12 or newer. In Git Bash (Mac: Terminal), from the repo folder (setup steps: class-material/setup.md):
+#   conda create -n dapt619 python=3.12
 #   conda activate dapt619
 #   pip install -r requirements.txt
 # WSL/Linux only: first run  pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu

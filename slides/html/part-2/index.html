@@ -204,9 +204,9 @@
   <h1 class="title">Start Now: Set Up Today’s Environment</h1>
   <div class="row fill" style="gap:36px;justify-content:center;align-items:center">
     <div class="col" style="gap:14px;width:760px">
-      <div class="term"><div class="bar"><i></i><i></i><i></i><span>Anaconda Prompt (Mac: Terminal)</span></div>
-        <div class="body" style="font-size:16.5px;line-height:1.8;white-space:nowrap"><span class="dim">&gt;</span> git clone https://github.com/vishal-git/dapt-619.git<br><span class="dim">  # already have it? cd dapt-619, then git pull</span><br><span class="dim">&gt;</span> cd dapt-619<br><span class="dim">&gt;</span> conda create -n dapt619 python=3.12 -y<br><span class="dim">&gt;</span> conda activate dapt619<br><span class="dim">&gt;</span> pip install -r requirements.txt</div></div>
-      <p class="muted" style="font-size:16px;margin:0;line-height:1.5">Prefer Git Bash? Run <code>conda init bash</code> once in Anaconda Prompt, then reopen Git Bash.</p>
+      <div class="term"><div class="bar"><i></i><i></i><i></i><span>Git Bash (Mac: Terminal)</span></div>
+        <div class="body" style="font-size:16.5px;line-height:1.8;white-space:nowrap"><span class="dim">$</span> git clone https://github.com/vishal-git/dapt-619.git<br><span class="dim">  # already have it? cd dapt-619, then git pull</span><br><span class="dim">$</span> cd dapt-619<br><span class="dim">$</span> conda create -n dapt619 python=3.12<br><span class="dim">$</span> conda env list<br><span class="dim">$</span> conda activate dapt619<br><span class="dim">$</span> pip install -r requirements.txt<br><span class="dim">$</span> pip show tabicl</div></div>
+      <p class="muted" style="font-size:16px;margin:0;line-height:1.5"><code>conda</code> not found in Git Bash? One-time fix: steps 1 and 4 in <code>class-material/setup.md</code>.</p>
     </div>
     <div class="col" style="gap:14px;width:340px">
       <p data-f="1" style="font-size:19px;margin:0;line-height:1.5">Last time: <code>python -m venv</code>. A <b>conda environment</b> is the same idea, an isolated set of packages, and it also lets us pick the <b>Python version</b> (3.12).</p>
@@ -328,7 +328,7 @@ git add analysis.py</pre>
   </div>
   <div class="row" data-f="2" style="justify-content:center;gap:22px;margin-bottom:20px">
     <div class="term" style="width:640px"><div class="bar"><i></i><i></i><i></i><span>bash</span></div>
-      <div class="body" style="font-size:19px;line-height:1.6"><span class="dim">$</span> pip install pytest<br><span class="dim">$</span> pytest -q addition.py   <span class="dim"># -q: quiet, dots + summary</span><br><span class="green">.</span>                                <span class="dim">[100%]</span><br><span class="green">1 passed</span> in 0.01s</div></div>
+      <div class="body" style="font-size:19px;line-height:1.6"><span class="dim">$</span> pytest -q addition.py   <span class="dim"># -q: quiet, dots + summary</span><br><span class="green">.</span>                                <span class="dim">[100%]</span><br><span class="green">1 passed</span> in 0.01s</div></div>
   </div>
 </section>
 
@@ -336,7 +336,8 @@ git add analysis.py</pre>
 <section class="slide section quiz" data-section="Testing · Demo" data-title="Pytest">
   <div class="kicker green">Live demo</div>
   <h1>Pytest</h1>
-  <pre style="margin-top:40px;font-size:26px;color:var(--amber)">pip install pytest</pre>
+  <pre style="margin-top:40px;font-size:24px;line-height:1.7;color:var(--amber)">addition.py   <span class="dim"># built live</span>
+src/addition.py <span class="dim"># complete version</span></pre>
   <svg class="big-ico ico" style="color:var(--green)"><use href="#i-flask"/></svg>
 </section>
 
@@ -384,7 +385,7 @@ E       assert -2 == 8</span>
 <pre class="src" style="font-size:18px"><span class="kw">def</span> <span class="f">add_number</span>(a, b):
     <span class="kw">if not</span> <span class="f">isinstance</span>(a, (int, float)) \
        <span class="kw">or not</span> <span class="f">isinstance</span>(b, (int, float)):
-        <span class="kw">raise</span> <span class="f">TypeError</span>(<span class="s">"expects two numbers"</span>)
+        <span class="kw">raise</span> <span class="f">TypeError</span>(<span class="s">"add_number expects two numbers"</span>)
     <span class="kw">return</span> a + b
 
 <span class="kw">def</span> <span class="f">test_add_number_rejects_strings</span>():

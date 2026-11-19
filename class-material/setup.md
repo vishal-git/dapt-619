@@ -59,3 +59,38 @@ Everything below runs in **Git Bash**, except step 1.
 - Every new terminal window starts outside the environment. Run `conda activate dapt619` before any `python` or `pytest` command.
 - Start Jupyter from the activated environment with `jupyter lab`. The JupyterLab button in Anaconda Navigator opens the `base` environment, which doesn't have the course packages.
 - Run commands from the repo root (`dapt-619/`), for example `pytest -v src/heart.py` or `python src/percent_app.py`.
+
+## Using Git Bash in VS Code
+
+VS Code finds Git Bash automatically when Git for Windows is installed.
+
+**Open a Git Bash terminal**
+
+1. **Terminal → New Terminal** (or `` Ctrl+` ``).
+2. In the terminal panel, click the **⌄** arrow next to the **+** and pick **Git Bash**.
+
+**Make Git Bash the default terminal**
+
+1. Either way works:
+   - `Ctrl+Shift+P` → **Terminal: Select Default Profile** → **Git Bash**, or
+   - in the terminal panel, click the **⌄** next to the **+** → **Select Default Profile** → **Git Bash**.
+2. Close the open terminal and open a new one (`` Ctrl+` ``). Every new terminal now opens in Git Bash.
+
+**If Git Bash isn't in the list**, add it to your settings: `Ctrl+Shift+P` → **Preferences: Open User Settings (JSON)**, then add these lines inside the outer `{ }`:
+
+```json
+"terminal.integrated.profiles.windows": {
+  "Git Bash": {
+    "path": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "args": ["--login", "-i"]
+  }
+},
+"terminal.integrated.defaultProfile.windows": "Git Bash"
+```
+
+Save the file, close the open terminal, and open a new one. (If Git is installed somewhere else, use that folder's `bin\bash.exe` in `"path"`.)
+
+**Two checks in the new terminal**
+
+- `conda activate dapt619` works. If it prints `conda: command not found`, the Git Bash profile is missing `"--login"`; use the JSON above.
+- VS Code's editor uses the same Python: `Ctrl+Shift+P` → **Python: Select Interpreter** → pick the one in `envs\dapt619`.
