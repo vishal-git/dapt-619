@@ -1,23 +1,28 @@
 import gradio as gr
-from digits_utils import predict_digit, white_canvas
+import joblib
+import numpy as np
+from PIL import ImageOps
 
-def process_image(image):
-    if image is None:
+model = joblib.load("models/digit_model.pkl")
+
+
+def predict_digit(drawing):
+    if drawing is None or drawing["composite"] is None:
         return "Please draw a digit first!"
-    return predict_digit(image)
+    img = ImageOps.invert(drawing["composite"])          # white digit on black, like the training images
+    img = img.crop(img.getbbox())                        # zoom in on the digit
+    img = ImageOps.pad(img, (max(img.size),) * 2)        # make it square
+    pixels = np.array(img.resize((8, 8))) / 255 * 16     # 8x8 on a 0-16 scale, like load_digits()
+    return int(model.predict(pixels.reshape(1, -1))[0])
+
 
 demo = gr.Interface(
-    fn=process_image,
-    inputs=gr.Paint(
-        type="pil",
-        image_mode="L",
-        height=400,
-        value=white_canvas(),
-        brush={"color": "black", "size": 15}
-    ),
+    fn=predict_digit,
+    inputs=gr.Sketchpad(type="pil", image_mode="L",
+                        brush=gr.Brush(default_size=30, colors=["#000000"], color_mode="fixed")),
     outputs="text",
     title="Handwritten Digit Recognition",
-    description="Draw a digit (0–9) below and see the prediction!"
+    description="Click the brush icon, draw a digit (0-9), and press Submit.",
 )
 
 if __name__ == "__main__":
