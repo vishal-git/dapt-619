@@ -186,26 +186,44 @@
 
 ## Exercise 1 (15–20 min): test a real dataset
 
-Files: `src/heart_tutorial.py` (fill in the blanks) or `src/heart.py` (complete; just run it). Data: `data/heart.csv` (Heart Failure Prediction, fedesoriano on Kaggle, 918 rows × 12 columns). Run everything from the repo root.
+Files: `src/heart_tutorial.py` (fill in the blanks) and `src/heart.py` (complete version). Data: `data/heart.csv` (Heart Failure Prediction, fedesoriano on Kaggle, 918 rows × 12 columns).
 
-**Part A (about 10 min)**
+**Setup.** Work on copies in your `pytest-demo` folder, so the course repo stays untouched. From inside `pytest-demo`:
 
-1. Activate the course environment (`conda activate dapt619`). Check that `pandas` and `pytest` are installed (`pip list`).
-2. Write a function `load_heart()` that loads `data/heart.csv` into a pandas DataFrame.
-3. Write a test: the DataFrame has 12 columns. Run `pytest -v src/heart_tutorial.py`. It should pass.
-4. Write a test: there are no null values in any column. It should pass.
-5. Write a test: the column `heart_disease` is present. It **fails**. Read the error message and figure out why. (The column is `HeartDisease`.)
+```bash
+mkdir data
+cp ../dapt-619/data/heart.csv data/
+cp ../dapt-619/src/heart_tutorial.py .
+```
 
-**Part B (about 5–10 min, pick two)**
+Run the tests with `pytest -v heart_tutorial.py`. The step numbers below match the comments in `heart_tutorial.py`.
 
-6. `Age` is between 18 and 100.
-7. `Sex` only contains `"M"` or `"F"`.
-8. `HeartDisease` only contains 0 and 1.
-9. `Cholesterol` is greater than 0. Put the number of bad rows in the assert message:
+**Part A: does the file look the way we expect? (about 10 min)**
+
+1. Finish `load_heart()` so it returns `data/heart.csv` as a pandas DataFrame.
+2. Test: the DataFrame has 12 columns. It passes.
+3. Test: there are no null values in any column. It passes.
+4. Test: the column `heart_disease` is present. It **fails**. Read the error message to find out why.
+
+**Part B: does the data make sense? (about 5–10 min, pick two)**
+
+5. `Age` is between 18 and 100.
+6. `Sex` only contains `"M"` or `"F"`.
+7. `HeartDisease` only contains 0 and 1.
+8. `Cholesterol` and `RestingBP` are greater than 0. Put the number of bad rows in the assert message:
 
    ```python
    bad = (df["Cholesterol"] <= 0).sum()
    assert bad == 0, f"{bad} rows have Cholesterol <= 0"
    ```
 
-**Debrief:** 172 rows (19%) have `Cholesterol = 0`, and 1 row has `RestingBP = 0`. These are missing values in disguise, and the "no nulls" test passed anyway. A failing test is often a question for whoever owns the data, not just a bug.
+**Stretch:** rewrite step 8 as one test with `@pytest.mark.parametrize("col", ["Cholesterol", "RestingBP"])`, so each column is its own test.
+
+**Complete version.** From the repo root: `pytest -v src/heart.py` → `5 failed, 5 passed`. All five failures are expected:
+
+- `test_has_heart_disease_column`: the column is called `HeartDisease`, not `heart_disease`. The test was right to fail; the assumption was wrong.
+- `test_cholesterol_positive`: 172 rows have `Cholesterol <= 0`.
+- `test_resting_bp_positive`: 1 row has `RestingBP <= 0`.
+- `test_measurement_positive[Cholesterol]` and `[RestingBP]`: the same two checks, from the parametrized stretch version.
+
+**Debrief.** 172 rows (19%) have `Cholesterol = 0`, and 1 row has `RestingBP = 0`. Nobody has zero cholesterol: these are missing values in disguise, and the "no nulls" test passed anyway. A failing test is often a question for whoever owns the data, not just a bug.

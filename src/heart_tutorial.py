@@ -1,6 +1,6 @@
 import pandas as pd
 
-# run from the repo root:  pytest -v src/heart_tutorial.py
+# Copy this file into your pytest-demo folder (and heart.csv into pytest-demo/data/), then run:  pytest -v heart_tutorial.py
 
 
 # step 1: write a function that loads data/heart.csv into a DataFrame
@@ -36,6 +36,6 @@ def test_has_twelve_columns():
 # step 7: HeartDisease only contains 0 and 1
 # --
 
-# step 8: Cholesterol is greater than 0; count the bad rows and put the count in the assert message
+# step 8: Cholesterol and RestingBP are greater than 0; count the bad rows and put the count in the assert message
 #         hint: assert bad == 0, f"{bad} rows have Cholesterol <= 0"
 # --

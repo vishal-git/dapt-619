@@ -618,8 +618,8 @@ src/heart.py           <span class="dim"># complete: just run it</span></pre>
   <h1 class="title">Exercise 1 · Part A: Load and Check <span class="muted" style="font-size:22px">· ~10 min</span></h1>
   <div class="row fill" style="gap:36px;align-items:center">
     <ol class="list sm" style="font-size:19px;line-height:1.45;width:640px;margin:0">
-      <li>Open <code>src/heart_tutorial.py</code>. Finish <code>load_heart()</code> so it returns <code>data/heart.csv</code> as a DataFrame.</li>
-      <li>Write a test: the DataFrame has <b>12 columns</b>. From the repo root, run <code>pytest -v src/heart_tutorial.py</code>. It should <span class="green">pass</span>.</li>
+      <li>In <code>pytest-demo</code>, copy <code>src/heart_tutorial.py</code> and <code>data/heart.csv</code> from the repo (see <code>pytest.md</code>). Finish <code>load_heart()</code> so it returns <code>data/heart.csv</code> as a DataFrame.</li>
+      <li>Write a test: the DataFrame has <b>12 columns</b>. Run <code>pytest -v heart_tutorial.py</code>. It should <span class="green">pass</span>.</li>
       <li>Write a test: <b>no null values</b> in any column. It should <span class="green">pass</span>.</li>
       <li>Write a test: the column <code>heart_disease</code> exists. It <span class="red">fails</span>. Read the error message and figure out why.</li>
     </ol>
@@ -650,7 +650,7 @@ src/heart.py           <span class="dim"># complete: just run it</span></pre>
         <li><code>HeartDisease</code> only contains 0 and 1.</li>
         <li><code>Cholesterol</code> and <code>RestingBP</code> are greater than 0.</li>
       </ol>
-      <p style="font-size:19px;margin:0">Run <code>pytest -v src/heart_tutorial.py</code>. Which tests fail? <b>How many rows</b> are affected?</p>
+      <p style="font-size:19px;margin:0">Run <code>pytest -v heart_tutorial.py</code>. Which tests fail? <b>How many rows</b> are affected?</p>
       <p style="font-size:18px;margin:4px 0 0" class="muted"><b class="amber">Stretch:</b> rewrite 8 with <code>@pytest.mark.parametrize("col", [...])</code> so each column is its own test.</p>
     </div>
     <div class="col" style="gap:10px;width:540px">
