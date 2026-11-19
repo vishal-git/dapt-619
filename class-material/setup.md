@@ -23,11 +23,32 @@ This lecture uses one conda environment, `dapt619`, with every package listed in
    python -c "import pandas, polars, pytest, gradio, sklearn, tabicl; print('all good')"
    ```
 
+## Using conda in Git Bash
+
+Git Bash doesn't know about conda until conda sets it up. This takes one command, run once:
+
+1. In **Anaconda Prompt**, find where conda is installed: `where conda`. Of the lines it prints, copy the one ending in `Scripts\conda.exe`, for example `C:\Users\ana\anaconda3\Scripts\conda.exe`.
+2. Switch to **Git Bash**.
+3. Convert that Windows path to a Unix-style path with `cygpath -u`. Keep the single quotes so the backslashes survive:
+
+   ```bash
+   cygpath -u 'C:\Users\ana\anaconda3\Scripts\conda.exe'
+   # /c/Users/ana/anaconda3/Scripts/conda.exe
+   ```
+
+4. Run conda's setup for Git Bash, using the path from step 3:
+
+   ```bash
+   /c/Users/ana/anaconda3/Scripts/conda.exe init bash
+   ```
+
+5. Close Git Bash and open it again. `conda activate dapt619` now works in every new Git Bash window.
+
 ## Troubleshooting
 
 | Symptom | Fix |
 |---|---|
-| `conda: command not found` in Git Bash | Use Anaconda Prompt. Or run `conda init bash` once in Anaconda Prompt, then close and reopen Git Bash. |
+| `conda: command not found` in Git Bash | Use Anaconda Prompt, or follow "Using conda in Git Bash" above. |
 | `git: command not found` in Anaconda Prompt | Do steps 1–3 in Git Bash, then switch to Anaconda Prompt for step 4. |
 | `ERROR: No matching distribution found for numpy==2.5.4` (or similar) | The environment isn't active, or isn't Python 3.12. Run `conda activate dapt619` and check `python --version`. |
 | The prompt shows `(base)` instead of `(dapt619)` | Run `conda activate dapt619` again. |
