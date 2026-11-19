@@ -19,8 +19,7 @@
        return a + b
 
 
-   if __name__ == "__main__":
-       print(add_number(3, 5))
+   print(add_number(3, 5))
    ```
 
 4. Run the script with `python addition.py`. It prints `8`.
@@ -48,7 +47,7 @@
    - `add_number(0, 0)` would have passed even with the typo. A test case where `a + b` and `a - b` agree catches nothing.
    - This is the reason for `@pytest.mark.parametrize` (Demo 2): each case becomes its own test, and one failure no longer hides the others.
 10. Fix the typo (back to `a + b`) and re-run. All green again.
-11. Start Python in the same folder (`python`), import the function (`from addition import add_number`), and try `add_number('a', 'b')`. It does **not** crash: Python returns `'ab'`. Then try `add_number('a', 5)`, which raises `TypeError: can only concatenate str (not "int") to str`. Neither is what we want from a function called `add_number`. Python has no idea we meant numbers. This is the Mars Climate Orbiter problem: wrong input, no crash, plausible-looking output. Leave Python with `exit()`.
+11. Start Python in the same folder (`python`), import the function (`from addition import add_number`; it prints `8`, because importing a file runs it), and try `add_number('a', 'b')`. It does **not** crash: Python returns `'ab'`. Then try `add_number('a', 5)`, which raises `TypeError: can only concatenate str (not "int") to str`. Neither is what we want from a function called `add_number`. Python has no idea we meant numbers. This is the Mars Climate Orbiter problem: wrong input, no crash, plausible-looking output. Leave Python with `exit()`.
 12. Make the function reject anything that is not a number, with a clear error:
 
     ```python

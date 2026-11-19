@@ -21,5 +21,4 @@ def test_add_number_rejects_strings():
         add_number("a", "b")
 
 
-if __name__ == "__main__":
-    print(add_number(3, 5))
+print(add_number(3, 5))
