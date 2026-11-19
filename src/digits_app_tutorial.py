@@ -29,4 +29,4 @@ def predict_digit(drawing):
 if __name__ == "__main__":
     # step 3: launch the app
     # --
-    pass
+    pass  # replace this line with your code

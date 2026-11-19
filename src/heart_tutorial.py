@@ -6,15 +6,13 @@ import pandas as pd
 # step 1: write a function that loads data/heart.csv into a DataFrame
 def load_heart(path="data/heart.csv"):
     # --
-    pass
+    pass  # replace this line with your code
 
 
 # ---------- Part A: does the file look the way we expect? ----------
 
 # step 2: test that the DataFrame has 12 columns
-def test_has_twelve_columns():
-    # --
-    pass
+# --
 
 
 # step 3: test that there are no null values in any column

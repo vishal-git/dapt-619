@@ -12,7 +12,7 @@ def describe_change(old, new):
 
     # step 3: return a string such as "25.0% (up)"
     # --
-    pass
+    pass  # replace this line with your code
 
 
 # step 4: create a gr.Interface with fn=describe_change,
@@ -22,4 +22,4 @@ def describe_change(old, new):
 if __name__ == "__main__":
     # step 5: launch the app (try share=True for a public link)
     # --
-    pass
+    pass  # replace this line with your code
