@@ -76,9 +76,15 @@
 
 14. Run `pytest -q addition.py` again: `2 passed`. The **old** test still passes: we changed the function, and the old test confirms we didn't break anything.
 
-## Demo 2: `percent_change` (files: `src/metrics.py`, `src/test_metrics.py`; tutorial version: `src/test_metrics_tutorial.py`)
+## Demo 2: `percent_change` (complete versions: `src/metrics.py`, `src/test_metrics.py`)
 
-1. Start from the spec, not the code. Agree on expected outputs before writing anything:
+1. Copy the function and the tutorial test file into your `pytest-demo` folder (from inside `pytest-demo`):
+
+   ```bash
+   cp ../dapt-619/src/metrics.py ../dapt-619/src/test_metrics_tutorial.py .
+   ```
+
+2. Start from the spec, not the code: agree on the expected outputs before writing anything.
 
    | old | new | expected |
    |---:|---:|---:|
@@ -89,7 +95,7 @@
    | -50 | -25 | 50.0 (a business decision!) |
    | 0 | 10 | error (`ValueError`) |
 
-2. Show `src/metrics.py`:
+3. The function, in `metrics.py`:
 
    ```python
    def percent_change(old, new):
@@ -99,13 +105,9 @@
        return (new - old) / abs(old) * 100
    ```
 
-3. Turn the table into one parametrized test:
+4. In `test_metrics_tutorial.py`, step 1: turn the table into one parametrized test. `@pytest.mark.parametrize` is a **decorator**: an `@...` line right above a `def` that changes how the function is used. Here it tells pytest to run the test once per row.
 
    ```python
-   import pytest
-   from metrics import percent_change
-
-
    @pytest.mark.parametrize("old, new, expected", [
        (80, 100, 25.0),
        (100, 80, -20.0),
@@ -116,10 +118,23 @@
        assert percent_change(old, new) == expected
    ```
 
-   Run `pytest -v src/test_metrics.py`: four separate lines, one per case.
+   Run `pytest -v test_metrics_tutorial.py`: four separate lines, one per case.
 
-4. Floats: `assert percent_change(3, 3.3) == 10.0` **fails** with `assert 9.999999999999993 == 10.0`. Fix it with `pytest.approx(10.0)`. (Same reason `0.1 + 0.2 == 0.3` is `False`.)
-5. Errors: test that the zero case fails the right way:
+5. Step 2, floats. This test **fails**:
+
+   ```python
+   def test_percent_change_float():
+       assert percent_change(3, 3.3) == 10.0
+   ```
+
+   pytest shows `assert 9.999999999999993 == 10.0`. Computers store floats in binary, and 3.3 has no exact binary form, so the result is off by a tiny amount (the same reason `0.1 + 0.2 == 0.3` is `False`). Compare with `pytest.approx` instead:
+
+   ```python
+   def test_percent_change_float():
+       assert percent_change(3, 3.3) == pytest.approx(10.0)
+   ```
+
+6. Step 3, errors: test that the zero case fails the right way.
 
    ```python
    def test_percent_change_zero_old():
@@ -127,7 +142,47 @@
            percent_change(0, 10)
    ```
 
-6. Run `pytest -q src/test_metrics.py`: `6 passed`.
+7. Run `pytest -q test_metrics_tutorial.py`: `6 passed`.
+
+## Demo 2b: testing data code with a fixture (complete versions: `src/cleaning.py`, `src/test_cleaning.py`)
+
+1. The function under test cleans a customer table: it drops duplicate customers and tidies the state codes.
+
+   ```python
+   def clean_customers(df):
+       out = df.drop_duplicates(subset="customer_id").copy()
+       out["state"] = out["state"].str.strip().str.upper()
+       return out
+   ```
+
+   - `.str` appears twice because `.str.strip()` returns a regular Series; the next string method needs the `.str` accessor again.
+   - `.copy()` doesn't protect the input (`drop_duplicates` already returns a new DataFrame); it avoids a `SettingWithCopyWarning` in pandas 2.
+
+2. A **fixture** is a function that builds test data. Mark it with the `@pytest.fixture` decorator; any test that names it as an argument gets a fresh copy.
+
+   ```python
+   @pytest.fixture
+   def raw():
+       return pd.DataFrame({"customer_id": [1, 1, 2],
+                            "state": [" va", " va", "NC "]})
+   ```
+
+3. Three tests use it. The third checks something the function should **not** do: change its input. It doesn't need the function's return value, so it doesn't store it.
+
+   ```python
+   def test_removes_duplicates(raw):
+       assert clean_customers(raw)["customer_id"].is_unique
+
+   def test_normalizes_state(raw):
+       assert list(clean_customers(raw)["state"]) == ["VA", "NC"]
+
+   def test_does_not_modify_input(raw):
+       before = raw.copy()
+       clean_customers(raw)
+       pd.testing.assert_frame_equal(raw, before)
+   ```
+
+4. Will these three tests pass or fail? Run `pytest -v src/test_cleaning.py` from the repo root: `3 passed`.
 
 ## Exercise 1 (15–20 min): test a real dataset
 

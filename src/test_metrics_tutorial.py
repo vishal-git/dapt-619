@@ -1,4 +1,4 @@
-# run from the repo root:  pytest -v src/test_metrics_tutorial.py
+# Copy this file and src/metrics.py into your pytest-demo folder, then run:  pytest -v test_metrics_tutorial.py
 import pytest
 from metrics import percent_change
 
