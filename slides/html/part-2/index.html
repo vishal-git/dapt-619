@@ -377,8 +377,11 @@ E       assert -2 == 8</span>
   <h1 class="title">Python Doesn’t Know You Meant Numbers</h1>
   <div class="row fill" style="gap:36px;justify-content:center;align-items:center">
     <div class="col" style="gap:16px;width:540px">
-      <div class="term"><div class="bar"><i></i><i></i><i></i><span>python</span></div>
-        <div class="body" style="font-size:20px;line-height:1.7"><span class="dim">&gt;&gt;&gt;</span> add_number(<span class="s">'a'</span>, <span class="s">'b'</span>)<br><span data-f="1" class="fx-none"><span class="amber">'ab'</span></span><br><span class="dim">&gt;&gt;&gt;</span> add_number(<span class="s">'a'</span>, <span class="n">5</span>)<br><span data-f="2" class="fx-none"><span class="red">TypeError: can only concatenate str (not "int") to str</span></span></div></div>
+      <div class="fname">addition.py: two temporary lines at the bottom</div>
+<pre class="src" style="font-size:18px;margin-top:-6px"><span class="f">print</span>(add_number(<span class="s">'x'</span>, <span class="s">'y'</span>))
+<span class="f">print</span>(add_number(<span class="s">'x'</span>, <span class="n">5</span>))</pre>
+      <div class="term"><div class="bar"><i></i><i></i><i></i><span>python addition.py</span></div>
+        <div class="body" style="font-size:18px;line-height:1.7">8<br><span data-f="1" class="fx-none"><span class="amber">xy</span></span><br><span data-f="2" class="fx-none"><span class="red">TypeError: can only concatenate str (not "int") to str</span></span></div></div>
       <p data-f="3" style="font-size:20px;margin:0;line-height:1.5">One input <span class="amber">silently returns nonsense</span> (the Mars Climate Orbiter problem), the other crashes. Neither is what a function called <code>add_number</code> should do.</p>
     </div>
     <div class="col" data-f="4" style="gap:12px;width:600px">
@@ -390,7 +393,7 @@ E       assert -2 == 8</span>
 
 <span class="kw">def</span> <span class="f">test_add_number_rejects_strings</span>():
     <span class="kw">with</span> pytest.raises(<span class="f">TypeError</span>):
-        add_number(<span class="s">'a'</span>, <span class="s">'b'</span>)</pre>
+        add_number(<span class="s">'x'</span>, <span class="s">'y'</span>)</pre>
       <p data-f="5" style="font-size:19px;margin:0" class="muted">Run <code>pytest -q</code> again: the <b>old</b> tests still pass. That is the safety net: you changed the function and know you didn’t break anything.</p>
     </div>
   </div>
@@ -399,21 +402,21 @@ E       assert -2 == 8</span>
 <!-- ═══════════════════════════ How pytest finds tests ═══════════════════════════ -->
 <section class="slide" data-section="Testing" data-title="How pytest finds and runs tests">
   <h1 class="title">How Pytest Finds and Runs Tests</h1>
-  <div class="row fill" style="gap:40px;justify-content:center;align-items:stretch">
+  <div class="row fill" style="gap:40px;justify-content:center;align-items:stretch;margin-bottom:22px">
     <div class="card col" style="width:520px;gap:14px">
       <h3 style="margin:0">Discovery: naming is the contract</h3>
-      <ul class="list" style="font-size:20px;margin:0">
+      <ul class="list" style="font-size:18px;margin:0">
         <li>Files named <code>test_*.py</code> or <code>*_test.py</code></li>
         <li>Functions named <code>test_*</code></li>
         <li>Searches the current folder and its subfolders</li>
         <li>Plain <code>assert</code>, no special methods to learn</li>
       </ul>
       <h3 style="margin:10px 0 0">Reading the dots</h3>
-      <div class="kv" style="font-size:20px"><code class="green">.</code><span>passed</span><code class="red">F</code><span>failed: an assert was false (or the test raised)</span><code class="amber">E</code><span>error <i>before</i> the test ran, e.g., the code that prepares its test data (a <b>fixture</b>, coming up) crashed</span><code class="muted">s</code><span>skipped on purpose, e.g., <code>@pytest.mark.skipif(no_gpu)</code></span></div>
+      <div class="kv" style="font-size:17px;gap:8px 16px"><code class="green">.</code><span>passed</span><code class="red">F</code><span>failed: an assert was false (or the test raised)</span><code class="amber">E</code><span>error <i>before</i> the test ran, e.g., the code that prepares its test data (a <b>fixture</b>, coming up) crashed</span><code class="muted">s</code><span>skipped on purpose, e.g., <code>@pytest.mark.skipif(no_gpu)</code></span></div>
     </div>
     <div class="card col" data-f="1" style="width:560px;gap:12px">
       <h3 style="margin:0">Some useful commands</h3>
-      <div class="kv mono" style="font-size:18px;gap:12px 20px">
+      <div class="kv mono" style="font-size:17px;gap:10px 20px">
         <span class="amber">pytest</span><span style="font-family:var(--font-body)">run everything</span>
         <span class="amber">pytest -q</span><span style="font-family:var(--font-body)">quiet: dots and a summary</span>
         <span class="amber">pytest -v</span><span style="font-family:var(--font-body)">verbose: one line per test</span>
@@ -493,8 +496,8 @@ test_percent_change[-50--25-50.0]  <span class="green">PASSED</span></div></div>
 <!-- Verified: percent_change(3, 3.3) == 9.999999999999993 in CPython 3.12/3.14. -->
 <section class="slide" data-section="Testing" data-title="Floats and errors: approx and raises">
   <h1 class="title">Two Traps: Floats and Errors</h1>
-  <div class="row fill" style="gap:36px;justify-content:center;align-items:stretch;margin-bottom:34px">
-    <div class="card col" style="width:560px;gap:14px">
+  <div class="row fill" style="gap:36px;justify-content:center;align-items:stretch;margin-bottom:70px">
+    <div class="card col" style="width:560px;gap:10px;padding:16px 22px">
       <h3 style="margin:0">Floats are almost never exactly equal</h3>
 <pre class="src" style="font-size:17px"><span class="kw">def</span> <span class="f">test_percent_change_float</span>():
     <span class="kw">assert</span> percent_change(<span class="n">3</span>, <span class="n">3.3</span>) == <span class="n">10.0</span></pre>
@@ -502,18 +505,18 @@ test_percent_change[-50--25-50.0]  <span class="green">PASSED</span></div></div>
 <pre class="src" data-f="2" style="font-size:15px"><span class="kw">assert</span> percent_change(<span class="n">3</span>, <span class="n">3.3</span>) == pytest.approx(<span class="n">10.0</span>)</pre>
       <p data-f="2" class="muted" style="font-size:17px;margin:0">Same reason <code>0.1 + 0.2 == 0.3</code> is <code>False</code> in Python.<sup class="amber">*</sup></p>
     </div>
-    <div class="card col" data-f="3" style="width:560px;gap:14px">
+    <div class="card col" data-f="3" style="width:560px;gap:9px;padding:16px 22px">
       <h3 style="margin:0">Test that it fails <span class="amber">the right way</span></h3>
       <div class="fname">metrics.py (from before)</div>
-<pre class="src" style="font-size:14px;margin-top:-6px"><span class="kw">def</span> <span class="f">percent_change</span>(old, new):
+<pre class="src" style="font-size:13px;margin-top:-4px;padding:10px 18px"><span class="kw">def</span> <span class="f">percent_change</span>(old, new):
     <span class="kw">if</span> old == <span class="n">0</span>:
         <span class="kw">raise</span> <span class="f">ValueError</span>(<span class="s">"old value cannot be zero"</span>)
     <span class="kw">return</span> (new - old) / <span class="f">abs</span>(old) * <span class="n">100</span></pre>
-<pre class="src" style="font-size:15px"><span class="kw">def</span> <span class="f">test_percent_change_zero_old</span>():
+<pre class="src" style="font-size:14px;padding:10px 18px"><span class="kw">def</span> <span class="f">test_percent_change_zero_old</span>():
     <span class="kw">with</span> pytest.raises(<span class="f">ValueError</span>):
         percent_change(<span class="n">0</span>, <span class="n">10</span>)</pre>
-      <p style="font-size:16px;margin:0;line-height:1.5">Passes only if a <code>ValueError</code> is raised. If someone “fixes” the function to quietly return <code>0</code>, this test catches it.</p>
-      <div class="term" data-f="4"><div class="bar"><i></i><i></i><i></i><span>pytest -q</span></div><div class="body" style="font-size:15px;line-height:1.5"><span class="green">......</span>   <span class="dim">[100%]</span><br><span class="green">6 passed</span> in 0.01s</div></div>
+      <p style="font-size:15px;margin:0;line-height:1.45">Passes only if a <code>ValueError</code> is raised. If someone “fixes” the function to quietly return <code>0</code>, this test catches it.</p>
+      <div class="term" data-f="4"><div class="bar"><i></i><i></i><i></i><span>pytest -q</span></div><div class="body" style="font-size:14px;line-height:1.4;padding:10px 20px"><span class="green">......</span>   <span class="dim">[100%]</span><br><span class="green">6 passed</span> in 0.01s</div></div>
     </div>
   </div>
   <div class="foot" data-f="2"><span class="amber">*</span> Why? Next slide.</div>

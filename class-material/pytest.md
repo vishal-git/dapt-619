@@ -47,7 +47,16 @@
    - `add_number(0, 0)` would have passed even with the typo. A test case where `a + b` and `a - b` agree catches nothing.
    - This is the reason for `@pytest.mark.parametrize` (Demo 2): each case becomes its own test, and one failure no longer hides the others.
 10. Fix the typo (back to `a + b`) and re-run. All green again.
-11. Start Python in the same folder (`python`), import the function (`from addition import add_number`; it prints `8`, because importing a file runs it), and try `add_number('a', 'b')`. It does **not** crash: Python returns `'ab'`. Then try `add_number('a', 5)`, which raises `TypeError: can only concatenate str (not "int") to str`. Neither is what we want from a function called `add_number`. Python has no idea we meant numbers. This is the Mars Climate Orbiter problem: wrong input, no crash, plausible-looking output. Leave Python with `exit()`.
+11. Try inputs that aren't numbers. At the bottom of `addition.py`, temporarily add:
+
+    ```python
+    print(add_number('x', 'y'))
+    print(add_number('x', 5))
+    ```
+
+    Run `python addition.py`. It prints `8`, then `xy`: adding two strings does **not** crash, it glues them together. Then the second line raises `TypeError: can only concatenate str (not "int") to str`. Neither is what we want from a function called `add_number`. Python has no idea we meant numbers. This is the Mars Climate Orbiter problem: wrong input, no crash, plausible-looking output.
+
+    Delete the two lines when you're done.
 12. Make the function reject anything that is not a number, with a clear error:
 
     ```python
@@ -62,7 +71,7 @@
     ```python
     def test_add_number_rejects_strings():
         with pytest.raises(TypeError):
-            add_number('a', 'b')
+            add_number('x', 'y')
     ```
 
 14. Run `pytest -q addition.py` again: `2 passed`. The **old** test still passes: we changed the function, and the old test confirms we didn't break anything.

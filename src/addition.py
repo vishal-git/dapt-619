@@ -18,7 +18,7 @@ def test_add_number():
 
 def test_add_number_rejects_strings():
     with pytest.raises(TypeError):
-        add_number("a", "b")
+        add_number("x", "y")
 
 
 print(add_number(3, 5))
