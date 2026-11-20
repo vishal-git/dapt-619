@@ -32,8 +32,6 @@ paste here
 
 ### Churn rate by contract type
 
-### Churn rate by tenure band
-
 ### My question:
 
 ### Lazy query plan
@@ -56,8 +54,8 @@ Which model I would deploy, and why:
 
 ## 4. App
 
-![Explore tab](screenshots/explore.png)
-![Predict tab](screenshots/predict.png)
+![A prediction](screenshots/prediction.png)
+![The error message for bad input](screenshots/error.png)
 
 ## 5. Recommendation
 

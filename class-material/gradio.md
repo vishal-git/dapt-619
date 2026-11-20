@@ -76,7 +76,7 @@ The goal: hand-draw a digit in a browser and let a model trained on scikit-learn
 
 ## Demo 2: Heart data explorer (just run it)
 
-`src/heart_app.py` uses `gr.Blocks` instead of `gr.Interface`: a dropdown and a **Plot** button side by side (`gr.Row`), a plot below, and `btn.click(...)` wiring the button to `plot_column()`. The homework app uses `gr.Blocks` too.
+`src/heart_app.py` uses `gr.Blocks` instead of `gr.Interface`: a dropdown and a **Plot** button side by side (`gr.Row`), a plot below, and `btn.click(...)` wiring the button to `plot_column()`.
 
 1. From the repo root (`dapt-619/`), with `dapt619` active: `python src/heart_app.py`. It reads `data/heart.csv`, so run it from the repo root, not from `src/`.
 2. The terminal prints two URLs:
@@ -86,6 +86,19 @@ The goal: hand-draw a digit in a browser and let a model trained on scikit-learn
 4. Press `Ctrl + C` to stop the app.
 
 If no public link appears, the terminal says why. Gradio downloads a small tunnel program the first time, and antivirus software or a network firewall can block it. The local URL still works.
+
+## Showing an error message
+
+When the input doesn't make sense, stop the function with `gr.Error`. The app shows your message instead of crashing:
+
+```python
+def predict(monthly_charges):
+    if monthly_charges <= 0:
+        raise gr.Error("Monthly charges must be a positive number.")
+    ...
+```
+
+The homework app needs this.
 
 ## Hosting on Hugging Face Spaces
 

@@ -1,7 +1,7 @@
 # Homework: Customer Churn, End to End
 
 **Due:** Thursday, December 3, 2026, 11:59 PM (submit your GitHub repo link)
-**Expected effort:** 2–3 hours
+**Expected effort:** 3–4 hours
 **Data:** `data/churn_raw.csv` in the course repo (3,020 rows, 15 columns)
 
 ## The scenario
@@ -20,30 +20,59 @@ Most of the points go to your **judgment calls** (what counts as a data problem 
 
 ## Setup (Part 0)
 
-1. Create a **new public GitHub repo** named `dapt619-churn-<your-last-name>`.
-2. Clone it, create a conda environment for it (for example `conda create -n churn python=3.12`, then `conda activate churn`), and install what you need (`polars`, `pyarrow`, `pandas`, `scikit-learn`, `pytest`, `gradio`, `matplotlib`, `tabicl`, …).
-3. Lay out the project like this (the starter files in the course repo's `homework/` folder give you a head start):
+1. On GitHub, create a **new public repo** named `dapt619-churn-<your-last-name>`.
+2. In Git Bash, go to the folder that contains your `dapt-619` clone, update it, and clone your new repo next to it:
+
+   ```bash
+   cd dapt-619 && git pull && cd ..
+   git clone https://github.com/<your-username>/dapt619-churn-<your-last-name>.git
+   cd dapt619-churn-<your-last-name>
+   ```
+
+3. Copy the starter files and the data into your repo:
+
+   ```bash
+   cp -r ../dapt-619/homework/. .                  # starter files, including the hidden .gitignore
+   cp ../dapt-619/data/churn_raw.csv data/raw/      # the raw data
+   ls -a; ls src tests data/raw                     # check what's there
+   ```
+
+   You now have this layout:
 
    ```
    dapt619-churn-<last-name>/
-   ├── README.md            # your report: see "README sections" below
-   ├── requirements.txt     # pip freeze > requirements.txt
-   ├── pyproject.toml       # [tool.pytest.ini_options] pythonpath = ["src"]
-   ├── .gitignore           # at least __pycache__/ and .pytest_cache/
+   ├── README.md            # your report: fill in each section
+   ├── pyproject.toml       # tells pytest that your code lives in src/
+   ├── .gitignore
    ├── data/raw/churn_raw.csv
    ├── notebooks/           # optional: exploration
-   ├── src/                 # cleaning.py, explore.py, train.py, app.py (names are up to you)
+   ├── src/                 # cleaning.py, explore.py, train.py, app.py
    ├── tests/               # test_raw_data.py, test_cleaning.py
-   ├── models/              # your saved model: commit it (it's small)
-   └── screenshots/         # the two app screenshots for your README
+   ├── models/              # your saved model goes here
+   └── screenshots/         # the app screenshots for your README
    ```
 
-4. Commit as you go: **at least 5 commits** with messages that say what changed. "update" is not a commit message.
-5. Commit the data file, your saved model, and your screenshots too. Someone who clones your repo should be able to run your tests and your app without retraining anything.
+4. Create an environment for the project and install the packages:
+
+   ```bash
+   conda create -n churn python=3.12 -y
+   conda activate churn
+   pip install polars pyarrow pandas scikit-learn pytest gradio matplotlib joblib tabicl
+   pip list --format=freeze > requirements.txt
+   ```
+
+   Use `pip list --format=freeze`, not `pip freeze`. Inside a conda environment, `pip freeze` can write lines like `package @ file:///...` that won't install on anyone else's computer.
+
+   If `tabicl` won't install (this happens on older Intel Macs), install everything else and see the Google Colab note in Part 3.
+
+5. Commit as you go: **at least 5 commits** with messages that say what changed. "update" is not a commit message.
+6. Commit the data file, your saved model, and your screenshots too. Someone who clones your repo should be able to run your tests and your app without retraining anything.
+
+Run every command from the repo root (`dapt619-churn-<last-name>/`), for example `pytest -v` or `python src/app.py`.
 
 ## Part 1: Can we trust the data? (pytest)
 
-1. In `tests/test_raw_data.py`, write **at least 6 tests** that state what the raw data *should* look like. Think like the billing team: IDs, ages, charges, category labels, the target.
+1. In `tests/test_raw_data.py`, write **at least 6 tests** (the two examples in the starter file count) that state what the raw data *should* look like. Think like the billing team: IDs, ages, charges, category labels, the target.
 2. Run `pytest -v`. Some of these tests will fail, **and that is expected**: each failure is a data problem you found.
 3. In your README, fill in a **data issues table**, one row per problem:
 
@@ -52,39 +81,38 @@ Most of the points go to your **judgment calls** (what counts as a data problem 
 
    There is no single right decision for every problem. A clear, defensible reason earns the points.
 4. Write `clean()` in `src/cleaning.py` to apply your decisions. Do not edit the raw file.
-5. In `tests/test_cleaning.py`, write **at least 4 tests** for `clean()`. Use a small, hand-made DataFrame as a fixture, so that you know the correct answer just by looking at it.
+5. In `tests/test_cleaning.py`, write **at least 3 tests** for `clean()`. Use a small, hand-made DataFrame as a fixture, so that you know the correct answer just by looking at it.
 6. Paste the final `pytest -v` output into your README.
 
 **To be clear about which tests should pass:** your `test_raw_data.py` tests are **expected to fail** on the raw file, one failure per problem in your issues table. Every test in `test_cleaning.py` **must pass**.
 
 ## Part 2: What drives churn? (Polars)
 
-Using **Polars** on the cleaned data, answer three questions with a small table each:
+In `src/explore.py`, use **Polars** on the cleaned data to answer two questions with a small table each:
 
 1. Churn rate by contract type.
-2. Churn rate by tenure band (you choose the bands).
-3. One question of your own that the retention team would care about. Combining two columns is a good idea.
+2. One question of your own that the retention team would care about. Combining two columns is a good idea.
 
 Then rewrite one of your queries as a **lazy** query with `pl.scan_csv(...)` and paste its `.explain()` output into your README. Running this one on the **raw** CSV is fine; the point is the query plan, not the numbers. Explain in one sentence what Polars optimized.
 
 ## Part 3: Which model? (scikit-learn + TabICL)
 
-1. Compare **three models** using **5-fold stratified cross-validated AUC** with `random_state=314`:
+1. In `src/train.py`, compare **three models** using **5-fold stratified cross-validated AUC** with `random_state=314`:
    - logistic regression,
    - a gradient-boosted tree model (e.g., `HistGradientBoostingClassifier`),
    - `TabICLClassifier` from `tabicl`.
 2. Report the mean ± standard deviation of the AUC for each model in a table, along with how long each one took.
 3. In one paragraph: which model would you put in front of the retention team, and **why**? Consider more than AUC: speed, explainability, how often it needs retraining, and cost.
-4. Save the model you picked to `models/`.
+4. Save the model you picked to `models/`, together with its list of feature columns (the app needs both; see the starter `train.py`).
+
+**If `tabicl` won't install on your computer:** run the TabICL part in [Google Colab](https://colab.research.google.com/). Upload `churn_raw.csv` and `src/cleaning.py` to the Colab session, run `!pip install polars tabicl` in the first cell, then run the same cross-validation for TabICL and copy its numbers into your table. Say in your README that this model ran in Colab. Your app can then use one of the other two models.
 
 ## Part 4: An app for the retention team (Gradio)
 
-Build `src/app.py` with `gr.Blocks` and two tabs:
+Fill in `src/app.py`: the retention team enters a customer's details and gets a churn probability from your saved model.
 
-1. **Explore:** pick a column from a dropdown and see a chart of churn rate by that column.
-2. **Predict:** enter a customer's details and get a churn probability from your saved model. Bad input (such as negative charges) should give a clear error message, not a crash.
-
-Add **two screenshots** of your running app to the README, one per tab.
+- Bad input (such as negative monthly charges) should show a clear error message, not crash the app. In Gradio, `raise gr.Error("...")` inside your function shows that message in the browser.
+- Add **two screenshots** to the README: one prediction, and the error message.
 
 ## Part 5: Your recommendation
 
@@ -105,9 +133,9 @@ Answer in your README in plain English (no code, about half a page). Back it up 
 
 | Part | Points | What earns them |
 |---|---:|---|
-| 0 · Repo & reproducibility | 10 | Structure as above; `requirements.txt`; `.gitignore`; ≥ 5 meaningful commits; data, model, and screenshots committed; "How to run" works on a fresh clone |
-| 1 · Data quality & tests | 25 | ≥ 6 raw-data tests; issues table that finds the real problems with sensible, justified decisions; ≥ 4 fixture-based tests for `clean()`, all passing (raw-data tests are expected to fail) |
-| 2 · Polars | 10 | Three correct tables; lazy query with `.explain()` and a correct one-line explanation |
+| 0 · Repo & reproducibility | 10 | Layout as above; `requirements.txt`; ≥ 5 meaningful commits; data, model, and screenshots committed; "How to run" works on a fresh clone |
+| 1 · Data quality & tests | 30 | ≥ 6 raw-data tests; issues table that finds the real problems with sensible, justified decisions; ≥ 3 fixture-based tests for `clean()`, all passing (raw-data tests are expected to fail) |
+| 2 · Polars | 10 | Two correct tables; lazy query with `.explain()` and a correct one-line explanation |
 | 3 · Models | 20 | Correct CV setup (seed 314); results table; a model choice backed by more than AUC |
-| 4 · Gradio app | 15 | Both tabs work; graceful error on bad input; screenshots |
+| 4 · Gradio app | 10 | Predictions work; clear error on bad input; screenshots |
 | 5 · Recommendation | 20 | A clear, actionable recommendation backed by numbers; honest limitations |
