@@ -55,7 +55,7 @@
     { key: 'Polars', label: 'Polars', icon: '#i-bolt', s: 2 },
     { key: 'Tabular FMs', label: 'Foundation models', icon: '#i-brain', s: 2 },
   ];
-  const APPENDIX = { 'Cookiecutter': 'A', 'Beyond your laptop': 'B', 'More tabular FMs': 'C' };
+  const APPENDIX = { 'Cookiecutter': 'A', 'Beyond your laptop': 'B', 'More tabular FMs': 'C', 'Environments': 'D' };
   const roadEl = document.getElementById('roadmap');
   function roadmap(i) {
     if (!roadEl) return;

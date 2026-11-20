@@ -89,6 +89,15 @@
   .yt-link:hover svg rect { fill: #cc0000; }
   .kin { color: var(--cyan); } .kout { color: var(--green); } .none { color: var(--dim); font-style: italic; }
   .ibox.kin { border-color: rgba(46,230,214,.5); } .ibox.kout { border-color: rgba(74,222,128,.5); color: var(--text); }
+  table.envtbl { border-collapse: collapse; font-size: 15px; }
+  table.envtbl th { font: 600 17px var(--font-head); color: var(--cyan); text-align: left; padding: 8px 14px; border-bottom: 1px solid var(--line); }
+  table.envtbl td { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,.06); vertical-align: top; line-height: 1.5; }
+  table.envtbl td.k { font: 600 13px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--amber); white-space: nowrap; }
+  table.envtbl code { font-size: 13.5px; }
+  table.envtbl tr.when td { color: var(--muted); font: 600 12px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; border: 0; }
+  .envcard { width: 360px; gap: 10px; font-size: 16px; line-height: 1.45; }
+  .envcard b { font: 600 22px var(--font-head); color: var(--text); }
+  .envcard .lab { display: block; font: 600 11px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); }
   pre .hl-block { background: rgba(255,182,72,.14); box-shadow: 0 0 0 3px rgba(255,182,72,.14); border-radius: 3px; }
 </style>
 </head>
@@ -214,10 +223,11 @@
       <p data-f="3" class="muted" style="font-size:17px;margin:0;line-height:1.5">It includes <b>PyTorch</b> (for <code>tabicl</code>, Session 2), which is big. Start now; it installs while we review.</p>
     </div>
   </div>
+  <a class="jump" href="#appendix-d">Appendix D: venv vs. conda vs. uv →</a>
 </section>
 
 <!-- ═══════════════════════════ Warm-up divider ═══════════════════════════ -->
-<section class="slide section quiz" data-section="Warm-up" data-title="Warm-up: where we left off">
+<section class="slide section quiz" id="warmup" data-section="Warm-up" data-title="Warm-up: where we left off">
   <div class="kicker">Warm-up</div>
   <h1>Where we <span>left off</span></h1>
   <svg class="big-ico ico"><use href="#i-quiz"/></svg>
@@ -1997,6 +2007,65 @@ app_file: app.py
   <a class="jump back" href="#recap">↩ Back to the lecture</a>
 </section>
 
+
+<!-- ═══════════════════════════ Appendix D: three ways to build an environment ═══════════════════════════ -->
+<!-- Facts: venv ships with Python and uses the interpreter that runs it; conda and uv can install a Python version themselves
+     (uv venv --python 3.12 downloads one if needed). uv's "10–100× faster than pip" is Astral's own benchmark claim.
+     conda's default solver has been libmamba since conda 23.10, so it is much faster than it used to be. -->
+<section class="slide section" id="appendix-d" data-section="Environments" data-title="Appendix D: Three ways to build an environment">
+  <div class="kicker">Appendix D</div>
+  <h1>venv vs. conda <span>vs. uv</span></h1>
+  <svg class="big-ico ico"><use href="#i-box"/></svg>
+  <div class="secnum">D</div>
+</section>
+
+<section class="slide" data-section="Environments" data-title="Same job, three tools">
+  <h1 class="title">Same Job, Three Tools</h1>
+  <div class="fill" style="align-items:center">
+  <table class="envtbl">
+    <tr><th></th><th>venv + pip</th><th>conda</th><th>uv</th></tr>
+    <tr data-f="1"><td class="k">create</td><td><code>python -m venv .venv</code></td><td><code>conda create -n dapt619 python=3.12</code></td><td><code>uv venv --python 3.12</code></td></tr>
+    <tr data-f="2"><td class="k">activate</td><td><code>source .venv/Scripts/activate</code></td><td><code>conda activate dapt619</code></td><td><code>source .venv/Scripts/activate</code><br><span class="muted">or skip it: <code>uv run …</code></span></td></tr>
+    <tr data-f="3"><td class="k">install</td><td><code>pip install -r requirements.txt</code></td><td><code>pip install -r requirements.txt</code><br><span class="muted">or <code>conda install pandas</code></span></td><td><code>uv pip install -r requirements.txt</code></td></tr>
+    <tr data-f="4"><td class="k">save</td><td><code>pip freeze &gt; requirements.txt</code></td><td><code>conda env export &gt; environment.yml</code></td><td><code>uv add pandas</code><br><span class="muted">records it in <code>pyproject.toml</code> + <code>uv.lock</code></span></td></tr>
+    <tr data-f="5"><td class="k">lives in</td><td><code>.venv/</code> in the project</td><td>one central <code>envs/</code> folder</td><td><code>.venv/</code> in the project</td></tr>
+    <tr data-f="6" class="when"><td></td><td>lecture 1</td><td>today</td><td>fast, modern</td></tr>
+  </table>
+  <p class="muted" style="font-size:15px;margin:14px 0 0">On a Mac, <code>.venv/Scripts/activate</code> is <code>.venv/bin/activate</code>.</p>
+  </div>
+</section>
+
+<section class="slide" data-section="Environments" data-title="What actually differs">
+  <h1 class="title">What Actually Differs</h1>
+  <div class="fill" style="gap:26px">
+    <div class="row" style="gap:24px;justify-content:center;align-items:stretch">
+      <div class="card col envcard" data-f="1">
+        <b>venv + pip</b>
+        <div><span class="lab">Python</span>uses the one you already have</div>
+        <div><span class="lab">Speed</span>fine</div>
+        <div><span class="lab">Extras</span>nothing to install: it comes with Python</div>
+        <div><span class="lab">Best for</span>simple projects, any machine with Python</div>
+      </div>
+      <div class="card col envcard" data-f="2">
+        <b>conda</b>
+        <div><span class="lab">Python</span>installs any version for you</div>
+        <div><span class="lab">Speed</span>slowest of the three (much faster than it used to be)</div>
+        <div><span class="lab">Extras</span>also installs non-Python libraries (C, CUDA, …)</div>
+        <div><span class="lab">Best for</span>data science stacks, Anaconda users</div>
+      </div>
+      <div class="card col envcard" data-f="3">
+        <b>uv</b>
+        <div><span class="lab">Python</span>installs any version for you</div>
+        <div><span class="lab">Speed</span>10–100× faster than pip</div>
+        <div><span class="lab">Extras</span>a lock file for exact versions; <code>uv run</code> without activating</div>
+        <div><span class="lab">Best for</span>new projects, when speed matters</div>
+      </div>
+    </div>
+    <p data-f="4" class="center" style="font-size:21px;margin:0">All three do the same core job: <span class="amber">one isolated set of packages per project</span>. <code>requirements.txt</code> works with all of them.</p>
+  </div>
+  <div class="foot">uv: <a href="https://docs.astral.sh/uv/" target="_blank">docs.astral.sh/uv</a> · conda: <a href="https://docs.conda.io/" target="_blank">docs.conda.io</a></div>
+  <a class="jump back" href="#warmup">↩ Back to the lecture</a>
+</section>
 </div></div>
 
 <!-- ───────── chrome ───────── -->
