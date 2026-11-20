@@ -198,7 +198,7 @@
       <div class="chip red" style="align-self:flex-start">Session 2 · 1h 45m</div>
       <ol class="list" style="font-size:24px;line-height:1.5;margin:0" start="5">
         <li><b>Gradio</b>: turn a function into an app</li>
-        <li><span class="amber">Exercise 2</span>: build and share an app</li>
+        <li><span class="amber">Demos</span>: model app, data explorer</li>
         <li><b>Polars</b>: DataFrames for the new era</li>
         <li><b>Foundation models</b> for tabular data</li>
       </ol>
@@ -1191,9 +1191,44 @@ demo.launch()</pre>
   <div class="foot"><a href="https://www.gradio.app/guides/the-interface-class" target="_blank">gradio.app/guides/the-interface-class</a></div>
 </section>
 
-<section class="slide section quiz" data-section="Gradio · Demo" data-title="Gradio demo: draw a digit">
-  <div class="kicker green">Live demo</div>
-  <h1>Gradio: <span style="color:var(--green)">Draw a Digit</span></h1>
+<!-- ═══════════════════════════ What is Gradio good for? (use cases) ═══════════════════════════ -->
+<!-- Use case 3 example is from the instructor's own work (vision model reading product dimensions from vendor PDF catalogues).
+     Not demoed; tell the story here. Use cases 1 and 2 are the two live demos that follow. -->
+<section class="slide" data-section="Gradio" data-title="What is Gradio good for?">
+  <h1 class="title">What Is Gradio Good For?</h1>
+  <div class="fill" style="gap:30px;justify-content:center">
+    <div class="grid-3" style="gap:26px;align-items:stretch">
+      <div class="card col" data-f="1" style="gap:12px">
+        <div class="row" style="gap:14px;align-items:center"><div class="num">1</div><b style="font-size:22px;line-height:1.25">Give a model an interface</b></div>
+        <p class="muted" style="font-size:17px;margin:0;line-height:1.5">Anyone can try your model: draw, upload, or type, and get a prediction. No Python needed on their side.</p>
+        <span class="chip green" style="align-self:flex-start;margin-top:auto">Demo 1 · draw a digit</span>
+      </div>
+      <div class="card col" data-f="2" style="gap:12px">
+        <div class="row" style="gap:14px;align-items:center"><div class="num amber">2</div><b style="font-size:22px;line-height:1.25">Explore data, slice a report</b></div>
+        <p class="muted" style="font-size:17px;margin:0;line-height:1.5">Dropdowns, sliders, and buttons over a DataFrame: filter, group, plot. A lightweight dashboard for the questions people actually ask.</p>
+        <span class="chip green" style="align-self:flex-start;margin-top:auto">Demo 2 · heart data explorer</span>
+      </div>
+      <div class="card col" data-f="3" style="gap:12px">
+        <div class="row" style="gap:14px;align-items:center"><div class="num violet">3</div><b style="font-size:22px;line-height:1.25">Review, validate, label</b></div>
+        <p class="muted" style="font-size:17px;margin:0;line-height:1.5">Put a person in the loop: show the model’s output next to the source, record ✓ / ✗ or the right answer, save it. Those rows become your <b>test set</b> or your <b>training labels</b>.</p>
+        <p style="font-size:16px;margin:auto 0 0;line-height:1.45"><span class="amber">e.g.</span> Did the vision model read the right product dimensions from a vendor’s PDF catalogue?</p>
+      </div>
+    </div>
+    <div class="row" data-f="4" style="gap:12px;justify-content:center;flex-wrap:wrap;font-size:16px">
+      <b style="font-size:17px">Also:</b>
+      <span class="chip">What-if calculators</span>
+      <span class="chip">Chat front-ends for LLMs</span>
+      <span class="chip">Side-by-side model comparison</span>
+      <span class="chip">Tools for AI agents (MCP)</span>
+    </div>
+    <p data-f="5" class="center" style="font-size:20px;margin:0"><span class="think" title="Think about it"><svg class="ico"><use href="#i-think"/></svg></span> Where in your job would one of these save someone an email, a spreadsheet, or a meeting?</p>
+  </div>
+</section>
+
+<section class="slide section quiz" data-section="Gradio · Use case 1" data-title="Use case 1: give a model an interface">
+  <div class="kicker green">Use case 1 · Live demo</div>
+  <h1>Give a Model <span style="color:var(--green)">an Interface</span></h1>
+  <p class="muted" style="font-size:24px;margin-top:18px">Draw a digit, get a prediction</p>
   <pre style="margin-top:40px;font-size:22px;line-height:1.7;color:var(--amber)">pip install gradio
 src/digits_app_tutorial.py  <span class="dim"># fill in the blanks</span>
 src/digits_app.py           <span class="dim"># complete: just run it</span></pre>
@@ -1201,7 +1236,7 @@ src/digits_app.py           <span class="dim"># complete: just run it</span></pr
 </section>
 
 <!-- ═══════════════════════════ The main guard ═══════════════════════════ -->
-<section class="slide" data-section="Gradio · Demo" data-title="The main guard">
+<section class="slide" data-section="Gradio · Use case 1" data-title="The main guard">
   <h1 class="title"><code class="plain" style="color:var(--amber)">if __name__ == "__main__":</code></h1>
   <p class="center muted" style="font-size:19px;margin:-14px 0 20px">the “main guard”</p>
   <div class="row fill" style="gap:40px;justify-content:center;align-items:center">
@@ -1232,7 +1267,7 @@ src/digits_app.py           <span class="dim"># complete: just run it</span></pr
 
 <!-- Verified in a headless browser on Gradio 5.49 and 6.32: mouse-drawn 1,7,4,2,3,5,8,9 predicted correctly; 0 and 6 missed.
      Same accuracy as the old digits_utils.py pre-processing, which this replaces. -->
-<section class="slide" data-section="Gradio · Demo" data-title="The digit app">
+<section class="slide" data-section="Gradio · Use case 1" data-title="The digit app">
   <h1 class="title">The Spring Digits Example, Now an App</h1>
   <div class="row fill" style="gap:30px;justify-content:center;align-items:center">
     <div class="col" style="gap:10px;width:640px">
@@ -1261,8 +1296,19 @@ demo = gr.Interface(
   </div>
 </section>
 
+<!-- ═══════════════════════════ Use case 2: explore your data ═══════════════════════════ -->
+<!-- Run-only demo (no tutorial version): from the repo root, python src/heart_app.py. It launches with share=True,
+     so paste the gradio.live link in the HyFlex chat; Ctrl+C on the next slide shows the link dying. -->
+<section class="slide section quiz" data-section="Gradio · Use case 2" data-title="Use case 2: explore your data">
+  <div class="kicker green">Use case 2 · Live demo</div>
+  <h1>Explore <span style="color:var(--green)">Your Data</span></h1>
+  <p class="muted" style="font-size:24px;margin-top:18px">The heart data, as a point-and-click explorer</p>
+  <pre style="margin-top:34px;font-size:22px;line-height:1.7;color:var(--amber)">python src/heart_app.py  <span class="dim"># from the repo root</span></pre>
+  <svg class="big-ico ico" style="color:var(--green)"><use href="#i-app"/></svg>
+</section>
+
 <!-- Verified on Gradio 5.49 and 6.32. Screenshot is a real Gradio 6.32 render of src/heart_app.py. -->
-<section class="slide" data-section="Gradio" data-title="More control: gr.Blocks">
+<section class="slide" data-section="Gradio · Use case 2" data-title="More control: gr.Blocks">
   <h1 class="title">More Control: <code class="plain" style="color:var(--amber)">gr.Blocks</code></h1>
   <div class="row fill" style="gap:30px;justify-content:center;align-items:center">
     <div class="col" style="gap:14px;width:600px">
@@ -1277,7 +1323,7 @@ demo = gr.Interface(
     btn.click(fn=plot_column,            <span class="c"># event → function</span>
               inputs=col, outputs=plot)
 
-demo.launch()</pre>
+demo.launch(share=<span class="kw">True</span>)   <span class="c"># + a public link</span></pre>
       <ul class="list" style="font-size:18px;margin:0">
         <li data-f="1"><b>Layout:</b> <code>gr.Row</code>, <code>gr.Column</code>, <code>gr.Tab</code></li>
         <li data-f="2"><b>Events:</b> <code>.click</code>, <code>.change</code>, <code>.submit</code> wire a component to a function</li>
@@ -1311,49 +1357,6 @@ demo.launch()</pre>
   </div>
   <p data-f="3" class="center" style="font-size:20px;margin:0 0 30px"><span class="red">Careful:</span> a public app exposes whatever your function can reach: files, API keys, your data.</p>
   <div class="foot"><a href="https://www.gradio.app/guides/sharing-your-app" target="_blank">gradio.app/guides/sharing-your-app</a></div>
-</section>
-
-<!-- ═══════════════════════════ Exercise 2 ═══════════════════════════ -->
-<section class="slide section quiz" data-section="Gradio · Exercise" data-title="Exercise 2: build and share an app">
-  <div class="kicker green">Exercise 2 · 10 min</div>
-  <h1>Build and <span style="color:var(--green)">Share</span> an App</h1>
-  <pre style="margin-top:40px;font-size:22px;line-height:1.7;color:var(--amber)">src/percent_app_tutorial.py  <span class="dim"># fill in the blanks</span>
-src/percent_app.py           <span class="dim"># complete: just run it</span></pre>
-  <svg class="big-ico ico" style="color:var(--green)"><use href="#i-app"/></svg>
-</section>
-
-<!-- Verified with Gradio 5.49 + gradio_client: 80→100 returns "25.0% (up)", 100→80 "-20.0% (down)", 0→5 shows the gr.Error. -->
-<section class="slide" data-section="Gradio · Exercise" data-title="Exercise 2: percent change app">
-  <h1 class="title" style="margin-bottom:14px">Exercise 2: Your Tested Function, Now an App</h1>
-  <div class="row fill" style="gap:34px;align-items:center">
-    <ol class="list sm" style="font-size:18px;line-height:1.45;width:490px;margin:0">
-      <li>Open <code>src/percent_app_tutorial.py</code> and fill in the steps (complete version: <code>src/percent_app.py</code>, shown on the right).</li>
-      <li>From the repo root, run <code>python src/percent_app_tutorial.py</code> and open the local URL.</li>
-      <li>Try <b>80 → 100</b>, then <b>0 → 10</b>. What happens? Where does the message come from?</li>
-      <li>Change one thing and rerun: the title, a label, or the output wording.</li>
-    </ol>
-<pre class="src" style="font-size:14px;width:650px;line-height:1.5"><span class="kw">import</span> gradio <span class="kw">as</span> gr
-<span class="kw">from</span> metrics <span class="kw">import</span> percent_change
-
-<span class="kw">def</span> <span class="f">describe_change</span>(old, new):
-    <span class="kw">try</span>:
-        pct = percent_change(old, new)
-    <span class="kw">except</span> <span class="f">ValueError</span>:
-        <span class="kw">raise</span> gr.Error(<span class="s">"Old value cannot be zero."</span>)
-    direction = <span class="s">"up"</span> <span class="kw">if</span> pct &gt; <span class="n">0</span> <span class="kw">else</span> <span class="s">"down"</span> <span class="kw">if</span> pct &lt; <span class="n">0</span> <span class="kw">else</span> <span class="s">"flat"</span>
-    <span class="kw">return</span> <span class="s">f"{pct:.1f}% ({direction})"</span>
-
-demo = gr.Interface(
-    fn=describe_change,
-    inputs=[gr.Number(label=<span class="s">"Old value"</span>),
-            gr.Number(label=<span class="s">"New value"</span>)],
-    outputs=gr.Textbox(label=<span class="s">"Change"</span>),
-    title=<span class="s">"Percent change calculator"</span>,
-)
-
-<span class="kw">if</span> __name__ == <span class="s">"__main__"</span>:
-    demo.launch()</pre>
-  </div>
   <a class="jump" href="#appendix-b">Appendix B: API, MCP &amp; Hugging Face hosting →</a>
 </section>
 
@@ -1365,7 +1368,7 @@ demo = gr.Interface(
   <a class="jump skip" href="#polars">Skip the quick check → Polars</a>
 </section>
 <section class="slide q" data-section="Gradio · Quick check" data-title="How many components?">
-  <div class="fill"><p><span class="chip amber qn">Q1</span> Your function is <code>def describe_change(old, new): return f"{pct:.1f}%"</code>. How many <b>input</b> and <b>output</b> components does its <code>gr.Interface</code> need?</p><div class="answer" data-f="1"><span class="chip green">Answer</span><span>2 inputs (one per argument) and 1 output (one per return value), e.g. two <code>gr.Number</code> and one <code>gr.Textbox</code>.</span></div></div>
+  <div class="fill"><p><span class="chip amber qn">Q1</span> Your function is <code>def churn_risk(tenure, plan): return label, prob</code>. How many <b>input</b> and <b>output</b> components does its <code>gr.Interface</code> need?</p><div class="answer" data-f="1"><span class="chip green">Answer</span><span>2 inputs (one per argument) and 2 outputs (one per return value), e.g. a <code>gr.Number</code> and a <code>gr.Dropdown</code> in, a <code>gr.Textbox</code> and a <code>gr.Number</code> out.</span></div></div>
 </section>
 <section class="slide q" data-section="Gradio · Quick check" data-title="Does the share link still work?">
   <div class="fill"><p><span class="chip amber qn">Q2</span> You ran <code>demo.launch(share=True)</code>, sent the link to your manager, and closed your laptop. Can your manager still use the app?</p><div class="answer" data-f="1"><span class="chip green">Answer</span><span><b>No.</b> The share link only forwards to your computer; the function runs on your laptop. For an app that stays up, host it (e.g. on Hugging Face Spaces).</span></div></div>
@@ -1879,7 +1882,7 @@ proba = clf.predict_proba(X_test)[:, <span class="n">1</span>]</pre>
 
 
 <!-- Verified on Gradio 6.32 with gradio[mcp]: launch(mcp_server=True) serves /gradio_api/mcp/schema with the function's
-     docstring as the tool description. gradio_client call verified earlier against percent_app (api_name = function name in 6.x). -->
+     docstring as the tool description. gradio_client call verified 2026-11-20 against the greet app from "Anatomy of gr.Interface" (api_name = function name in 6.x). -->
 <section class="slide" data-section="Beyond your laptop" data-title="Your app is also an API and an AI tool">
   <h1 class="title">Bonus: Your App Is Also an API, and an AI Tool</h1>
   <div class="row fill" style="gap:30px;justify-content:center;align-items:center"><div class="row" style="gap:30px;align-items:stretch">
@@ -1888,8 +1891,8 @@ proba = clf.predict_proba(X_test)[:, <span class="n">1</span>]</pre>
 <pre class="src" style="font-size:14px"><span class="kw">from</span> gradio_client <span class="kw">import</span> Client
 
 client = Client(<span class="s">"http://127.0.0.1:7860/"</span>)
-client.predict(<span class="n">80</span>, <span class="n">100</span>, api_name=<span class="s">"/describe_change"</span>)
-<span class="c"># '25.0% (up)'</span></pre>
+client.predict(<span class="s">"Ada"</span>, api_name=<span class="s">"/greet"</span>)
+<span class="c"># 'Hello Ada!'</span></pre>
       <p class="muted" style="font-size:16px;margin:0;line-height:1.5">Click <b>Use via API</b> at the bottom of any Gradio app to see this code for <i>that</i> app.</p>
     </div>
     <div class="card glow-amber col" data-f="1" style="width:550px;gap:12px">

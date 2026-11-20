@@ -25,4 +25,4 @@ with gr.Blocks(title="Heart data explorer") as demo:
     btn.click(fn=plot_column, inputs=col, outputs=plot)
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(share=True)  # share=True: also prints a public link (https://....gradio.live), valid for 1 week

@@ -3,7 +3,7 @@
 Each sub-folder is a self-contained HTML version of the matching `.pptx` deck in `slides/`.
 
 - `part-1/index.html` — DAPT 619 · Analytics Computing · Part 1 (80 slides, click-builds mirror the PowerPoint animations)
-- `part-2/index.html` — Part 2 (107 slides: main deck with 6 quick checks + appendices A–C, two 1h45 sessions): unit testing (revisited, with Exercise 1), project code structure, Gradio (Exercise 2), Polars, foundation models for tabular data
+- `part-2/index.html` — Part 2 (107 slides: main deck with 6 quick checks + appendices A–C, two 1h45 sessions): unit testing (revisited, with Exercise 1), project code structure, Gradio (use cases + two live demos: digits tutorial, heart data explorer), Polars, foundation models for tabular data
 
 ## Presenting
 

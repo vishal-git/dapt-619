@@ -58,7 +58,7 @@ Everything below runs in **Git Bash**, except step 1.
 
 - Every new terminal window starts outside the environment. Run `conda activate dapt619` before any `python` or `pytest` command.
 - Start Jupyter from the activated environment with `jupyter lab`. The JupyterLab button in Anaconda Navigator opens the `base` environment, which doesn't have the course packages.
-- Run commands from the repo root (`dapt-619/`), for example `pytest -v src/heart.py` or `python src/percent_app.py`.
+- Run commands from the repo root (`dapt-619/`), for example `pytest -v src/heart.py` or `python src/heart_app.py`.
 
 ## Using Git Bash in VS Code
 
