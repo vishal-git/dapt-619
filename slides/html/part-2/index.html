@@ -1184,9 +1184,9 @@ demo.launch()</pre>
   <h1 class="title">Four Kinds of Interface</h1>
   <div class="grid-2 fill" style="gap:26px 36px;align-content:center;padding:0 60px">
     <div class="card col center" data-f="1" style="gap:12px"><code class="plain mono" style="font-size:18px">gr.Interface(fn, <span class="kin">inputs</span>, <span class="kout">outputs</span>)</code><div class="row" style="gap:12px;justify-content:center"><div class="ibox kin">Input(s)</div><span class="amber" style="font-size:24px">→</span><div class="ibox kout">Output(s)</div></div><b>Standard</b><span class="muted" style="font-size:15px">a classifier, a calculator</span></div>
-    <div class="card col center" data-f="2" style="gap:12px"><code class="plain mono" style="font-size:18px">gr.Interface(fn, <span class="none">None</span>, <span class="kout">outputs</span>)</code><div class="ibox kout" style="width:300px">Output(s)</div><b>Output-only</b><span class="muted" style="font-size:15px">generate a random sample</span></div>
-    <div class="card col center" data-f="3" style="gap:12px"><code class="plain mono" style="font-size:18px">gr.Interface(fn, <span class="kin">inputs</span>, <span class="none">None</span>)</code><div class="ibox kin" style="width:300px">Input(s)</div><b>Input-only</b><span class="muted" style="font-size:15px">collect labels or feedback</span></div>
-    <div class="card col center" data-f="4" style="gap:12px"><code class="plain mono" style="font-size:18px">gr.Interface(fn, <span class="kin">inputs</span>, <span class="kin">inputs</span>)</code><div class="ibox kin" style="width:300px">Input(s) / Output(s) ↺</div><b>Unified</b><span class="muted" style="font-size:15px">text that continues itself</span></div>
+    <div class="card col center" data-f="2" style="gap:12px"><code class="plain mono" style="font-size:18px">gr.Interface(fn, <span class="none">None</span>, <span class="kout">outputs</span>)</code><div class="ibox kout" style="width:300px;align-self:center">Output(s)</div><b>Output-only</b><span class="muted" style="font-size:15px">generate a random sample</span></div>
+    <div class="card col center" data-f="3" style="gap:12px"><code class="plain mono" style="font-size:18px">gr.Interface(fn, <span class="kin">inputs</span>, <span class="none">None</span>)</code><div class="ibox kin" style="width:300px;align-self:center">Input(s)</div><b>Input-only</b><span class="muted" style="font-size:15px">collect labels or feedback</span></div>
+    <div class="card col center" data-f="4" style="gap:12px"><code class="plain mono" style="font-size:18px">gr.Interface(fn, <span class="kin">inputs</span>, <span class="kin">inputs</span>)</code><div class="ibox kin" style="width:300px;align-self:center">Input(s) / Output(s) ↺</div><b>Unified</b><span class="muted" style="font-size:15px">text that continues itself</span></div>
   </div>
   <div class="foot"><a href="https://www.gradio.app/guides/the-interface-class" target="_blank">gradio.app/guides/the-interface-class</a></div>
 </section>
@@ -1199,6 +1199,36 @@ src/digits_app_tutorial.py  <span class="dim"># fill in the blanks</span>
 src/digits_app.py           <span class="dim"># complete: just run it</span></pre>
   <svg class="big-ico ico" style="color:var(--green)"><use href="#i-app"/></svg>
 </section>
+
+<!-- ═══════════════════════════ The main guard ═══════════════════════════ -->
+<section class="slide" data-section="Gradio · Demo" data-title="The main guard">
+  <h1 class="title"><code class="plain" style="color:var(--amber)">if __name__ == "__main__":</code></h1>
+  <p class="center muted" style="font-size:19px;margin:-14px 0 20px">the “main guard”</p>
+  <div class="row fill" style="gap:40px;justify-content:center;align-items:center">
+    <div class="col" style="gap:8px;width:470px">
+      <div class="fname">digits_app.py</div>
+<pre class="src" style="font-size:18px">demo = gr.Interface(...)
+
+<span class="kw">if</span> __name__ == <span class="s">"__main__"</span>:
+    demo.launch()</pre>
+      <p class="muted" style="font-size:16px;margin:4px 0 0;line-height:1.5">Python sets <code>__name__</code> for every file it loads.</p>
+    </div>
+    <div class="col" style="gap:18px;width:560px">
+      <div class="card glow-cyan col" data-f="1" style="gap:8px">
+        <b style="font-size:19px">You run the file</b>
+<pre class="src" style="font-size:16px">$ python digits_app.py</pre>
+        <p style="font-size:17px;margin:0"><code>__name__</code> is <code>"__main__"</code> → <span class="green">the app launches</span></p>
+      </div>
+      <div class="card col" data-f="2" style="gap:8px">
+        <b style="font-size:19px">Another file imports it</b>
+<pre class="src" style="font-size:16px"><span class="kw">from</span> digits_app <span class="kw">import</span> predict_digit</pre>
+        <p style="font-size:17px;margin:0"><code>__name__</code> is <code>"digits_app"</code> → <span class="amber">nothing launches</span>; you just get the code to use or test</p>
+      </div>
+    </div>
+  </div>
+  <p data-f="3" class="center" style="font-size:22px;margin:0 0 24px">Read it as: <span class="amber">“run this part only when this file is the one being run.”</span></p>
+</section>
+
 
 <!-- Verified in a headless browser on Gradio 5.49 and 6.32: mouse-drawn 1,7,4,2,3,5,8,9 predicted correctly; 0 and 6 missed.
      Same accuracy as the old digits_utils.py pre-processing, which this replaces. -->

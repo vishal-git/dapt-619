@@ -47,7 +47,7 @@ The goal: hand-draw a digit in a browser and let a model trained on scikit-learn
     )
     ```
 
-    Step 2, inside `if __name__ == "__main__":`, replaces `pass`:
+    Step 2, inside `if __name__ == "__main__":`, replaces `pass`. This "main guard" runs its block only when the file itself is run (`python src/digits_app.py`), not when another file imports it:
 
     ```python
         demo.launch()
@@ -58,6 +58,14 @@ The goal: hand-draw a digit in a browser and let a model trained on scikit-learn
     - Use the canvas's **trash-can icon** to wipe the drawing. The **Clear** button below doesn't reliably clear the canvas.
     - Expect some mistakes: the model was trained on tiny 8×8 scans, not mouse drawings. How would you make it more accurate?
 12. Press `Ctrl + C` in the terminal to stop the app.
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---|---|
+| Submit shows an error, and the terminal ends with `UnidentifiedImageError: cannot identify image file '...\layer_0.png'` | A Windows timing issue: Gradio read the drawing before it was fully saved. Wait a second and press **Submit** again. |
+| That error keeps coming back | Switch to the Gradio version used last year, then restart the app: `pip install gradio==5.49.1`. The course code works the same on it. |
+| **Clear** doesn't wipe the drawing | Use the canvas's **trash-can icon** instead. |
 
 ## Hosting on Hugging Face Spaces
 
