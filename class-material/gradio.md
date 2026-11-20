@@ -34,8 +34,24 @@ The goal: hand-draw a digit in a browser and let a model trained on scikit-learn
 
 ## Build the app
 
-9. Open `src/digits_app.py`. The pre-processing is already filled in. Its four lines make the drawing *look like the training data*: they invert it (white digit on black), crop to the digit, pad it to a square, and shrink it to 8×8 pixels on a 0–16 scale, the same as `load_digits()`.
-10. Fill in the three steps: return the model's prediction, create the `gr.Interface` with a `gr.Sketchpad` input, and launch the app.
+9. Open `src/digits_app.py`. The function `predict_digit()` is already filled in. Its four pre-processing lines make the drawing *look like the training data*: they invert it (white digit on black), crop to the digit, pad it to a square, and shrink it to 8×8 pixels on a 0–16 scale, the same as `load_digits()`. Then it returns the model's guess.
+10. Fill in the two steps. Step 1, below `predict_digit()`, creates the interface:
+
+    ```python
+    demo = gr.Interface(
+        fn=predict_digit,
+        inputs=gr.Sketchpad(type="pil", image_mode="L",
+                            brush=gr.Brush(default_size=30, colors=["#000000"], color_mode="fixed")),
+        outputs="text",
+        title="Handwritten Digit Recognition",
+    )
+    ```
+
+    Step 2, inside `if __name__ == "__main__":`, replaces `pass`:
+
+    ```python
+        demo.launch()
+    ```
 11. Run the app from the `digits` folder: `python src/digits_app.py`. It prints a local URL (`http://127.0.0.1:7860`); open it in a browser.
     - Click the **brush icon** first; the canvas doesn't draw until a tool is selected.
     - Draw the digit large and centered, then press **Submit**.

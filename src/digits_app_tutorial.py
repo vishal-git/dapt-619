@@ -14,12 +14,10 @@ def predict_digit(drawing):
     img = img.crop(img.getbbox())                        # zoom in on the digit
     img = ImageOps.pad(img, (max(img.size),) * 2)        # make it square
     pixels = np.array(img.resize((8, 8))) / 255 * 16     # 8x8 on a 0-16 scale, like load_digits()
-
-    # step 1: return the model's prediction for these pixels (hint: reshape to one row)
-    # --
+    return int(model.predict(pixels.reshape(1, -1))[0])  # the model's guess for this one drawing
 
 
-# step 2: create a gr.Interface with
+# step 1: create a gr.Interface with
 #         fn=predict_digit,
 #         inputs=gr.Sketchpad(type="pil", image_mode="L",
 #                             brush=gr.Brush(default_size=30, colors=["#000000"], color_mode="fixed")),
@@ -27,6 +25,6 @@ def predict_digit(drawing):
 # --
 
 if __name__ == "__main__":
-    # step 3: launch the app
+    # step 2: launch the app
     # --
     pass  # replace this line with your code
