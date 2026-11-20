@@ -1,4 +1,4 @@
-"""Part 3: compare three models with 5-fold cross-validated AUC. Run from the repo root:  python src/train.py"""
+"""Part 3: compare three models with 3-fold cross-validated AUC. Run from the repo root:  python src/train.py"""
 import time
 
 import joblib
@@ -17,7 +17,7 @@ df = clean(load_raw())
 #         then .to_pandas(); models can't use missing values, so handle any that are left
 # --
 
-# step 2: set up 5-fold stratified cross-validation with shuffle=True and random_state=SEED
+# step 2: set up 3-fold stratified cross-validation with shuffle=True and random_state=SEED
 # --
 
 # step 3: for each of the three models, run cross_val_score(..., scoring="roc_auc"),

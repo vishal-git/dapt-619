@@ -56,7 +56,3 @@ Which model I would deploy, and why:
 
 ![A prediction](screenshots/prediction.png)
 ![The error message for bad input](screenshots/error.png)
-
-## 5. Recommendation
-
-What would your recommendation be to the stakeholders?
