@@ -1694,8 +1694,8 @@ notebooks/02_lazy_evaluation.ipynb</span></pre>
 </section>
 
 <!-- Verified on this machine (CPU, seed 314, 70/30 stratified split of heart.csv, one-hot encoding):
-     LogReg 0.919 AUC, HistGradientBoosting 0.927, TabICL 0.932 (~1 s after the one-time weight download).
-     Script: see notes in the session; pip install tabicl pulls in PyTorch. -->
+     LogReg (scaled) 0.919 AUC, HistGradientBoosting 0.927, TabICL 0.932 (~1 s after the one-time weight download).
+     Script: src/tabicl_heart.py (re-verified 2026-11-20). First run downloads a ~110 MB checkpoint (jingang/TabICL on HF). -->
 <section class="slide" data-section="Tabular FMs" data-title="Try it: TabICL on heart.csv">
   <h1 class="title">Try It: Three Lines</h1>
   <div class="row fill" style="gap:40px;justify-content:center;align-items:center">
@@ -1719,6 +1719,7 @@ proba = clf.predict_proba(X_test)[:, <span class="n">1</span>]</pre>
       <p data-f="2" style="font-size:17px;margin:0;line-height:1.5">On a small, clean dataset everyone is close. The gap grows on <b>messier data</b> and when the baselines aren’t tuned by an expert.</p>
     </div>
   </div>
+  <div class="foot">Full code: <code>src/tabicl_heart.py</code></div>
 </section>
 
 <section class="slide" data-section="Tabular FMs" data-title="Should you use one?">
