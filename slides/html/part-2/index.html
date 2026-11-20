@@ -76,7 +76,7 @@
   .qprog i.on { background: var(--amber); }
   .rung { display: flex; gap: 16px; align-items: center; padding: 14px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); font-size: 17px; line-height: 1.4; }
   .rung .chip { flex: none; width: 172px; justify-content: center; white-space: nowrap; letter-spacing: .08em; }
-  .hwrow { display: grid; grid-template-columns: 40px 210px 1fr auto; gap: 14px; align-items: center; padding: 9px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); font-size: 16px; }
+  .hwrow { display: grid; grid-template-columns: 62px 200px 1fr auto; gap: 14px; align-items: center; padding: 9px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); font-size: 16px; }
   .hwrow .pts { font: 700 20px var(--font-head); color: var(--amber); text-align: center; }
   .hwrow b { font: 600 17px var(--font-head); }
   .hwrow > span:nth-child(3) { color: var(--muted); white-space: nowrap; }
@@ -1303,35 +1303,6 @@ src/digits_app.py           <span class="dim"># complete: just run it</span></pr
   <svg class="big-ico ico" style="color:var(--green)"><use href="#i-app"/></svg>
 </section>
 
-<!-- ═══════════════════════════ The main guard ═══════════════════════════ -->
-<section class="slide" data-section="Gradio · Use case 1" data-title="The main guard">
-  <h1 class="title"><code class="plain" style="color:var(--amber)">if __name__ == "__main__":</code></h1>
-  <p class="center muted" style="font-size:19px;margin:-14px 0 20px">the “main guard”</p>
-  <div class="row fill" style="gap:40px;justify-content:center;align-items:center">
-    <div class="col" style="gap:8px;width:470px">
-      <div class="fname">digits_app.py</div>
-<pre class="src" style="font-size:18px">demo = gr.Interface(...)
-
-<span class="kw">if</span> __name__ == <span class="s">"__main__"</span>:
-    demo.launch()</pre>
-      <p class="muted" style="font-size:16px;margin:4px 0 0;line-height:1.5">Python sets <code>__name__</code> for every file it loads.</p>
-    </div>
-    <div class="col" style="gap:18px;width:560px">
-      <div class="card glow-cyan col" data-f="1" style="gap:8px">
-        <b style="font-size:19px">You run the file</b>
-<pre class="src" style="font-size:16px">$ python digits_app.py</pre>
-        <p style="font-size:17px;margin:0"><code>__name__</code> is <code>"__main__"</code> → <span class="green">the app launches</span></p>
-      </div>
-      <div class="card col" data-f="2" style="gap:8px">
-        <b style="font-size:19px">Another file imports it</b>
-<pre class="src" style="font-size:16px"><span class="kw">from</span> digits_app <span class="kw">import</span> predict_digit</pre>
-        <p style="font-size:17px;margin:0"><code>__name__</code> is <code>"digits_app"</code> → <span class="amber">nothing launches</span>; you just get the code to use or test</p>
-      </div>
-    </div>
-  </div>
-  <p data-f="3" class="center" style="font-size:22px;margin:0 0 24px">Read it as: <span class="amber">“run this part only when this file is the one being run.”</span></p>
-</section>
-
 
 <!-- Verified in a headless browser on Gradio 5.49 and 6.32: mouse-drawn 1,7,4,2,3,5,8,9 predicted correctly; 0 and 6 missed.
      Same accuracy as the old digits_utils.py pre-processing, which this replaces. -->
@@ -1362,6 +1333,35 @@ demo = gr.Interface(
       <p class="muted" style="font-size:15px;margin:0;line-height:1.5">Click the <b>brush</b> icon before drawing. The canvas’s trash-can icon wipes it.</p>
     </div>
   </div>
+</section>
+
+<!-- ═══════════════════════════ The main guard ═══════════════════════════ -->
+<section class="slide" data-section="Gradio · Use case 1" data-title="The main guard">
+  <h1 class="title"><code class="plain" style="color:var(--amber)">if __name__ == "__main__":</code></h1>
+  <p class="center muted" style="font-size:19px;margin:-14px 0 20px">the “main guard”</p>
+  <div class="row fill" style="gap:40px;justify-content:center;align-items:center">
+    <div class="col" style="gap:8px;width:470px">
+      <div class="fname">digits_app.py</div>
+<pre class="src" style="font-size:18px">demo = gr.Interface(...)
+
+<span class="kw">if</span> __name__ == <span class="s">"__main__"</span>:
+    demo.launch()</pre>
+      <p class="muted" style="font-size:16px;margin:4px 0 0;line-height:1.5">Python sets <code>__name__</code> for every file it loads.</p>
+    </div>
+    <div class="col" style="gap:18px;width:560px">
+      <div class="card glow-cyan col" data-f="1" style="gap:8px">
+        <b style="font-size:19px">You run the file</b>
+<pre class="src" style="font-size:16px">$ python digits_app.py</pre>
+        <p style="font-size:17px;margin:0"><code>__name__</code> is <code>"__main__"</code> → <span class="green">the app launches</span></p>
+      </div>
+      <div class="card col" data-f="2" style="gap:8px">
+        <b style="font-size:19px">Another file imports it</b>
+<pre class="src" style="font-size:16px"><span class="kw">from</span> digits_app <span class="kw">import</span> predict_digit</pre>
+        <p style="font-size:17px;margin:0"><code>__name__</code> is <code>"digits_app"</code> → <span class="amber">nothing launches</span>; you just get the code to use or test</p>
+      </div>
+    </div>
+  </div>
+  <p data-f="3" class="center" style="font-size:22px;margin:0 0 24px">Read it as: <span class="amber">“run this part only when this file is the one being run.”</span></p>
 </section>
 
 <!-- ═══════════════════════════ Use case 2: explore your data ═══════════════════════════ -->
@@ -1845,17 +1845,17 @@ proba = clf.predict_proba(X_test)[:, <span class="n">1</span>]</pre>
   </div>
   <div class="row fill" style="gap:34px;justify-content:center;align-items:center">
     <div class="col" style="gap:10px;width:620px">
-      <p style="font-size:19px;margin:0 0 4px;line-height:1.5">You just joined a telecom’s analytics team. A colleague left you <code>churn_raw.csv</code>. Nobody has checked it.</p>
-      <div class="hwrow" data-f="1"><span class="pts">15</span><b>Repo</b><span>git, environment, layout</span><span class="tag">Session 1</span></div>
-      <div class="hwrow" data-f="1"><span class="pts">30</span><b>Can we trust the data?</b><span>pytest + a data issues log</span><span class="tag">Testing</span></div>
-      <div class="hwrow" data-f="1"><span class="pts">15</span><b>What drives churn?</b><span>Polars tables + a lazy plan</span><span class="tag">Polars</span></div>
-      <div class="hwrow" data-f="1"><span class="pts">25</span><b>Which model?</b><span>3-fold CV, with TabICL</span><span class="tag">Tabular FMs</span></div>
-      <div class="hwrow" data-f="1"><span class="pts">15</span><b>An app</b><span>a churn prediction screen</span><span class="tag">Gradio</span></div>
+      <p style="font-size:19px;margin:0 0 4px;line-height:1.5">Using <code>churn_raw.csv</code>, find out whether the data can be trusted, find the patterns behind churn, compare a few churn prediction models, and create a small app for the churn retention team.</p>
+      <div class="hwrow" data-f="1"><span class="pts">15<small style="font-size:12px;font-weight:600;margin-left:3px;opacity:.8">pts</small></span><b>Setup</b><span>git, environment, layout</span><span class="tag">Session 1</span></div>
+      <div class="hwrow" data-f="1"><span class="pts">30<small style="font-size:12px;font-weight:600;margin-left:3px;opacity:.8">pts</small></span><b>Can we trust the data?</b><span>pytest + a data issues log</span><span class="tag">Testing</span></div>
+      <div class="hwrow" data-f="1"><span class="pts">15<small style="font-size:12px;font-weight:600;margin-left:3px;opacity:.8">pts</small></span><b>What drives churn?</b><span>Polars tables + a lazy plan</span><span class="tag">Polars</span></div>
+      <div class="hwrow" data-f="1"><span class="pts">25<small style="font-size:12px;font-weight:600;margin-left:3px;opacity:.8">pts</small></span><b>Predict churn</b><span>3-fold CV, with TabICL</span><span class="tag">Tabular FMs</span></div>
+      <div class="hwrow" data-f="1"><span class="pts">15<small style="font-size:12px;font-weight:600;margin-left:3px;opacity:.8">pts</small></span><b>An app</b><span>for the retention team</span><span class="tag">Gradio</span></div>
     </div>
     <div class="col" data-f="2" style="gap:14px;width:470px">
       <div class="card glow-cyan col" style="gap:8px">
         <b style="font-size:19px">How it’s graded</b>
-        <p class="muted" style="font-size:16px;margin:0;line-height:1.5">Most points are for your <b>judgment calls</b> (what’s wrong with the data, and which model to trust) and for showing that you <b>ran</b> the code.</p>
+        <p class="muted" style="font-size:16px;margin:0;line-height:1.5">Most of the points go to your <b>judgment calls</b> (what counts as a data problem and what to do about it, and which model to trust) and to evidence that you actually <b>ran</b> the code.</p>
       </div>
       <div class="card col" style="gap:8px">
         <b style="font-size:19px">Get started</b>
