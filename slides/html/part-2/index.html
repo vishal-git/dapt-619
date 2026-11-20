@@ -184,26 +184,26 @@
 <!-- ═══════════════════════════ Agenda ═══════════════════════════ -->
 <section class="slide" data-title="Today: two sessions">
   <h1 class="title">Today</h1>
-  <div class="row fill" style="gap:40px;justify-content:center;align-items:center">
-    <div class="card glow-cyan col" data-f="1" style="width:520px;gap:16px;padding:28px 34px;align-self:center">
+  <div class="row fill" style="gap:40px;justify-content:center;align-items:center"><div class="row" style="gap:40px;align-items:stretch">
+    <div class="card glow-cyan col" data-f="1" style="width:520px;gap:16px;padding:28px 34px">
       <div class="chip" style="align-self:flex-start">Session 1 · 1h 45m</div>
-      <ol class="list" style="font-size:24px;line-height:1.5;margin:0">
-        <li>Warm-up: where we left off</li>
-        <li><b>Unit testing</b>, properly this time</li>
-        <li><span class="amber">Exercise 1</span>: test a real dataset</li>
-        <li>Project code structure</li>
+      <ol class="list" style="font-size:24px;line-height:1.35;margin:0">
+        <li><b>Environments</b><br><span class="muted" style="font-size:19px">conda, and how it compares to venv and uv</span></li>
+        <li><b>Warm-up</b><br><span class="muted" style="font-size:19px">where we left off</span></li>
+        <li><b>Unit testing</b><br><span class="muted" style="font-size:19px"><span class="amber">Exercise</span>: test a real dataset</span></li>
+        <li><b>Project code structure</b></li>
       </ol>
     </div>
     <div class="card glow-red col" data-f="2" style="width:520px;gap:16px;padding:28px 34px">
       <div class="chip red" style="align-self:flex-start">Session 2 · 1h 45m</div>
-      <ol class="list" style="font-size:24px;line-height:1.5;margin:0" start="5">
-        <li><b>Gradio</b>: turn a function into an app</li>
-        <li><span class="amber">Demos</span>: model app, data explorer</li>
-        <li><b>Polars</b>: DataFrames for the new era</li>
-        <li><b>Foundation models</b> for tabular data</li>
+      <ol class="list" style="font-size:24px;line-height:1.35;margin:0;counter-reset:n 4">
+        <li><b>Gradio</b><br><span class="muted" style="font-size:19px"><span class="amber">Demos</span>: a model app, a data explorer</span></li>
+        <li><b>Polars</b><br><span class="muted" style="font-size:19px"><span class="amber">Demos</span>: two notebooks</span></li>
+        <li><b>Foundation models</b> for tables<br><span class="muted" style="font-size:19px"><span class="amber">Demo</span>: TabICL on heart.csv</span></li>
+        <li><b>Homework</b><br><span class="muted" style="font-size:19px">customer churn</span></li>
       </ol>
     </div>
-  </div>
+  </div></div>
 </section>
 
 <!-- ═══════════════════════════ Start installing now ═══════════════════════════ -->
@@ -223,7 +223,57 @@
       <p data-f="3" class="muted" style="font-size:17px;margin:0;line-height:1.5">It includes <b>PyTorch</b> (for <code>tabicl</code>, Session 2), which is big. Start now; it installs while we review.</p>
     </div>
   </div>
-  <a class="jump" href="#appendix-d">Appendix D: venv vs. conda vs. uv →</a>
+</section>
+
+<!-- ═══════════════════════════ venv vs. conda vs. uv (moved from Appendix D on 2026-11-20) ═══════════════════════════ -->
+<!-- Facts: venv ships with Python and uses the interpreter that runs it; conda and uv can install a Python version themselves
+     (uv venv --python 3.12 downloads one if needed). uv's "10–100× faster than pip" is Astral's own benchmark claim.
+     conda's default solver has been libmamba since conda 23.10, so it is much faster than it used to be. -->
+<section class="slide" data-title="Same job, three tools">
+  <h1 class="title">Same Job, Three Tools</h1>
+  <div class="fill" style="align-items:center">
+  <table class="envtbl">
+    <tr><th></th><th>venv + pip</th><th>conda</th><th>uv</th></tr>
+    <tr data-f="1"><td class="k">create</td><td><code>python -m venv .venv</code></td><td><code>conda create -n dapt619 python=3.12</code></td><td><code>uv venv --python 3.12</code></td></tr>
+    <tr data-f="2"><td class="k">activate</td><td><code>source .venv/Scripts/activate</code></td><td><code>conda activate dapt619</code></td><td><code>source .venv/Scripts/activate</code><br><span class="muted">or skip it: <code>uv run …</code></span></td></tr>
+    <tr data-f="3"><td class="k">install</td><td><code>pip install -r requirements.txt</code></td><td><code>pip install -r requirements.txt</code><br><span class="muted">or <code>conda install pandas</code></span></td><td><code>uv pip install -r requirements.txt</code></td></tr>
+    <tr data-f="4"><td class="k">save</td><td><code>pip freeze &gt; requirements.txt</code></td><td><code>conda env export &gt; environment.yml</code></td><td><code>uv add pandas</code><br><span class="muted">records it in <code>pyproject.toml</code> + <code>uv.lock</code></span></td></tr>
+    <tr data-f="5"><td class="k">lives in</td><td><code>.venv/</code> in the project</td><td>one central <code>envs/</code> folder</td><td><code>.venv/</code> in the project</td></tr>
+    <tr data-f="6" class="when"><td></td><td>lecture 1</td><td>today</td><td>fast, modern</td></tr>
+  </table>
+  <p class="muted" style="font-size:15px;margin:14px 0 0">On a Mac, <code>.venv/Scripts/activate</code> is <code>.venv/bin/activate</code>.</p>
+  </div>
+</section>
+
+<section class="slide" data-title="What actually differs">
+  <h1 class="title">What Actually Differs</h1>
+  <div class="fill" style="gap:26px">
+    <div class="row" style="gap:24px;justify-content:center;align-items:stretch">
+      <div class="card col envcard" data-f="1">
+        <b>venv + pip</b>
+        <div><span class="lab">Python</span>uses the one you already have</div>
+        <div><span class="lab">Speed</span>fine</div>
+        <div><span class="lab">Extras</span>nothing to install: it comes with Python</div>
+        <div><span class="lab">Best for</span>simple projects, any machine with Python</div>
+      </div>
+      <div class="card col envcard" data-f="2">
+        <b>conda</b>
+        <div><span class="lab">Python</span>installs any version for you</div>
+        <div><span class="lab">Speed</span>slowest of the three (much faster than it used to be)</div>
+        <div><span class="lab">Extras</span>also installs non-Python libraries (C, CUDA, …)</div>
+        <div><span class="lab">Best for</span>data science stacks</div>
+      </div>
+      <div class="card col envcard" data-f="3">
+        <b>uv</b>
+        <div><span class="lab">Python</span>installs any version for you</div>
+        <div><span class="lab">Speed</span>10–100× faster than pip</div>
+        <div><span class="lab">Extras</span>a lock file for exact versions; <code>uv run</code> without activating</div>
+        <div><span class="lab">Best for</span>new projects, when speed matters</div>
+      </div>
+    </div>
+    <p data-f="4" class="center" style="font-size:21px;margin:0">All three do the same core job: <span class="amber">one isolated set of packages per project</span>. <code>requirements.txt</code> works with all of them.</p>
+  </div>
+  <div class="foot">uv: <a href="https://docs.astral.sh/uv/" target="_blank">docs.astral.sh/uv</a> · conda: <a href="https://docs.conda.io/" target="_blank">docs.conda.io</a></div>
 </section>
 
 <!-- ═══════════════════════════ Warm-up divider ═══════════════════════════ -->
@@ -272,7 +322,7 @@ git add analysis.py</pre>
   <div class="overlay-card" style="left:56px;top:48px;width:560px">
     <div class="oc-head" style="color:var(--amber)">Mars Climate Orbiter · 1998–1999</div>
     <p style="font-size:19px;margin:0 0 12px;line-height:1.5">Launched Dec 11, 1998. Lost Sep 23, 1999: it <span class="red">burned up in Mars’ atmosphere</span>. Cost: about <b>$327M</b>.</p>
-    <p data-f="1" style="font-size:19px;margin:0;line-height:1.5">One team’s software reported thruster force in <b>pound-force seconds</b>; the navigation software expected <b>newton-seconds</b>. Every number was off by <b>4.45×</b>. <span class="amber">Nothing crashed.</span></p>
+    <p data-f="1" style="font-size:19px;margin:0;line-height:1.5">One team’s software reported thruster force in <b>pound-force seconds</b>; the navigation software expected <b>newton-seconds</b>. Every number was off by <b>4.45×</b>. <span class="amber">The software never raised an error.</span></p>
   </div>
   <div class="overlay-card" data-f="2" style="left:56px;top:372px;width:560px">
     <p style="font-size:19px;margin:0;line-height:1.5"><span class="think" title="Think about it"><svg class="ico"><use href="#i-think"/></svg></span> A Python function expects <b>kilometers</b> but receives <b>miles</b>. Would the code <span class="red">necessarily crash</span>?</p>
@@ -385,8 +435,8 @@ E       assert -2 == 8</span>
 <!-- ═══════════════════════════ Python doesn't know you meant numbers ═══════════════════════════ -->
 <section class="slide" data-section="Testing" data-title="Python doesn't know you meant numbers">
   <h1 class="title">Python Doesn’t Know You Meant Numbers</h1>
-  <div class="row fill" style="gap:36px;justify-content:center;align-items:center">
-    <div class="col" style="gap:16px;width:540px">
+  <div class="row fill" style="gap:28px;justify-content:center;align-items:center">
+    <div class="col" style="gap:16px;width:500px">
       <div class="fname">addition.py: two temporary lines at the bottom</div>
 <pre class="src" style="font-size:18px;margin-top:-6px"><span class="f">print</span>(add_number(<span class="s">'x'</span>, <span class="s">'y'</span>))
 <span class="f">print</span>(add_number(<span class="s">'x'</span>, <span class="n">5</span>))</pre>
@@ -394,7 +444,7 @@ E       assert -2 == 8</span>
         <div class="body" style="font-size:18px;line-height:1.7">8<br><span data-f="1" class="fx-none"><span class="amber">xy</span></span><br><span data-f="2" class="fx-none"><span class="red">TypeError: can only concatenate str (not "int") to str</span></span></div></div>
       <p data-f="3" style="font-size:20px;margin:0;line-height:1.5">One input <span class="amber">silently returns nonsense</span> (the Mars Climate Orbiter problem), the other crashes. Neither is what a function called <code>add_number</code> should do.</p>
     </div>
-    <div class="col" data-f="4" style="gap:12px;width:600px">
+    <div class="col" data-f="4" style="gap:12px;width:660px">
 <pre class="src" style="font-size:18px"><span class="kw">def</span> <span class="f">add_number</span>(a, b):
     <span class="kw">if not</span> <span class="f">isinstance</span>(a, (int, float)) \
        <span class="kw">or not</span> <span class="f">isinstance</span>(b, (int, float)):
@@ -629,9 +679,9 @@ src/heart.py           <span class="dim"># complete: just run it</span></pre>
   <div class="row fill" style="gap:36px;align-items:center">
     <ol class="list sm" style="font-size:19px;line-height:1.45;width:640px;margin:0">
       <li>In <code>pytest-demo</code>, copy <code>src/heart_tutorial.py</code> and <code>data/heart.csv</code> from the repo (see <code>pytest.md</code>). Finish <code>load_heart()</code> so it returns <code>data/heart.csv</code> as a DataFrame.</li>
-      <li>Write a test: the DataFrame has <b>12 columns</b>. Run <code>pytest -v heart_tutorial.py</code>. It should <span class="green">pass</span>.</li>
-      <li>Write a test: <b>no null values</b> in any column. It should <span class="green">pass</span>.</li>
-      <li>Write a test: the column <code>heart_disease</code> exists. It <span class="red">fails</span>. Read the error message and figure out why.</li>
+      <li>Fill in <code>test_has_twelve_columns</code>: the DataFrame has <b>12 columns</b>. Run <code>pytest -v heart_tutorial.py</code>. It should <span class="green">pass</span>; tests you haven’t written yet show as <span class="muted">SKIPPED</span>.</li>
+      <li>Fill in <code>test_no_nulls</code>: <b>no null values</b> in any column. It should <span class="green">pass</span>.</li>
+      <li>Fill in <code>test_has_heart_disease_column</code>: the column <code>heart_disease</code> exists. It <span class="red">fails</span>. Read the error message and figure out why.</li>
     </ol>
     <div class="col" style="gap:10px;width:470px">
 <pre class="src" style="font-size:17px"><span class="kw">import</span> pandas <span class="kw">as</span> pd
@@ -642,7 +692,8 @@ src/heart.py           <span class="dim"># complete: just run it</span></pre>
 
 
 <span class="kw">def</span> <span class="f">test_has_twelve_columns</span>():
-    <span class="kw">assert</span> ...</pre>
+    df = load_heart()
+    <span class="kw">assert</span> ...   <span class="c"># your line</span></pre>
       <div class="tiny muted">Data: Heart Failure Prediction (fedesoriano), 918 rows × 12 columns · <a href="https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction" target="_blank">kaggle.com/datasets/fedesoriano/heart-failure-prediction</a></div>
     </div>
   </div>
@@ -729,18 +780,18 @@ src/heart.py           <span class="dim"># complete: just run it</span></pre>
 </section>
 
 <!-- ═══════════════════════════ 65 · Test the intent ═══════════════════════════ -->
-<section class="slide" data-section="Testing" data-title="Test the Intent, Not the Implementation" style="padding-top:50px">
-  <h1 class="title">Test the Intent, Not the Implementation</h1>
+<section class="slide" data-section="Testing" data-title="Test the Intent, Not Just the Implementation" style="padding-top:50px">
+  <h1 class="title">Test the Intent, Not Just the Implementation</h1>
   <div class="fill" style="justify-content:center;gap:36px">
   <div class="row" style="gap:30px;justify-content:center;align-items:stretch">
-    <div class="card glow-red col" data-f="1" style="width:470px;gap:10px;padding:20px 26px">
-      <div style="font:600 20px var(--font-head)">Tests written <span class="red">from the code</span></div>
-      <div class="muted" style="font-size:17px;line-height:1.5">Read the function, then write a test that passes. You inherit every assumption the author made, including the wrong ones.</div>
-      <div style="font:600 17px var(--font-head);color:var(--red);margin-top:auto">Confirms what was <em>written</em>.</div>
+    <div class="card glow-amber col" data-f="1" style="width:470px;gap:10px;padding:20px 26px">
+      <div style="font:600 20px var(--font-head)">Tests written <span class="amber">from the code</span></div>
+      <div class="muted" style="font-size:17px;line-height:1.5">Useful for choosing <b>which cases</b> to test: every branch, every error path, every edge. Risky for deciding the <b>right answer</b>: copy what the code returns into the assert, and you lock in its bugs.</div>
+      <div style="font:600 17px var(--font-head);color:var(--amber);margin-top:auto">Covers what was <em>written</em>.</div>
     </div>
     <div class="card glow-cyan col" data-f="2" style="width:470px;gap:10px;padding:20px 26px;border-color:rgba(74,222,128,.5)">
       <div style="font:600 20px var(--font-head)">Tests written <span class="green">from the spec</span></div>
-      <div class="muted" style="font-size:17px;line-height:1.5">Start from the requirement. Decide the expected output <em>before</em> looking at (or writing) the implementation.</div>
+      <div class="muted" style="font-size:17px;line-height:1.5">Start from the requirement. Decide the <b>expected output</b> <em>before</em> looking at (or writing) the implementation.</div>
       <div style="font:600 17px var(--font-head);color:var(--green);margin-top:auto">Checks what was <em>intended</em>.</div>
     </div>
   </div>
@@ -776,8 +827,18 @@ src/heart.py           <span class="dim"># complete: just run it</span></pre>
     <div class="answer" data-f="1"><span class="chip green">Answer</span><span>3 passed. <code class="red">F</code>: the test ran and failed (an assert was false). <code class="amber">E</code>: something broke <i>before</i> the test could run, such as a fixture raising an error.</span></div></div>
 </section>
 <section class="slide q" data-section="Testing · Quick check" data-title="Testing for an error">
-  <div class="fill"><p><span class="chip amber qn">Q4</span> <code>load_data("")</code> should raise a <code>ValueError</code> for an empty path. Write the test.</p>
-    <div class="answer" data-f="1"><span class="chip green">Answer</span><span><code>with pytest.raises(ValueError): load_data("")</code>. It fails if no error, or a different error, is raised.</span></div></div>
+  <div class="fill"><p><span class="chip amber qn">Q4</span> <code>load_data("")</code> should raise a <code>ValueError</code> for an empty path. Which test checks this?</p>
+    <ol class="list abc mono" style="font-size:19px;line-height:1.35;display:grid;grid-template-columns:1fr 1fr;gap:4px 40px">
+      <li style="white-space:pre">assert load_data("") == ValueError</li>
+      <li data-fa="1" style="white-space:pre">with pytest.raises(ValueError):
+    load_data("")</li>
+      <li style="white-space:pre">try:
+    load_data("")
+except ValueError:
+    pass</li>
+      <li style="white-space:pre">assert load_data("") is None</li>
+    </ol>
+    <div class="answer" data-f="1"><span class="chip green">Answer</span><span><b>B.</b> A and D never reach the comparison: the error is raised first, so the test crashes instead of checking anything. C passes even when <b>no</b> error is raised, so it can never fail.</span></div></div>
 </section>
 <section class="slide q" data-section="Testing · Quick check" data-title="All green means correct?">
   <div class="fill"><p><span class="chip amber qn">Q5</span> <strong>True or False:</strong> if all of your tests pass, your code is correct.</p>
@@ -968,13 +1029,20 @@ src/heart.py           <span class="dim"># complete: just run it</span></pre>
 <!-- ═══════════════════════════ 78 · How to name files ═══════════════════════════ -->
 <section class="slide" data-section="Structure" data-title="How to Name Files">
   <h1 class="title">How to Name Files</h1>
-  <div class="fill" style="align-items:center">
+  <div class="fill" style="align-items:center;gap:22px">
+    <!-- Quote: commonly attributed to Phil Karlton (Netscape); see martinfowler.com/bliki/TwoHardThings.html -->
+    <div class="center" style="max-width:980px">
+      <p style="font-size:26px;margin:0;line-height:1.4">“There are only two hard things in Computer Science: cache invalidation and <span class="amber">naming things</span>.”</p>
+      <p class="muted" style="font-size:16px;margin:6px 0 0">Phil Karlton</p>
+    </div>
+    <div class="col" data-f="1" style="align-items:center">
     <!-- YouTube only allows embeds from http(s) pages; when opened as a local file we show a thumbnail that links out instead -->
-    <div class="yt-slot ring" data-video="ES1LTlnpLMk" style="width:880px;height:495px">
+    <div class="yt-slot ring" data-video="ES1LTlnpLMk" style="width:640px;height:360px">
       <a class="yt-fallback" href="https://www.youtube.com/watch?v=ES1LTlnpLMk" target="_blank" style="display:block;position:relative;width:100%;height:100%"><img src="assets/normconf.png" class="shot" style="width:100%;height:100%;object-fit:cover" alt="How to Name Files Like a Normie — Jenny Bryan, NormConf">
         <svg class="ico" style="position:absolute;left:50%;top:50%;width:90px;height:90px;transform:translate(-50%,-50%);color:#fff;filter:drop-shadow(0 4px 20px rgba(0,0,0,.6))"><use href="#i-play"/></svg></a>
     </div>
     <div class="tiny yt-note" style="margin-top:12px">Jenny Bryan · NormConf · <a href="https://www.youtube.com/watch?v=ES1LTlnpLMk" target="_blank">youtube.com/watch?v=ES1LTlnpLMk</a></div>
+    </div>
   </div>
 </section>
 
@@ -2042,64 +2110,6 @@ app_file: app.py
 </section>
 
 
-<!-- ═══════════════════════════ Appendix D: three ways to build an environment ═══════════════════════════ -->
-<!-- Facts: venv ships with Python and uses the interpreter that runs it; conda and uv can install a Python version themselves
-     (uv venv --python 3.12 downloads one if needed). uv's "10–100× faster than pip" is Astral's own benchmark claim.
-     conda's default solver has been libmamba since conda 23.10, so it is much faster than it used to be. -->
-<section class="slide section" id="appendix-d" data-section="Environments" data-title="Appendix D: Three ways to build an environment">
-  <div class="kicker">Appendix D</div>
-  <h1>venv vs. conda <span>vs. uv</span></h1>
-  <svg class="big-ico ico"><use href="#i-box"/></svg>
-  <div class="secnum">D</div>
-</section>
-
-<section class="slide" data-section="Environments" data-title="Same job, three tools">
-  <h1 class="title">Same Job, Three Tools</h1>
-  <div class="fill" style="align-items:center">
-  <table class="envtbl">
-    <tr><th></th><th>venv + pip</th><th>conda</th><th>uv</th></tr>
-    <tr data-f="1"><td class="k">create</td><td><code>python -m venv .venv</code></td><td><code>conda create -n dapt619 python=3.12</code></td><td><code>uv venv --python 3.12</code></td></tr>
-    <tr data-f="2"><td class="k">activate</td><td><code>source .venv/Scripts/activate</code></td><td><code>conda activate dapt619</code></td><td><code>source .venv/Scripts/activate</code><br><span class="muted">or skip it: <code>uv run …</code></span></td></tr>
-    <tr data-f="3"><td class="k">install</td><td><code>pip install -r requirements.txt</code></td><td><code>pip install -r requirements.txt</code><br><span class="muted">or <code>conda install pandas</code></span></td><td><code>uv pip install -r requirements.txt</code></td></tr>
-    <tr data-f="4"><td class="k">save</td><td><code>pip freeze &gt; requirements.txt</code></td><td><code>conda env export &gt; environment.yml</code></td><td><code>uv add pandas</code><br><span class="muted">records it in <code>pyproject.toml</code> + <code>uv.lock</code></span></td></tr>
-    <tr data-f="5"><td class="k">lives in</td><td><code>.venv/</code> in the project</td><td>one central <code>envs/</code> folder</td><td><code>.venv/</code> in the project</td></tr>
-    <tr data-f="6" class="when"><td></td><td>lecture 1</td><td>today</td><td>fast, modern</td></tr>
-  </table>
-  <p class="muted" style="font-size:15px;margin:14px 0 0">On a Mac, <code>.venv/Scripts/activate</code> is <code>.venv/bin/activate</code>.</p>
-  </div>
-</section>
-
-<section class="slide" data-section="Environments" data-title="What actually differs">
-  <h1 class="title">What Actually Differs</h1>
-  <div class="fill" style="gap:26px">
-    <div class="row" style="gap:24px;justify-content:center;align-items:stretch">
-      <div class="card col envcard" data-f="1">
-        <b>venv + pip</b>
-        <div><span class="lab">Python</span>uses the one you already have</div>
-        <div><span class="lab">Speed</span>fine</div>
-        <div><span class="lab">Extras</span>nothing to install: it comes with Python</div>
-        <div><span class="lab">Best for</span>simple projects, any machine with Python</div>
-      </div>
-      <div class="card col envcard" data-f="2">
-        <b>conda</b>
-        <div><span class="lab">Python</span>installs any version for you</div>
-        <div><span class="lab">Speed</span>slowest of the three (much faster than it used to be)</div>
-        <div><span class="lab">Extras</span>also installs non-Python libraries (C, CUDA, …)</div>
-        <div><span class="lab">Best for</span>data science stacks, Anaconda users</div>
-      </div>
-      <div class="card col envcard" data-f="3">
-        <b>uv</b>
-        <div><span class="lab">Python</span>installs any version for you</div>
-        <div><span class="lab">Speed</span>10–100× faster than pip</div>
-        <div><span class="lab">Extras</span>a lock file for exact versions; <code>uv run</code> without activating</div>
-        <div><span class="lab">Best for</span>new projects, when speed matters</div>
-      </div>
-    </div>
-    <p data-f="4" class="center" style="font-size:21px;margin:0">All three do the same core job: <span class="amber">one isolated set of packages per project</span>. <code>requirements.txt</code> works with all of them.</p>
-  </div>
-  <div class="foot">uv: <a href="https://docs.astral.sh/uv/" target="_blank">docs.astral.sh/uv</a> · conda: <a href="https://docs.conda.io/" target="_blank">docs.conda.io</a></div>
-  <a class="jump back" href="#warmup">↩ Back to the lecture</a>
-</section>
 </div></div>
 
 <!-- ───────── chrome ───────── -->

@@ -11,16 +11,19 @@ def load_heart(path="data/heart.csv"):
 # ---------- Part A: does the file look the way we expect? ----------
 
 def test_has_twelve_columns():
-    assert load_heart().shape[1] == 12
+    df = load_heart()
+    assert df.shape[1] == 12
 
 
 def test_no_nulls():
-    assert load_heart().isnull().sum().sum() == 0
+    df = load_heart()
+    assert df.isnull().sum().sum() == 0
 
 
 def test_has_heart_disease_column():
     # fails on purpose: read the error message to see the real column name
-    assert "heart_disease" in load_heart().columns
+    df = load_heart()
+    assert "heart_disease" in df.columns
 
 
 # ---------- Part B: does the data make sense? ----------
@@ -31,11 +34,13 @@ def test_age_in_range():
 
 
 def test_sex_values():
-    assert set(load_heart()["Sex"]) <= {"M", "F"}
+    df = load_heart()
+    assert set(df["Sex"]) <= {"M", "F"}
 
 
 def test_target_is_binary():
-    assert set(load_heart()["HeartDisease"]) <= {0, 1}
+    df = load_heart()
+    assert set(df["HeartDisease"]) <= {0, 1}
 
 
 def test_cholesterol_positive():

@@ -143,6 +143,10 @@
    ```
 
 7. Run `pytest -q test_metrics_tutorial.py`: `6 passed`.
+8. Now run `pytest -v` with **no file name**. Pytest searches the current folder (and its subfolders) on its own:
+   - It collects files named `test_*.py` or `*_test.py`, and inside them, functions whose names start with `test_`.
+   - So it finds `test_metrics_tutorial.py` and runs its 6 tests, but it skips `addition.py`: that name doesn't match, even though the file contains a test. That's why the earlier demos named the file explicitly (`pytest -q addition.py`); a file you name on the command line is always collected.
+   - Rename it to follow the pattern (`mv addition.py test_addition.py`) and run `pytest -v` again: now its test is collected too.
 
 ## Demo 2b: testing data code with a fixture (complete versions: `src/cleaning.py`, `src/test_cleaning.py`)
 
@@ -197,6 +201,8 @@ cp ../dapt-619/src/heart_tutorial.py .
 ```
 
 Run the tests with `pytest -v heart_tutorial.py`. The step numbers below match the comments in `heart_tutorial.py`.
+
+Every test function is already set up for you, with its name and `df = load_heart()`. Replace each `pytest.skip("not written yet")` line with your assert. Until you do, that test shows up as `SKIPPED`, so the report always tells you which tests are left.
 
 **Part A: does the file look the way we expect? (about 10 min)**
 
