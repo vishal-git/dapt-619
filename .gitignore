@@ -1,2 +1,17 @@
 # instructor-only material (answer keys, data generators): keep out of the public course repo
 instructor/
+quiz_questions.md
+
+# large or regenerated data (download/rebuild locally; data/ itself holds tracked course files)
+data/cifar-10-batches-py/
+data/cifar-10-python.tar.gz
+*.db
+
+# source PowerPoint decks (the HTML decks in slides/html/ are what's published)
+slides/*.pptx
+
+# Python / tooling clutter
+__pycache__/
+.venv/
+.ipynb_checkpoints/
+.gradio/
